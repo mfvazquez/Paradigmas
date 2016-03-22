@@ -18,19 +18,31 @@ white = [255 255 255];
 [xCenter, yCenter] = RectCenter(scrnsize);
 [screenXpixels, screenYpixels] = Screen('WindowSize', window);
 
-xPos = 0.25*screenXpixels;
-xLength = screenXpixels * 0.05;
+
+xLength = screenXpixels * 0.5;
 yLength = screenYpixels * 0.1;
 
-baseRectBack = [0 0 xLength*10 yLength];
-rectBack = baseRectBack + xPos;
+xPos = xCenter - xLength/2;
+yPos = yCenter - yLength/2;
+
+BoxXLength = xLength/9;
+
+rectBack = [xPos yPos xLength+xPos yLength+yPos];
+
 Screen('FillRect', window, white, rectBack);
 
-
-baseRect = [0 0 xLength yLength];
-rect = baseRect + xPos;
 red = [255 0 0];
-DrawFormattedText(window, '1',xPos , xPos, red);
+
+TextXPos = xPos + BoxXLength/2 - text;
+
+textSize = yLength*0.5;
+TextYPos = yPos + yLength/2 - textSize/2 - textSize * 4/19;
+
+Screen('TextSize', hd.window, textSize);
+%- (textSize*4/19)
+for n = 1:9
+    DrawFormattedText(window, int2str(n),TextXPos + (n-1) * BoxXLength , TextYPos, red);
+end
 
 Screen('Flip', window);
 
