@@ -39,7 +39,6 @@ refreshInterval = Screen('GetFlipInterval',hd.window);
 hd.ontime = ceil(hd.ontime/refreshInterval) * refreshInterval;
 hd.offtime = ceil(hd.offtime/refreshInterval) * refreshInterval;
 fprintf('\nUsing ON time of %dms with OFF time of %dms.\n', round(hd.ontime*1000), round(hd.offtime*1000));
-Screen('TextSize',hd.window,hd.textsize);
 Screen('TextFont',hd.window,hd.textfont);
 
 %Screen settings
