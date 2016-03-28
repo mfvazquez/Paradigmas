@@ -34,24 +34,11 @@ red = [255 0 0];
 
 % ------------------- VERSION A CORRER --------------------------------
 
-
-
-
-
 versiones = {'Gráfico versión 1','Gráfico versión 2','Simple versión 1','Simple versión 2'};
 carpetas = {'grafico_v1','grafico_v2', 'simple_v1', 'simple_v2'};
 choice = menu('Version de lenguaje:',versiones);
 carpeta_historias = carpetas{choice};
 arch_historia = fullfile('..', 'data', carpeta_historias, 'historia_1.txt'); %aca deberia abrir todos los archivos en la carpeta, ojo que no estan ordenados, hay que ordenarlos
-
-% ------------------- INICIALIZO PSYCHOTOOLBOX ------------------------
-
-[window, scrnsize] = init_psych(hd);
-
-text = fileread(arch_historia);
-
-
-textoCentradoBoton(window, scrnsize, text);
 
 a = dir(['..\data\' carpeta_historias]);
 a(1) = [];
@@ -59,30 +46,35 @@ a(1) = [];
 arch = {a.name};
 arch = natsort(arch);
 
-% % % % % ------------------- INICIALIZO PSYCHOTOOLBOX ------------------------
-% % % % ListenChar(2);
-% % % % HideCursor;
-% % % % [window, scrnsize] = init_psych(hd);
+
+% ------------------- INICIALIZO PSYCHOTOOLBOX ------------------------
+ListenChar(2);
+HideCursor;
+[window, scrnsize] = init_psych(hd);
 
 % ------------------- INICIO DEL PARADIGMA ----------------------------
 
-% ------------------- + PARA CENTRAR VISTA ----------------------------
-
-% textoCentrado(window, scrnsize, TIEMPO_INICIAL_CENTRADO, '+');
+% % % % % % ------------------- + PARA CENTRAR VISTA ----------------------------
+% % % % % 
+% % % % % textoCentrado(window, scrnsize, TIEMPO_INICIAL_CENTRADO, '+');
 
 % ------------------- INTRODUCCION -----------------------------------
 
 
 
 
-% ------------------- + PARA CENTRAR VISTA ---------------------------
-
+% % % % % % ------------------- + PARA CENTRAR VISTA ---------------------------
+% % % % % 
 % % % % % textoCentrado(window, scrnsize, TIEMPO_PRE_HISTORIA, '+');
 
-% ------------------- HISTORIA ---------------------------------------
+% % % % % % ------------------- HISTORIA ---------------------------------------
+% % % % % 
+% % % % % text = fileread(arch_historia);
+% % % % % textoCentradoBoton(window, scrnsize, text);
 
-% ------------------- + PARA CENTRAR VISTA ---------------------------
 
+% % % % % % ------------------- + PARA CENTRAR VISTA ---------------------------
+% % % % % 
 % % % % % textoCentrado(window, scrnsize, TIEMPO_POST_HISTORIA, '+');
 
 % ------------------- OPCIONES ---------------------------------------

@@ -30,8 +30,9 @@ function dibujarOpciones(window, scrnsize, elegido, textos)
     rectText = [xPos+BoxXLength*8  textYpos BoxXLength*9+xPos textYpos+yLength];
     DrawFormattedText(window, textos.maximo, 'center', 'center', white, [],[],[],[],[],rectText);
     
-    textSize = round(yLength*0.6);
+    textSize = round(yLength*0.5);
     Screen('TextSize', window, textSize);
+
     rectText = [0  round(textYpos/2) screenXpixels textYpos];
     DrawFormattedText(window, textos.pregunta, 'center', 'center', white, [],[],[], 2,[],rectText);
     
@@ -41,15 +42,15 @@ function dibujarOpciones(window, scrnsize, elegido, textos)
     textSize = round(yLength*0.6);
     Screen('TextSize', window, textSize);
     centro = round(yPos + yLength/2);
-    corrimiento = round(textSize * 0.5);
     for n = 1:9
         rectSel = [xPos+BoxXLength*(n-1)  yPos BoxXLength*n+xPos yLength+yPos];
-        textRec = [xPos+BoxXLength*(n-1)  centro-round(textSize/2)-corrimiento BoxXLength*n+xPos centro+round(textSize/2)];
+        textRec = [xPos+BoxXLength*(n-1)  centro-round(textSize/2) BoxXLength*n+xPos centro+round(textSize/2)];
         if n == elegido
             Screen('FillRect', window, red, rectSel);
         else
             Screen('FillRect', window, white, rectSel);
         end
+        Screen('FillRect', window, [0 255 0], textRec);
         DrawFormattedText(window, int2str(n), 'center','center', black, [],[],[],[],[], textRec);
     end
     Screen('Flip', window);
