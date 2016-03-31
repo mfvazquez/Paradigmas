@@ -35,7 +35,7 @@ function FWT()
     %% set Psychtoolbox preferences
 
     % Screen('Preference', 'ConserveVRAM', 64);  %agregado
-    % Screen('Preference', 'Verbosity', 0);
+    Screen('Preference', 'Verbosity', 0);
     % Screen('Preference', 'VisualDebugLevel',0);
 
     % Screen('Preference', 'VBLTimestampingMode', 1);
