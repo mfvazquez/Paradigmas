@@ -16,7 +16,6 @@ function [window,scrnsize] = iniciarPsych(hd)
 
     Screen('Preference', 'ConserveVRAM', 64);  %agregado
     Screen('Preference', 'Verbosity', 0);
-    Screen('Preference', 'SkipSyncTests',1);
     Screen('Preference', 'VisualDebugLevel',0);
     Screen('Preference', 'ConserveVRAM', 64);
 
