@@ -1,11 +1,10 @@
-function textoCentradoBoton(window, scrnsize, texto)
+function textoCentradoBoton(window, texto)
 
     [screenXpixels, screenYpixels] = Screen('WindowSize', window);
     
     white = [255 255 255];
-    black = [0 0 0];
 
-    textSize = round(screenYpixels*0.035);
+    textSize = round(screenYpixels*0.04);
 
     Screen('TextSize', window, textSize);
     DrawFormattedText(window, texto, 'center','center', white, [],[],[], 2,[],[]);

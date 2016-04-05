@@ -1,9 +1,8 @@
-function textoCentrado(window, scrnsize, tiempo, texto)
+function textoCentrado(window, tiempo, texto)
 
     [screenXpixels, screenYpixels] = Screen('WindowSize', window);
     
     white = [255 255 255];
-    black = [0 0 0];
 
     textSize = round(screenYpixels*0.05);
 

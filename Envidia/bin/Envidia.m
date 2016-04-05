@@ -12,6 +12,9 @@ function Envidia()
     % -------------------- CONSTANTES -------------------------------------
 
     TIEMPO_INICIAL_CENTRADO = 3;
+    TIEMPO_CRUZ_ANTES_PREGUNTA = 1.5;
+    TIEMPO_CRUZ_DESPUES_PREGUNTA = 2;
+    TIEMPO_PERSONAJE = 8;
 
     % -------------------- TECLAS A UTILIZAR -------------------------------
     KbName('UnifyKeyNames');
@@ -38,61 +41,65 @@ function Envidia()
     imagen = imread(fullfile('..','data','PersonajeA.jpg'));
     personajeA.textura = Screen('MakeTexture', window, imagen);
     
+    
     personajeB.historia = fileread(fullfile('..','data','HistoriaB.txt'));
     imagen = imread(fullfile('..','data','PersonajeB.jpg'));
     personajeB.textura = Screen('MakeTexture', window, imagen);
         
     envidia = CargarDatos(fullfile('..','data','envidia'));
     schan = CargarDatos(fullfile('..','data','schadenfreude'));
-
-    
     
     % ------------------- INICIO DEL PARADIGMA ----------------------------
     
-    % % % % % % ------------------- + PARA CENTRAR VISTA ----------------------------
-    % % % % % 
-    % % % % % textoCentrado(window, scrnsize, TIEMPO_INICIAL_CENTRADO, '+');
+    % ------------------- + PARA CENTRAR VISTA ----------------------------
+    
+    textoCentrado(window, TIEMPO_INICIAL_CENTRADO, '+');
 
-    % ------------------- INTRODUCCION -----------------------------------
+    % ------------------- PRESENTACION DE LOS PERSONAJES ------------------
+    
+    PresentarPersonaje(personajeA, TIEMPO_PERSONAJE, window);
+    PresentarPersonaje(personajeB, TIEMPO_PERSONAJE, window);
+    
+    % ------------------- INSTRUCCIONES -----------------------------------
+      
+    textoCentradoBoton(window, envidia.instrucciones);
 
 
+    % ------------------- + PARA CENTRAR VISTA ---------------------------
+    
+    textoCentrado(window, TIEMPO_CRUZ_ANTES_PREGUNTA, '+');
 
-
-    % % % % % % ------------------- + PARA CENTRAR VISTA ---------------------------
-    % % % % % 
-    % % % % % textoCentrado(window, scrnsize, TIEMPO_PRE_HISTORIA, '+');
-
-    % % % % % % ------------------- HISTORIA ---------------------------------------
+    % % % % % % ------------------- ESTIMULO ---------------------------------------
     % % % % % 
     % % % % % text = fileread(arch_historia);
     % % % % % textoCentradoBoton(window, scrnsize, text);
 
 
-    % % % % % % ------------------- + PARA CENTRAR VISTA ---------------------------
-    % % % % % 
-    % % % % % textoCentrado(window, scrnsize, TIEMPO_POST_HISTORIA, '+');
+    % ------------------- + PARA CENTRAR VISTA ---------------------------
+    
+    textoCentrado(window, TIEMPO_CRUZ_DESPUES_PREGUNTA, '+');
 
     % ------------------- OPCIONES ---------------------------------------
 
-    elegido = 5;
-    dibujarOpciones(window, scrnsize, elegido, textos_opciones);
-
-    continuar = true;
-    while continuar
-
-        [~, keyCode, ~] = KbPressWait;
-
-        if keyCode(rightKey) && elegido < 9
-            elegido = elegido + 1;
-            dibujarOpciones(window, scrnsize, elegido, textos_opciones);
-        elseif keyCode(leftKey) && elegido > 1
-            elegido = elegido - 1;
-            dibujarOpciones(window, scrnsize, elegido, textos_opciones);
-        elseif keyCode(escKey)
-            continuar = false;
-        end   
-
-    end
+%     elegido = 5;
+%     dibujarOpciones(window, scrnsize, elegido, textos_opciones);
+% 
+%     continuar = true;
+%     while continuar
+% 
+%         [~, keyCode, ~] = KbPressWait;
+% 
+%         if keyCode(rightKey) && elegido < 9
+%             elegido = elegido + 1;
+%             dibujarOpciones(window, scrnsize, elegido, textos_opciones);
+%         elseif keyCode(leftKey) && elegido > 1
+%             elegido = elegido - 1;
+%             dibujarOpciones(window, scrnsize, elegido, textos_opciones);
+%         elseif keyCode(escKey)
+%             continuar = false;
+%         end   
+% 
+%     end
 
 
     % ---------------------- FIN DEL PARADIGMA ---------------------------
