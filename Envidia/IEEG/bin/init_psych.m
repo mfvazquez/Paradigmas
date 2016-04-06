@@ -15,7 +15,7 @@ function [window,scrnsize] = iniciarPsych(hd)
     debounce=100/1000;
 
 
-%    Screen('Preference', 'Verbosity', 0);
+%   Screen('Preference', 'Verbosity', 0);
 
     Screen('Preference', 'TextRenderer', 1);
     Screen('Preference', 'TextAntiAliasing', 2);

@@ -24,6 +24,7 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
     log.opciones = zeros(1, largo);
     log.respuesta_tiempo = zeros(1, largo);    
     log.respuesta = zeros(1, largo);
+    log.personaje = cell(1, largo);
     
     % ------------------- + PARA CENTRAR VISTA ----------------------------
 
@@ -50,8 +51,10 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
 
         if (bloque.situaciones{1,i}.personaje == 'A')
             [exit, OnSetTime] = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeA.textura, MENSAJE_CONTINUAR);
+            log.personaje{1,i} = 'A';
         else
             [exit, OnSetTime] = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeB.textura, MENSAJE_CONTINUAR);
+            log.personaje{1,i} = 'B';
         end
         log.estimulo(1,i) = OnSetTime;
         if exit
