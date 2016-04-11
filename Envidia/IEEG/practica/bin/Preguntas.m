@@ -17,7 +17,7 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
         
     % ------------------- + PARA CENTRAR VISTA ----------------------------
 
-    textoCentrado(window, TIEMPO_INICIAL_CENTRADO, '+');
+    textoCentrado(TIEMPO_INICIAL_CENTRADO, '+');
 
     % ------------------- PRESENTACION DE LOS PERSONAJES ------------------
 
@@ -32,9 +32,8 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
     
     % ------------------- INSTRUCCIONES -----------------------------------
 
-    textoCentradoBoton(window, bloque.instrucciones);
+    textoCentradoBoton(bloque.instrucciones);
 
-    exit = false;
     for i = 1:length(bloque.situaciones)
 
         % -------------------- ESTIMULO ---------------------------------------
@@ -49,26 +48,16 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
         end
         % ------------------- + PARA CENTRAR VISTA ------------------------
 
-        textoCentrado(window, TIEMPO_CRUZ_ANTES_PREGUNTA, '+');
+        textoCentrado(TIEMPO_CRUZ_ANTES_PREGUNTA, '+');
 
         % -------------------- PREGUNTA -----------------------------------
         
-        [elegido, continuar, exit] = EsperarRespuesta(elegido)
-        
-        
-        
-        dibujarOpciones(window, scrnsize, [], opciones, false);
-        Screen('Flip', window);
-        exit = false;
-        esperar = true;
-        while esperar
-            [~, keyCode, ~] = KbPressWait;
-            if keyCode(spaceKey)
-                esperar = false;
-            elseif keyCode(escKey)
-                esperar = false;
-                exit = true;
-            end   
+
+        dibujarOpciones([], opciones, false);
+        Screen('Flip', window);  
+        continuar = true;
+        while continuar
+            [~, continuar, exit] = EsperarRespuesta(0);
         end
         if exit
             break;
@@ -81,14 +70,26 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
         
         % -------------------- PREGUNTA CON OPCIONES ----------------------
         
-        [elegido, exit] = PreguntaConOpciones();
+        elegido = 5;
+        continuar = true;
+        dibujarOpciones(elegido, opciones, true);
+        Screen('Flip', window);
+        
+        while continuar
+            dibujarOpciones(elegido, opciones, true);
+            Screen('Flip', window);
+            [elegido, continuar, exit] = EsperarRespuesta(elegido);
+        end
+        dibujarOpciones(elegido, opciones, true);
+        Screen('Flip', window);
+        
         if exit
             break;
         end
 
         % ------------------- + PARA CENTRAR VISTA ---------------------------
     
-        textoCentrado(window, TIEMPO_CRUZ_DESPUES_PREGUNTA, '+');
+        textoCentrado(TIEMPO_CRUZ_DESPUES_PREGUNTA, '+');
 
     end
 end

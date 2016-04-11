@@ -1,4 +1,4 @@
-function Preguntas(bloque, personajeA, personajeB, opciones)
+function log = Preguntas(bloque, personajeA, personajeB, opciones)
 
     global window;
     global scrnsize;
@@ -15,6 +15,17 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
 
     MENSAJE_CONTINUAR = 'Presione la barra espaciadora cuando termine de leer';
         
+    % --------------------- PREPARO LOG -----------------------------------
+    
+    largo = length(bloque.situaciones);
+    log.estimulo = zeros(1, largo);
+    log.pregunta = zeros(1, largo);
+    log.pantalla_negra = zeros(1, largo);
+    log.opciones = zeros(1, largo);
+    log.respuesta_tiempo = zeros(1, largo);    
+    log.respuesta = zeros(1, largo);
+    log.personaje = cell(1, largo);
+    
     % ------------------- + PARA CENTRAR VISTA ----------------------------
 
     textoCentrado(TIEMPO_INICIAL_CENTRADO, '+');
@@ -39,10 +50,13 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
         % -------------------- ESTIMULO ---------------------------------------
 
         if (bloque.situaciones{1,i}.personaje == 'A')
-            exit = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeA.textura, MENSAJE_CONTINUAR);
+            [exit, OnSetTime] = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeA.textura, MENSAJE_CONTINUAR);
+            log.personaje{1,i} = 'A';
         else
-            exit = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeB.textura, MENSAJE_CONTINUAR);
+            [exit, OnSetTime] = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeB.textura, MENSAJE_CONTINUAR);
+            log.personaje{1,i} = 'B';
         end
+        log.estimulo(1,i) = OnSetTime;
         if exit
             break;
         end
@@ -51,10 +65,13 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
         textoCentrado(TIEMPO_CRUZ_ANTES_PREGUNTA, '+');
 
         % -------------------- PREGUNTA -----------------------------------
+        
+
+        dibujarOpciones([], opciones, false);
+        OnSetTime = blink();
+        log.pregunta(1,i) = OnSetTime;
         continuar = true;
         while continuar
-            dibujarOpciones([], opciones, false);
-            Screen('Flip', window);
             [~, continuar, exit] = EsperarRespuesta(0);
         end
         if exit
@@ -64,17 +81,28 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
         % -------------------- PANTALLA NEGRA -----------------------------
         
         Screen('Flip', window);
+        OnSetTime = blink();
+        log.pantalla_negra(1,i) = OnSetTime;
         WaitSecs(2);
         
         % -------------------- PREGUNTA CON OPCIONES ----------------------
         
         elegido = 5;
         continuar = true;
+        dibujarOpciones(elegido, opciones, true);
+        OnSetTime = blink();
+        log.opciones(1,i) = OnSetTime;
+        
         while continuar
             dibujarOpciones(elegido, opciones, true);
             Screen('Flip', window);
             [elegido, continuar, exit] = EsperarRespuesta(elegido);
         end
+        dibujarOpciones(elegido, opciones, true);
+        OnSetTime = blink();
+        log.respuesta_tiempo(1,i) = OnSetTime;
+        log.respuesta(1,i) = elegido;
+        
         if exit
             break;
         end

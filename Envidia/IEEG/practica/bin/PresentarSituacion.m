@@ -1,13 +1,11 @@
-function [exit, OnSetTime] = PresentarSituacion(texto, textura, mensaje)
+function exit = PresentarSituacion(texto, textura, mensaje)
 
     global window;
     global escKey;
     global spaceKey;
 
-    DibujarSituacion(texto, textura, mensaje);
-    OnSetTime = blink();
-    
-%     Screen('Flip', window);    
+    DibujarSituacion(texto, textura, mensaje);    
+    Screen('Flip', window);    
     
     exit = false;
     esperar = true;
