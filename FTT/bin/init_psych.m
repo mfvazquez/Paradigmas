@@ -1,22 +1,19 @@
-function [window,scrnsize] = iniciarPsych()
-   
-    global hd;
+function hd = init_psych()
     
-    hd.bgcolor = [0 0 0] ;
+    hd.bgcolor = [0 0 0];
     hd.dispscreen = 0;
     hd.itemsize = 100;
     hd.wsize = (hd.itemsize/2)+30;
 
-    hd.textsize = 60;
+     
     hd.textfont = 'Helvetica';
     hd.textcolor = [255 255 255];%[255 255 255]
     hd.ontime = 150/1000;
     hd.offtime = 850/1000;
 
-    blacktime=500/1000;
-    debounce=100/1000;
-
-
+    hd.white = [255 255 255];
+    hd.black = [0 0 0];
+    
 %   Screen('Preference', 'Verbosity', 0);
 
     Screen('Preference', 'TextRenderer', 1);
@@ -28,9 +25,15 @@ function [window,scrnsize] = iniciarPsych()
 
     [window,scrnsize] = Screen('OpenWindow', hd.dispscreen, hd.bgcolor);
     hd.window = window;
+    hd.scrnsize = scrnsize;
     hd.centerx = scrnsize(3)/2;
     hd.centery = scrnsize(4)/2;
 
+    [~, screenYpixels] = Screen('WindowSize', hd.window);
+    hd.textSize = round(screenYpixels*0.04);
+    Screen('TextSize', hd.window, hd.textSize);
+
+    
     % Adjust requested SOA so that it is an exact multiple of the base refresh
     % interval of the monitor at the current refresh rate.
 
@@ -40,10 +43,6 @@ function [window,scrnsize] = iniciarPsych()
     fprintf('\nUsing ON time of %dms with OFF time of %dms.\n', round(hd.ontime*1000), round(hd.offtime*1000));
     Screen('TextFont',hd.window,hd.textfont);
 
-    %Screen settings
-
-    xCenter=hd.centerx;
-    yCenter=hd.centery;
 
     %Teclas de respuesta
     KbName('UnifyKeyNames');
