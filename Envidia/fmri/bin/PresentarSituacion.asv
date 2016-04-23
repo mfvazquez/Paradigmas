@@ -1,0 +1,18 @@
+function [exiOnSetTime = PresentarSituacion(texto, textura, mensaje)
+
+    global window;
+   
+    DibujarSituacion(texto, textura, mensaje);
+    OnSetTime = blink();
+    
+%     Screen('Flip', window);    
+    
+    esperar = true;
+    while esperar
+        [~, keyCode, ~] = KbPressWait;
+        if keyCode(spaceKey)
+            esperar = false;
+        end   
+    end
+    
+end

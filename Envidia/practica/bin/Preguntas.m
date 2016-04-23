@@ -1,4 +1,4 @@
-function log = Preguntas(bloque, personajeA, personajeB, opciones)
+function Preguntas(bloque, personajeA, personajeB, opciones)
 
     global window;
     global scrnsize;
@@ -7,24 +7,14 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
     global leftKey;
     global spaceKey;
 
-    TIEMPO_CRUZ_ANTES_PREGUNTA = 5.5;
-    TIEMPO_CRUZ_DESPUES_PREGUNTA = 5;
+    TIEMPO_CRUZ_ANTES_PREGUNTA = 1.5;
+    TIEMPO_CRUZ_DESPUES_PREGUNTA = 2;
 
-    TIEMPO_INICIAL_CENTRADO = 5;
+    TIEMPO_INICIAL_CENTRADO = 3;
     TIEMPO_PERSONAJE = 8;
 
-    MENSAJE_CONTINUAR = 'Presione cualquier boton cuando termine de leer';
+    MENSAJE_CONTINUAR = 'Presione la barra espaciadora cuando termine de leer';
         
-    % --------------------- PREPARO LOG -----------------------------------
-    
-    largo = length(bloque.situaciones);
-        
-    log.opciones = zeros(1, largo);
-    log.respuesta_tiempo = zeros(1, largo);    
-    log.respuesta = zeros(1, largo);
-    log.personaje = cell(1, largo);
-    log.estimulo = zeros(1, largo);
-    
     % ------------------- + PARA CENTRAR VISTA ----------------------------
 
     textoCentrado(TIEMPO_INICIAL_CENTRADO, '+');
@@ -49,36 +39,54 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
         % -------------------- ESTIMULO ---------------------------------------
 
         if (bloque.situaciones{1,i}.personaje == 'A')
-            OnSetTime = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeA.textura, MENSAJE_CONTINUAR);
-            log.personaje{1,i} = 'A';
+            exit = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeA.textura, MENSAJE_CONTINUAR);
         else
-            OnSetTime = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeB.textura, MENSAJE_CONTINUAR);
-            log.personaje{1,i} = 'B';
+            exit = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeB.textura, MENSAJE_CONTINUAR);
         end
-        log.estimulo(1,i) = OnSetTime;
-
+        if exit
+            break;
+        end
         % ------------------- + PARA CENTRAR VISTA ------------------------
 
         textoCentrado(TIEMPO_CRUZ_ANTES_PREGUNTA, '+');
+
+        % -------------------- PREGUNTA -----------------------------------
+        
+
+        dibujarOpciones([], opciones, false);
+        Screen('Flip', window);  
+        continuar = true;
+        while continuar
+            [~, continuar, exit] = EsperarRespuesta(0);
+        end
+        if exit
+            break;
+        end
+        
+        % -------------------- PANTALLA NEGRA -----------------------------
+        
+        Screen('Flip', window);
+        WaitSecs(2);
         
         % -------------------- PREGUNTA CON OPCIONES ----------------------
         
         elegido = 5;
-        dibujarOpciones(elegido, opciones, true);
-        OnSetTime = blink();
-        log.opciones(1,i) = OnSetTime;
-        
         continuar = true;
+        dibujarOpciones(elegido, opciones, true);
+        Screen('Flip', window);
+        
         while continuar
             dibujarOpciones(elegido, opciones, true);
             Screen('Flip', window);
-            [elegido, continuar] = EsperarRespuesta(elegido);
+            [elegido, continuar, exit] = EsperarRespuesta(elegido);
         end
         dibujarOpciones(elegido, opciones, true);
-        OnSetTime = blink();
-        log.respuesta_tiempo(1,i) = OnSetTime;
-        log.respuesta(1,i) = elegido;
+        Screen('Flip', window);
         
+        if exit
+            break;
+        end
+
         % ------------------- + PARA CENTRAR VISTA ---------------------------
     
         textoCentrado(TIEMPO_CRUZ_DESPUES_PREGUNTA, '+');

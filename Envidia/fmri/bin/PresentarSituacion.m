@@ -1,23 +1,18 @@
-function [exit, OnSetTime] = PresentarSituacion(texto, textura, mensaje)
+function OnSetTime = PresentarSituacion(texto, textura, mensaje)
 
     global window;
-    global escKey;
-    global spaceKey;
-
+   
     DibujarSituacion(texto, textura, mensaje);
     OnSetTime = blink();
     
-%     Screen('Flip', window);    
-    
-    exit = false;
     esperar = true;
     while esperar
-        [~, keyCode, ~] = KbPressWait;
-        if keyCode(spaceKey)
+        
+        input_data=io32(pportobj,pportaddr);
+        input_data=bitand(input_data, 27); % filtro bits 4, 3, 1 y 0
+        
+        if input_data ~= 0
             esperar = false;
-        elseif keyCode(escKey)
-            esperar = false;
-            exit = true;
         end   
     end
     

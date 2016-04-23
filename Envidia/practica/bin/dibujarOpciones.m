@@ -46,8 +46,7 @@ function dibujarOpciones(elegido, textos, cursor)
         textSize = round(yLength*0.6);
         Screen('TextSize', window, textSize);
         centro = round(yPos + yLength/2);
-%         corrimiento = round(textSize * 0.5);
-        corrimiento = 0;
+        corrimiento = round(textSize * 0.5);
         for n = 1:9
             rectSel = [xPos+BoxXLength*(n-1)  yPos BoxXLength*n+xPos yLength+yPos];
             textRec = [xPos+BoxXLength*(n-1)  centro-round(textSize/2)-corrimiento BoxXLength*n+xPos centro+round(textSize/2)];
