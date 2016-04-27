@@ -19,6 +19,10 @@ textos_opciones.minimo = 'Ningún castigo';
 textos_opciones.medio = 'Neutral';
 textos_opciones.maximo = 'Mucho castigo';
 
+tamanio_fijacion = 0.05;
+tamanio_historia = 0.035;
+
+
 % -------------------- TECLAS A UTILIZAR -------------------------------
 KbName('UnifyKeyNames');
 escKey = KbName('ESCAPE');
@@ -34,69 +38,108 @@ red = [255 0 0];
 
 % ------------------- VERSION A CORRER --------------------------------
 
-versiones = {'Gráfico versión 1','Gráfico versión 2','Simple versión 1','Simple versión 2'};
-carpetas = {'grafico_v1','grafico_v2', 'simple_v1', 'simple_v2'};
-choice = menu('Version de lenguaje:',versiones);
-carpeta_historias = carpetas{choice};
-arch_historia = fullfile('..', 'data', carpeta_historias, 'historia_1.txt'); %aca deberia abrir todos los archivos en la carpeta, ojo que no estan ordenados, hay que ordenarlos
+data_path = fullfile('..','data');
+carpetas = dir(data_path);
+carpetas = {carpetas.name};
+carpetas(1) = []; % elimino el .
+carpetas(1) = []; % elimino el ..
 
-a = dir(['..\data\' carpeta_historias]);
-a(1) = [];
-a(1) = [];
-arch = {a.name};
-arch = natsort(arch);
+versiones = cell(1,length(carpetas));
+for i = 1:length(carpetas)
+    versiones{1,i} = carpetas{i};
+end
+
+choice = menu('Version:',versiones);
+version = carpetas{choice};
+
+historias_path = fullfile(data_path, version);
+historias_arch = dir(historias_path);
+historias_arch = {historias_arch.name};
+historias_arch(1) = [];
+historias_arch(1) = [];
+historias_arch = natsort(historias_arch);
+
+historias = cell(1, length(historias_arch));
+for i = 1:length(historias)
+    archivo = fullfile(historias_path, historias_arch{i});
+    historias{1,i} = fileread(archivo);
+end
 
 
 % ------------------- INICIALIZO PSYCHOTOOLBOX ------------------------
 ListenChar(2);
 HideCursor;
-[window, scrnsize] = init_psych(hd);
+init_psych();
 
 % ------------------- INICIO DEL PARADIGMA ----------------------------
 
 % % % % % % ------------------- + PARA CENTRAR VISTA ----------------------------
 % % % % % 
-% % % % % textoCentrado(window, scrnsize, TIEMPO_INICIAL_CENTRADO, '+');
-
-% ------------------- INTRODUCCION -----------------------------------
-
-
-
-
-% % % % % % ------------------- + PARA CENTRAR VISTA ---------------------------
+% % % % % textoCentrado('+', tamanio_fijacion);
+% % % % % Screen('Flip', hd.window);
+% % % % % WaitSecs(TIEMPO_INICIAL_CENTRADO);
 % % % % % 
-% % % % % textoCentrado(window, scrnsize, TIEMPO_PRE_HISTORIA, '+');
-
-% % % % % % ------------------- HISTORIA ---------------------------------------
+% % % % % % ------------------- INTRODUCCION -----------------------------------
 % % % % % 
-% % % % % text = fileread(arch_historia);
-% % % % % textoCentradoBoton(window, scrnsize, text);
+% % % % % textoCentrado('INSTRUCCIONES INSTRUCTIVAS', tamanio_fijacion);
+% % % % % Screen('Flip', hd.window);
+% % % % % KbWait;
 
 
-% % % % % % ------------------- + PARA CENTRAR VISTA ---------------------------
+exit = false;
+for i = 1:length(historias)
+
+% % % % %     % ------------------- + PARA CENTRAR VISTA ---------------------------
 % % % % % 
-% % % % % textoCentrado(window, scrnsize, TIEMPO_POST_HISTORIA, '+');
+% % % % %     textoCentrado('+', tamanio_fijacion);
+% % % % %     Screen('Flip', hd.window);
+% % % % %     WaitSecs(TIEMPO_PRE_HISTORIA);
+% % % % % 
 
-% ------------------- OPCIONES ---------------------------------------
+    % ------------------- HISTORIA ---------------------------------------
 
-elegido = 5;
-dibujarOpciones(window, scrnsize, elegido, textos_opciones);
+    textoCentrado(historias{1,i}, tamanio_historia);
+    Screen('Flip', hd.window);
+    KbPressWait;
+% % % % % 
+% % % % %     % ------------------- + PARA CENTRAR VISTA ---------------------------
+% % % % % 
+% % % % %     textoCentrado('+', tamanio_fijacion);
+% % % % %     Screen('Flip', hd.window);
+% % % % %     WaitSecs(TIEMPO_POST_HISTORIA);
+% % % % % 
+% % % % %     % ------------------- OPCIONES ---------------------------------------
 
-continuar = true;
-while continuar
-
-    [~, keyCode, ~] = KbPressWait;
+% % % % %     elegido = 5;
+% % % % %     dibujarOpciones(elegido, textos_opciones);
+% % % % %     Screen('Flip', hd.window);
+% % % % % 
+% % % % %     continuar = true;
+% % % % %     while continuar
+% % % % % 
+% % % % %         [~, keyCode, ~] = KbPressWait;
+% % % % % 
+% % % % %         if keyCode(rightKey) && elegido < 9
+% % % % %             elegido = elegido + 1;
+% % % % %             dibujarOpciones(elegido, textos_opciones);
+% % % % %             Screen('Flip', hd.window);
+% % % % %         elseif keyCode(leftKey) && elegido > 1
+% % % % %             elegido = elegido - 1;
+% % % % %             dibujarOpciones(elegido, textos_opciones);
+% % % % %             Screen('Flip', hd.window);
+% % % % %         elseif keyCode(downKey)
+% % % % %             continuar = false;
+% % % % %         elseif keyCode(escKey)
+% % % % %             continuar = false;
+% % % % %             exit = true;
+% % % % %         end
+% % % % % 
+% % % % %     end
+% % % % %     
+% % % % %     if (exit)
+% % % % %         break;
+% % % % %     end
     
-    if keyCode(rightKey) && elegido < 9
-        elegido = elegido + 1;
-        dibujarOpciones(window, scrnsize, elegido, textos_opciones);
-    elseif keyCode(leftKey) && elegido > 1
-        elegido = elegido - 1;
-        dibujarOpciones(window, scrnsize, elegido, textos_opciones);
-    elseif keyCode(escKey)
-        continuar = false;
-    end   
-   
 end
 
 

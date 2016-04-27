@@ -1,5 +1,7 @@
-function [window,scrnsize] = iniciarPsych(hd)
+function iniciarPsych()
    
+    global hd
+
     hd.bgcolor = [0 0 0] ;
     hd.dispscreen = 0;
     hd.itemsize = 100;
@@ -13,13 +15,14 @@ function [window,scrnsize] = iniciarPsych(hd)
 
     blacktime=500/1000;
     debounce=100/1000;
+    
+    hd.white = [255 255 255];
+    hd.black = [0 0 0];
+    hd.red = [255 0 0];
 
-    Screen('Preference', 'ConserveVRAM', 64);  %agregado
-    Screen('Preference', 'Verbosity', 0);
-    Screen('Preference', 'VisualDebugLevel',0);
-    Screen('Preference', 'ConserveVRAM', 64);
 
-    Screen('Preference', 'VBLTimestampingMode', 1);
+%   Screen('Preference', 'Verbosity', 0);
+
     Screen('Preference', 'TextRenderer', 1);
     Screen('Preference', 'TextAntiAliasing', 2);
     Screen('Preference', 'TextAlphaBlending',1);
@@ -31,6 +34,7 @@ function [window,scrnsize] = iniciarPsych(hd)
     hd.window = window;
     hd.centerx = scrnsize(3)/2;
     hd.centery = scrnsize(4)/2;
+    hd.scrnsize = scrnsize;
 
     % Adjust requested SOA so that it is an exact multiple of the base refresh
     % interval of the monitor at the current refresh rate.

@@ -1,15 +1,12 @@
-function textoCentrado(window, scrnsize, tiempo, texto)
+function textoCentrado(texto, tamanio)
 
-    [screenXpixels, screenYpixels] = Screen('WindowSize', window);
-    
-    white = [255 255 255];
-    black = [0 0 0];
+    global hd;
 
-    textSize = round(screenYpixels*0.05);
+    [~, screenYpixels] = Screen('WindowSize', hd.window);
 
-    Screen('TextSize', window, textSize);
-    DrawFormattedText(window, texto, 'center','center', white);
-    Screen('Flip', window);
-    WaitSecs(tiempo);
+    textSize = round(screenYpixels*tamanio);
+
+    Screen('TextSize', hd.window, textSize);
+    DrawFormattedText(hd.window, texto, 'center','center', hd.white, [],[],[], 1.5,[],[]);
 
 end
