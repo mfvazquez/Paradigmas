@@ -1,3 +1,5 @@
+function Moral()
+
 clc;
 sca;
 close all;
@@ -22,7 +24,10 @@ textos_opciones.maximo = 'Mucho castigo';
 tamanio_fijacion = 0.05;
 tamanio_historia = 0.035;
 
+LARGO_LINEA = 65;
 
+INSTRUCCIONES = 'A continuación se le presentarán una serie de situaciones. Por favor léalas y responda las preguntas usando las escalas correspondientes.';
+INSTRUCCIONES = AgregarFinLinea(INSTRUCCIONES, round(LARGO_LINEA/2));
 % -------------------- TECLAS A UTILIZAR -------------------------------
 KbName('UnifyKeyNames');
 escKey = KbName('ESCAPE');
@@ -63,6 +68,7 @@ historias = cell(1, length(historias_arch));
 for i = 1:length(historias)
     archivo = fullfile(historias_path, historias_arch{i});
     historias{1,i} = fileread(archivo);
+    historias{1,i} = AgregarFinLinea(historias{1,i}, LARGO_LINEA);
 end
 
 
@@ -73,72 +79,72 @@ init_psych();
 
 % ------------------- INICIO DEL PARADIGMA ----------------------------
 
-% % % % % % ------------------- + PARA CENTRAR VISTA ----------------------------
-% % % % % 
-% % % % % textoCentrado('+', tamanio_fijacion);
-% % % % % Screen('Flip', hd.window);
-% % % % % WaitSecs(TIEMPO_INICIAL_CENTRADO);
-% % % % % 
-% % % % % % ------------------- INTRODUCCION -----------------------------------
-% % % % % 
-% % % % % textoCentrado('INSTRUCCIONES INSTRUCTIVAS', tamanio_fijacion);
-% % % % % Screen('Flip', hd.window);
-% % % % % KbWait;
+% ------------------- + PARA CENTRAR VISTA ----------------------------
+
+textoCentrado('+', tamanio_fijacion);
+Screen('Flip', hd.window);
+WaitSecs(TIEMPO_INICIAL_CENTRADO);
+
+% ------------------- INTRODUCCION -----------------------------------
+
+textoCentrado(INSTRUCCIONES, tamanio_fijacion);
+Screen('Flip', hd.window);
+KbWait;
 
 
 exit = false;
 for i = 1:length(historias)
 
-% % % % %     % ------------------- + PARA CENTRAR VISTA ---------------------------
-% % % % % 
-% % % % %     textoCentrado('+', tamanio_fijacion);
-% % % % %     Screen('Flip', hd.window);
-% % % % %     WaitSecs(TIEMPO_PRE_HISTORIA);
-% % % % % 
+    % ------------------- + PARA CENTRAR VISTA ---------------------------
+
+    textoCentrado('+', tamanio_fijacion);
+    Screen('Flip', hd.window);
+    WaitSecs(TIEMPO_PRE_HISTORIA);
+
 
     % ------------------- HISTORIA ---------------------------------------
 
     textoCentrado(historias{1,i}, tamanio_historia);
     Screen('Flip', hd.window);
     KbPressWait;
-% % % % % 
-% % % % %     % ------------------- + PARA CENTRAR VISTA ---------------------------
-% % % % % 
-% % % % %     textoCentrado('+', tamanio_fijacion);
-% % % % %     Screen('Flip', hd.window);
-% % % % %     WaitSecs(TIEMPO_POST_HISTORIA);
-% % % % % 
-% % % % %     % ------------------- OPCIONES ---------------------------------------
 
-% % % % %     elegido = 5;
-% % % % %     dibujarOpciones(elegido, textos_opciones);
-% % % % %     Screen('Flip', hd.window);
-% % % % % 
-% % % % %     continuar = true;
-% % % % %     while continuar
-% % % % % 
-% % % % %         [~, keyCode, ~] = KbPressWait;
-% % % % % 
-% % % % %         if keyCode(rightKey) && elegido < 9
-% % % % %             elegido = elegido + 1;
-% % % % %             dibujarOpciones(elegido, textos_opciones);
-% % % % %             Screen('Flip', hd.window);
-% % % % %         elseif keyCode(leftKey) && elegido > 1
-% % % % %             elegido = elegido - 1;
-% % % % %             dibujarOpciones(elegido, textos_opciones);
-% % % % %             Screen('Flip', hd.window);
-% % % % %         elseif keyCode(downKey)
-% % % % %             continuar = false;
-% % % % %         elseif keyCode(escKey)
-% % % % %             continuar = false;
-% % % % %             exit = true;
-% % % % %         end
-% % % % % 
-% % % % %     end
-% % % % %     
-% % % % %     if (exit)
-% % % % %         break;
-% % % % %     end
+    % ------------------- + PARA CENTRAR VISTA ---------------------------
+
+    textoCentrado('+', tamanio_fijacion);
+    Screen('Flip', hd.window);
+    WaitSecs(TIEMPO_POST_HISTORIA);
+
+    % ------------------- OPCIONES ---------------------------------------
+
+    elegido = 5;
+    dibujarOpciones(elegido, textos_opciones);
+    Screen('Flip', hd.window);
+
+    continuar = true;
+    while continuar
+
+        [~, keyCode, ~] = KbPressWait;
+
+        if keyCode(rightKey) && elegido < 9
+            elegido = elegido + 1;
+            dibujarOpciones(elegido, textos_opciones);
+            Screen('Flip', hd.window);
+        elseif keyCode(leftKey) && elegido > 1
+            elegido = elegido - 1;
+            dibujarOpciones(elegido, textos_opciones);
+            Screen('Flip', hd.window);
+        elseif keyCode(downKey)
+            continuar = false;
+        elseif keyCode(escKey)
+            continuar = false;
+            exit = true;
+        end
+
+    end
+    
+    if (exit)
+        break;
+    end
     
 end
 
@@ -148,3 +154,5 @@ end
 Screen('CloseAll'); % Cierro ventana del Psychtoolbox
 ListenChar(1);
 ShowCursor;
+
+end
