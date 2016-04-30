@@ -3,7 +3,7 @@ function [elegido, continuar] = EsperarRespuesta(elegido)
     RIGHT = 2;
     LEFT = 1;
     ACCEPT = 16;
-    
+        
     continuar = true;
     leer_puerto = true;
     while leer_puerto

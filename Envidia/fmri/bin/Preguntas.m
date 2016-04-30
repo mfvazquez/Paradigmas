@@ -1,12 +1,10 @@
 function log = Preguntas(bloque, personajeA, personajeB, opciones)
 
     global window;
-    global scrnsize;
-    global escKey;
-    global rightKey;
-    global leftKey;
-    global spaceKey;
-
+    global pportobj;
+    global pportaddr;
+    
+    
     TIEMPO_CRUZ_ANTES_PREGUNTA = 5.5;
     TIEMPO_CRUZ_DESPUES_PREGUNTA = 5;
 
@@ -18,12 +16,16 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
     % --------------------- PREPARO LOG -----------------------------------
     
     largo = length(bloque.situaciones);
-        
-    log.opciones = zeros(1, largo);
-    log.respuesta_tiempo = zeros(1, largo);    
-    log.respuesta = zeros(1, largo);
+
     log.personaje = cell(1, largo);
-    log.estimulo = zeros(1, largo);
+    log.estimulo_inicio = cell(1, largo);
+    log.estimulo_fin = cell(1, largo);
+ 
+    log.opciones_inicio = cell(1, largo);
+    log.opciones_fin = cell(1, largo);    
+    log.respuesta = cell(1, largo);       
+    log.opciones_PrimerMovimiento = cell(1, largo);
+        
     
     % ------------------- + PARA CENTRAR VISTA ----------------------------
 
@@ -55,8 +57,8 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
             OnSetTime = PresentarSituacion(bloque.situaciones{1,i}.texto, personajeB.textura, MENSAJE_CONTINUAR);
             log.personaje{1,i} = 'B';
         end
-        log.estimulo(1,i) = OnSetTime;
-
+        log.estimulo_inicio{1,i} = OnSetTime;
+        log.estimulo_fin{1,i} = GetSecs;
         % ------------------- + PARA CENTRAR VISTA ------------------------
 
         textoCentrado(TIEMPO_CRUZ_ANTES_PREGUNTA, '+');
@@ -66,18 +68,21 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
         elegido = 5;
         dibujarOpciones(elegido, opciones, true);
         OnSetTime = blink();
-        log.opciones(1,i) = OnSetTime;
+        log.opciones_inicio{1,i} = OnSetTime;
         
+        primer_movimiento = -1;
         continuar = true;
         while continuar
             dibujarOpciones(elegido, opciones, true);
             Screen('Flip', window);
             [elegido, continuar] = EsperarRespuesta(elegido);
+            if primer_movimiento == -1
+                primer_movimiento = GetSecs;
+            end
         end
-        dibujarOpciones(elegido, opciones, true);
-        OnSetTime = blink();
-        log.respuesta_tiempo(1,i) = OnSetTime;
-        log.respuesta(1,i) = elegido;
+        log.opciones_fin{1,i} = GetSecs;
+        log.respuesta{1,i} = elegido;
+        log.opciones_PrimerMovimiento{1,i} = primer_movimiento;
         
         % ------------------- + PARA CENTRAR VISTA ---------------------------
     

@@ -16,6 +16,8 @@ function Envidia()
     global hd; 
     global window;
     global scrnsize;
+    global pportobj;
+    global pportaddr;
     
     % -------------------- CONSTANTES -------------------------------------
     

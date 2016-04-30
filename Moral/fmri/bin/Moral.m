@@ -28,18 +28,6 @@ LARGO_LINEA = 65;
 
 INSTRUCCIONES = 'A continuación se le presentarán una serie de situaciones. Por favor léalas y responda las preguntas usando las escalas correspondientes.';
 INSTRUCCIONES = AgregarFinLinea(INSTRUCCIONES, round(LARGO_LINEA/2));
-% -------------------- TECLAS A UTILIZAR -------------------------------
-
-global escKey;
-global rightKey;
-global leftKey;
-global downKey;
-
-KbName('UnifyKeyNames');
-escKey = KbName('ESCAPE');
-rightKey = KbName('RightArrow');
-leftKey = KbName('LeftArrow');
-downKey = KbName('DownArrow');
 
 % -------------------- NOMBRE -----------------------------------------
 
@@ -92,6 +80,45 @@ ListenChar(2);
 HideCursor;
 init_psych();
 
+% ------------------- INICIALIZO PUERTO PARALELO ----------------------
+
+% Init Puerto Paralelo (io32.dll debe estar en la carpeta del proyecto y la 
+% input32.dll en c:\windows\system32 y/o c:\windows\system)
+
+pportaddr = 'C020';
+% pportaddr = '378';
+
+if exist('pportaddr','var') && ~isempty(pportaddr)
+
+    fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+    pportaddr = hex2dec(pportaddr);
+    pportobj = io32;
+    io32status = io32(pportobj);
+    io32(pportobj,pportaddr,0)
+
+    if io32status ~= 0
+        error('io32 failure: could not initialise parallel port.\n');
+    end
+
+end
+
+------------------- ESPERA AL RESONADOR -----------------------------
+    
+textoCentrado('Esperando al resonador...', tamanio_fijacion);
+Screen('Flip',hd.window);
+WaitSecs(2);
+% Sincronización con el resonador
+start_signal= 4;
+
+wait_start = true;
+while (wait_start)
+       input_data=io32(pportobj,pportaddr);
+       input_data=bitand(input_data, 4);
+       if input_data == start_signal %Una vez que ocurra la señal del resonador, arranca
+           wait_start=false;
+       end
+end
+
 % ------------------- INICIO DEL PARADIGMA ----------------------------
 
 % ------------------- + PARA CENTRAR VISTA ----------------------------
@@ -105,7 +132,8 @@ WaitSecs(TIEMPO_INICIAL_CENTRADO);
 textoCentrado(INSTRUCCIONES, tamanio_fijacion);
 [~, OnSetTime] = Screen('Flip', hd.window);
 log.instrucciones_inicio = OnSetTime;
-KbWait;
+% KbPressWait;
+EsperarBoton(pportobj,pportaddr);
 log.instrucciones_fin = GetSecs;
 
 
@@ -124,7 +152,9 @@ for i = 1:length(historias)
     textoCentrado(historias{1,i}, tamanio_historia);
     [~, OnSetTime] = Screen('Flip', hd.window);
     log.historia_inicio{1,i} = OnSetTime;
-    KbPressWait;
+
+%     KbPressWait;
+    EsperarBoton(pportobj,pportaddr);
     log.historia_fin{1,i} = GetSecs;
 
     % ------------------- + PARA CENTRAR VISTA ---------------------------
@@ -134,18 +164,25 @@ for i = 1:length(historias)
     WaitSecs(TIEMPO_POST_HISTORIA);
 
     % ------------------- OPCIONES ---------------------------------------
-
-    [exit, log_respuesta] = Respuesta(textos_opciones);
+    elegido = 5;
+    dibujarOpciones(elegido, textos_opciones);
+    [~, OnSetTime] = Screen('Flip',hd.window);
+    log.respuesta_inicio{1,i} = OnSetTime;
     
-    if (exit)
-        break;
+    primer_movimiento = -1;
+    continuar = true;
+    while continuar
+        dibujarOpciones(elegido, textos_opciones);
+        Screen('Flip', hd.window);
+        [elegido, continuar] = EsperarRespuesta(elegido);
+        if primer_movimiento == -1
+            primer_movimiento = GetSecs;
+        end
     end
-    
-    log.respuesta_inicio{1,i} =log_respuesta.respuesta_inicio;
-    log.respuesta_PrimerMovimiento{1,i} =log_respuesta.primer_movimiento;
-    log.respuesta_fin{1,i} = log_respuesta.respuesta_fin;
-    log.respuestas{1,i} = log_respuesta.respuesta;
-    
+    log.respuesta_fin{1,i} = GetSecs;
+    log.respuestas{1,i} = elegido;
+    log.respuesta_PrimerMovimiento{1,i} = primer_movimiento;
+        
 end
 
 % ---------------------- GUARDO LOG ----------------------------------
