@@ -1,22 +1,16 @@
-function Bloque(secuencia, duracion)
+    fKey = KbName('f');
+    gKey = KbName('g');
+    hKey = KbName('h');
+    jKey = KbName('j');
 
-    global hd; 
-    global escKey;
-    global fKey;
-    global gKey;
-    global hKey;
-    global jKey;
 
-    secuencia_largo = floor(length(secuencia)/2) + 1;
+    ListenChar(2);
     
-    actual = 1;
-    DibujarSecuencia(secuencia, actual);
-    Screen('Flip', hd.window);
-    
-    duracion = 3;
+    duracion = 10;
     actual = 1;
     continuar = true;
     tstart = GetSecs();
+    WaitSecs(2)
     [~, ~, keyCode, ~] = KbCheck;
     while continuar
 
@@ -24,13 +18,13 @@ function Bloque(secuencia, duracion)
         find(keyCode)
         
         if keyCode(fKey)
-            actual = actual + 1
+            actual = actual + 1;
             if actual > secuencia_largo
-                actual = 1
+                actual = 1;
             end
 
-            DibujarSecuencia(secuencia, actual);
-            Screen('Flip', hd.window);
+%             DibujarSecuencia(secuencia, actual);
+%             Screen('Flip', hd.window);
         elseif keyCode(escKey)
             continuar = false;
         end
@@ -41,6 +35,6 @@ function Bloque(secuencia, duracion)
             continuar = false;
         end
     end
-
-
-end
+    
+    
+    ListenChar(1);

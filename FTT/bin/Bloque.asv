@@ -29,8 +29,8 @@ function Bloque(secuencia, duracion)
                 actual = 1
             end
 
-            DibujarSecuencia(secuencia, actual);
-            Screen('Flip', hd.window);
+%             DibujarSecuencia(secuencia, actual);
+%             Screen('Flip', hd.window);
         elseif keyCode(escKey)
             continuar = false;
         end

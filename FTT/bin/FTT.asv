@@ -1,5 +1,3 @@
-function FFT()
-
 clc;
 sca;
 close all;
@@ -58,7 +56,7 @@ jKey = KbName('j');
 % % ------------------- + PARA CENTRAR VISTA -------------------------------
 % ffghjjklggfjjgf
 % textoCentrado('+');
-% Screen('Flip', hd.window);
+% Screen('Flip', hd.window);se
 % WaitSecs(TIEMPO_CENTRADO);
 
 % ------------------- INICIO DEL BLOQUE ----------------------------------
@@ -70,5 +68,3 @@ Bloque('2-5-3-4-3', 5);
 Screen('CloseAll'); % Cierro ventana del Psychtoolbox
 ListenChar(1);
 ShowCursor;
-
-end
