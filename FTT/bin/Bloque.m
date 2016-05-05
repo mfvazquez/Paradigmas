@@ -13,26 +13,21 @@ function Bloque(secuencia, duracion)
     DibujarSecuencia(secuencia, actual);
     Screen('Flip', hd.window);
     
-    duracion = 3;
     actual = 1;
     continuar = true;
     tstart = GetSecs();
-    [~, ~, keyCode, ~] = KbCheck;
     while continuar
 
-        keyCode = KbCheckNewPush(keyCode);
-        find(keyCode)
+        [~, keyCode, ~] = KbPressWait;
         
-        if keyCode(fKey)
-            actual = actual + 1
-            if actual > secuencia_largo
-                actual = 1
+        if any(keyCode)
+            actual = actual + 1;
+            if actual > secuencia_largo;
+                actual = 1;
             end
 
             DibujarSecuencia(secuencia, actual);
             Screen('Flip', hd.window);
-        elseif keyCode(escKey)
-            continuar = false;
         end
 
 
@@ -41,6 +36,5 @@ function Bloque(secuencia, duracion)
             continuar = false;
         end
     end
-
 
 end
