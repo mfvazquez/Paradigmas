@@ -45,11 +45,6 @@ function iniciarPsych()
     fprintf('\nUsing ON time of %dms with OFF time of %dms.\n', round(hd.ontime*1000), round(hd.offtime*1000));
     Screen('TextFont',hd.window,hd.textfont);
 
-    %Screen settings
-
-    xCenter=hd.centerx;
-    yCenter=hd.centery;
-
     %Teclas de respuesta
     KbName('UnifyKeyNames');
 

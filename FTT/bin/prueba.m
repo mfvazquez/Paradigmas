@@ -15,8 +15,11 @@
         [keyCode, anteriores] = KbCheckNewPush(anteriores);
         
         
-        if keyCode(fKey)
+        if any(keyCode)
+            display 'apretadas'
             find(keyCode)
+            display 'anteriores'
+            find(anteriores)
 
 %             DibujarSecuencia(secuencia, actual);
 %             Screen('Flip', hd.window);
