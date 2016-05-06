@@ -15,7 +15,7 @@ function hd = init_psych()
     hd.black = [0 0 0];
     hd.red = [255 0 0];
     
-%   Screen('Preference', 'Verbosity', 0);
+    Screen('Preference', 'Verbosity', 0);
 
     Screen('Preference', 'TextRenderer', 1);
     Screen('Preference', 'TextAntiAliasing', 2);

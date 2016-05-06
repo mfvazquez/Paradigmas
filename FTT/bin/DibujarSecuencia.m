@@ -20,7 +20,8 @@ function DibujarSecuencia(secuencia, actual)
     Xpos = round((Xpixels - Xlength)/2);
     BoxXLength = round(Xlength/length(secuencia));
     
-    corrimiento = round(textSize * 0.5);
+%     corrimiento = round(textSize * 0.5); para la asus
+    corrimiento = 0;
     
     for i = 1:length(secuencia)
     

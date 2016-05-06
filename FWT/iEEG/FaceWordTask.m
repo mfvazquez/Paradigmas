@@ -220,9 +220,14 @@ function FWT()
     %----------------------------------------------------------------------
 
     if (~exist('log','dir')) 
-    mkdir log;
-    mkdir log/mat;
+        mkdir log;
     end
+    
+    
+    if (~exist('log/mat','dir')) 
+        mkdir log/mat;
+    end
+    
 
     for i = 1:length(respMat)
     xlwrite(['log\' Name '.xls'], respMat{1,i}, ['Bloque ' int2str(i)], 'A1');

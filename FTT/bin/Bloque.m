@@ -5,9 +5,11 @@ function [log, exit] = Bloque(secuencia, duracion, teclas)
     
     exit = false;
     
-    log.accuracy = zeros(1,2500);
-    log.resp_time = zeros(1,2500);
-    log.resp_rel_time = zeros(1,2500);
+    log.accuracy = cell(2500,1);
+    log.resp_time = cell(2500,1);
+    log.resp_rel_time = cell(2500,1);
+    log.begin = [];
+    log.end = [];
     
     secuencia_largo = floor(length(secuencia)/2) + 1;
     
@@ -29,22 +31,22 @@ function [log, exit] = Bloque(secuencia, duracion, teclas)
         if any(keyCode == escKey)
             continuar = false;
             exit = true;
-            log.end = GetSecs;
+            
         elseif any(ismember(keyCode, teclas))
             
             for i = 1:length(keyCode)
                 boton = find(keyCode(i) == teclas) + 1;
                 if ~isempty(boton)
-                    log.resp_time(contador) = GetSecs;
+                    log.resp_time{contador,1} = GetSecs;
                     if (contador > 1)
-                        log.resp_rel_time(contador) = log.resp_time(contador) - log.resp_time(contador-1);
+                        log.resp_rel_time{contador,1} = log.resp_time{contador,1} - log.resp_time{contador-1,1};
                     end
                     num = secuencia(actual*2-1);
                     num = str2num(num);
                     if num == boton
-                        log.accuracy(contador) = 1;
+                        log.accuracy{contador,1} = 1;
                     else
-                        log.accuracy(contador) = -1;
+                        log.accuracy{contador,1} = -1;
                     end
                     contador = contador + 1;
                 end
@@ -61,9 +63,9 @@ function [log, exit] = Bloque(secuencia, duracion, teclas)
 
         telapsed = GetSecs();
         if (telapsed - tstart > duracion)
-            log.end = GetSecs;
             continuar = false;
             Screen('Flip', hd.window);
         end
-    end    
+    end
+    log.end = GetSecs;
 end

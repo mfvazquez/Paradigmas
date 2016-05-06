@@ -7,7 +7,7 @@ clearvars;
 
 lib_path = fullfile('..','lib');
 addpath(lib_path);
-addpath(fullfile(lib_path, 'xlwrite', 'xlwrite'));
+loadPOI;
 
 % ------------------- CONSTANTES GLOBALES --------------------------------
 global hd;
@@ -61,6 +61,17 @@ version = versiones{choice};
 
 secuencia = fileread(fullfile(versiones_path,[version '.txt']));
 
+bloques = 6;
+BloquesID = fopen(fullfile(DATA_PATH,'Bloques.txt'));
+linea = fgets(BloquesID);
+while linea ~= -1
+    bloque = textscan(linea,'%q%d', 'delimiter',',');
+    linea = fgets(BloquesID);
+    if strcmp(bloque{1}, version)
+        bloques = bloque{2};
+    end
+end
+
 % ------------------------ MANO A USAR -----------------------------------
 
 manos = {'Diestro' 'Zurdo'};
@@ -90,22 +101,26 @@ KbWait;
 
 % ------------------- INICIO DEL BLOQUE ----------------------------------
 
-for i = 1:length(log)
+for i = 1:bloques
 
     CentrarVista(TIEMPO_CENTRADO);
     
     [log{1,i}, exit] = Bloque(secuencia, BLOQUE_DURACION, teclas);
     if exit
+        bloques = i;
         break
     end
-    WaitSecs(BREAK_DURACION);
+    if i ~= bloques
+        WaitSecs(BREAK_DURACION);
+    end
 end
 
-%----------------------------------------------------------------------
-%                          Guardado del Log
-%----------------------------------------------------------------------
+%---------------------- GUARDO EL LOG ------------------------------------
 
-GuardarLog(log, nombre, version);
+textoCentrado('Guardando Datos...');
+Screen('Flip', hd.window);
+GuardarLog(log, nombre, version, bloques);
+
 
 % -------------------- CIERRO PSYCHOTOOLBOX ------------------------------
 
