@@ -7,6 +7,8 @@ clearvars;
 
 lib_path = fullfile('..','lib');
 addpath(lib_path);
+xlwrite_path = fullfile(lib_path, 'xlwrite', 'xlwrite');
+addpath(xlwrite_path);
 loadPOI;
 
 % ------------------- CONSTANTES GLOBALES --------------------------------
