@@ -8,4 +8,4 @@ Cuando sea una PALABRA INVENTADA pulsa la tecla V.
 
 Vamos a hacer algunos ejemplos.
 
-Presiona ESPACIO para comenzar.
+Presiona cualquier tecla para para comenzar.
