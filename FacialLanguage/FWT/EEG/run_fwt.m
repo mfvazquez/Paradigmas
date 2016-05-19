@@ -23,11 +23,11 @@ function [respMat, EXIT]= run_fwt(PsyParams, estimulos, mensaje, keys ,respMat)
     %Si pasan un quinto argumento a la funcion entonces es un bloque experimental
     %y no de practica
     
-    if (experimental) 
-        io32(pportobj,pportaddr,255) %Inicio de bloque
-        WaitSecs(0.05);
-    end 
-    io32(pportobj,pportaddr,0) %Inicio de bloque
+%     if (experimental) 
+%         io32(pportobj,pportaddr,255) %Inicio de bloque
+%         WaitSecs(0.05);
+%     end 
+%     io32(pportobj,pportaddr,0) %Inicio de bloque
 
 
     for trial = 1:numTrials
@@ -72,17 +72,17 @@ function [respMat, EXIT]= run_fwt(PsyParams, estimulos, mensaje, keys ,respMat)
 
        % Draw the word
        DrawFormattedText(window, char(estimulos(1, trial)), 'center', 'center', black);
-       if (experimental)
-           io32(pportobj,pportaddr,cell2mat(estimulos(5, trial))) %Inicio de bloque 1
-       end
-       % Flip to the screen
+%        if (experimental)
+%            io32(pportobj,pportaddr,cell2mat(estimulos(5, trial))) %Inicio de bloque 1
+%        end
+%        % Flip to the screen
         vbl = Screen('Flip', window);
         WaitSecs(0.3);
 
-        if (experimental)
-            io32(pportobj,pportaddr,0)
-        end
-        
+%         if (experimental)
+%             io32(pportobj,pportaddr,0)
+%         end
+%         
         response=[];
         accuracy=[];
         rt=[];
@@ -117,7 +117,7 @@ function [respMat, EXIT]= run_fwt(PsyParams, estimulos, mensaje, keys ,respMat)
                     else
                         accuracy=0; 
                     end
-                    io32(pportobj,pportaddr,accuracy+100)
+%                     io32(pportobj,pportaddr,accuracy+100)
                 end
                 
             elseif keyCode(NoCaraKey)
@@ -129,7 +129,7 @@ function [respMat, EXIT]= run_fwt(PsyParams, estimulos, mensaje, keys ,respMat)
                     else
                         accuracy=0; 
                     end
-                    io32(pportobj,pportaddr,accuracy+100)
+%                     io32(pportobj,pportaddr,accuracy+100)
                 end                
 
             end
@@ -143,9 +143,9 @@ function [respMat, EXIT]= run_fwt(PsyParams, estimulos, mensaje, keys ,respMat)
         Screen('FillRect', window, grey)
         vbl = Screen('Flip', window);
 
-        if (experimental)
-            io32(pportobj,pportaddr,0) 
-        end
+%         if (experimental)
+%             io32(pportobj,pportaddr,0) 
+%         end
 
         % Record the trial data into out data matrix
         if experimental

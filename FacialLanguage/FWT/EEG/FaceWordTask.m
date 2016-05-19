@@ -33,21 +33,21 @@ black = BlackIndex(screenNumber);
 
 %% Parallel Port
 
-global pportobj pportaddr
-
-pportaddr = 'C020';
-
-if exist('pportaddr','var') && ~isempty(pportaddr)
-    fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-    pportaddr = hex2dec(pportaddr);
-
-    pportobj = io32;
-    io32status = io32(pportobj);
-    
-    if io32status ~= 0
-        error('io32 failure: could not initialise parallel port.\n');
-    end
-end
+% global pportobj pportaddr
+% 
+% pportaddr = 'C020';
+% 
+% if exist('pportaddr','var') && ~isempty(pportaddr)
+%     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+%     pportaddr = hex2dec(pportaddr);
+% 
+%     pportobj = io32;
+%     io32status = io32(pportobj);
+%     
+%     if io32status ~= 0
+%         error('io32 failure: could not initialise parallel port.\n');
+%     end
+% end
 
 
 
