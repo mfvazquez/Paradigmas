@@ -7,6 +7,7 @@ sca;
 
 addpath('lib');
 addpath(fullfile('lib','xlwrite','xlwrite'));
+addpath(fullfile('lib','strings'));
 % loadPOI;
 
 %% ----------------------- CONSTANTES ------------------------------------
