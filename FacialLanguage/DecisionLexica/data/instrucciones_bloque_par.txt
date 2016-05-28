@@ -1,0 +1,10 @@
+Esto es un experimento de DECISIÓN LÉXICA.
+En la pantalla irán apareciendo palabras y no palabras.
+Debes decidir si es una palabra real o inventada.
+Hazlo lo más rápido que puedas, 
+intentando no cometer errores.
+
+Cuando sea una PALABRA REAL pulsa la tecla B.
+Cuando sea una PALABRA INVENTADA pulsa la tecla V.
+
+Presiona cualquier tecla para para comenzar.

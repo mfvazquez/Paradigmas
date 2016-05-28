@@ -1,4 +1,4 @@
-function GuardarLog(log, nombre, version, bloques)
+function GuardarLog(log, nombre)
 
 log_folder = fullfile('..', 'log');
 if (~exist(log_folder,'dir')) 

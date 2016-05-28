@@ -7,6 +7,6 @@ function textoCentrado(texto, tamanio)
     textSize = round(screenYpixels*tamanio);
 
     Screen('TextSize', hd.window, textSize);
-    DrawFormattedText(hd.window, texto, 'center','center', hd.white, [],[],[], 1.5,[],[]);
+    DrawFormattedText(hd.window, texto, 'center','center', hd.white, [],[],[], 1.5,[]);
 
 end
