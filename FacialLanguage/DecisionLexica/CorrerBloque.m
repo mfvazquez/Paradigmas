@@ -1,4 +1,4 @@
-function [exit, log] = CorrerBloque(instrucciones, bloque, botones, log)
+function [exit, log] = CorrerBloque(bloque, botones, log)
 
     global hd;
    
@@ -8,12 +8,6 @@ function [exit, log] = CorrerBloque(instrucciones, bloque, botones, log)
     if isempty(log)
         experimental = false;
     end
-    
-    %% ------------------ INSTRUCCIONES --------------------------------------
-
-    textoCentrado(instrucciones, 0.04);
-    Screen('Flip',hd.window);
-    KbPressWait;
     
     %% ------------------- INICIO DEL BLOQUE -----------------------
     
