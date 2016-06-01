@@ -91,7 +91,7 @@ KbPressWait;
 
 %% ------------------ PRACTICA ----------------------------------
 
-exit = CorrerBloque(practica, botones, []);
+exit = CorrerBloque(practica, botones, [], false);
 
 if exit
     Screen('CloseAll'); % Cierro ventana del Psychtoolbox
@@ -108,7 +108,7 @@ KbPressWait;
 
 for i = 1:length(bloques)
 
-    [exit, log{1,i}] = CorrerBloque(bloques{1,i}, botones, log{1,i});
+    [exit, log{1,i}] = CorrerBloque(bloques{1,i}, botones, log{1,i}, false);
 
     if exit
         break;

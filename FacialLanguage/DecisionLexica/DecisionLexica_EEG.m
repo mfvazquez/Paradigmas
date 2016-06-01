@@ -1,4 +1,4 @@
-%% Face Word Task - Version 5
+function DecisionLexica_EEG()
 
 % Clear the workspace
 close all;
@@ -8,7 +8,6 @@ sca;
 addpath('lib');
 addpath(fullfile('lib','xlwrite','xlwrite'));
 addpath(fullfile('lib','strings'));
-% loadPOI;
 
 %% ----------------------- CONSTANTES ------------------------------------
 
@@ -20,6 +19,8 @@ PAUSA_TEXTO = '¡Hagamos una pausa!\n\n Presiona cualquier tecla para continuar';
 FIN_TEXTO = 'Fin de la prueba \n ¡MUCHAS GRACIAS!';
 PREGUNTA_TEXTO = '¿Tienes alguna pregunta? \n\n Presiona cualquier tecla para continuar';
 
+LOG_PATH = fullfile('log','sin_marcas');
+
 %% ----------------------- BOTONES ---------------------------------------
 
 KbName('UnifyKeyNames');
@@ -27,14 +28,9 @@ escKey = KbName('ESCAPE');
 vKey = KbName('v');
 bKey = KbName('b');
 
-botones_bloque_impar.Si = vKey;
-botones_bloque_impar.No = bKey;
-
-botones_bloque_par.Si = bKey;
-botones_bloque_par.No = vKey;
-
-botones_bloque_impar.Salir = escKey;
-botones_bloque_par.Salir = escKey;
+botones.Si = vKey;
+botones.No = bKey;
+botones.Salir = escKey;
 
 %% ------------------------ NOMBRE ---------------------------------------
 
@@ -44,11 +40,28 @@ if isempty(nombre)
 end
 nombre = nombre{1};
 
+%% ------------------ PUERTO PARALELO --------------------------
+
+% global pportobj pportaddr
+% 
+% pportaddr = 'C020';
+% 
+% if exist('pportaddr','var') && ~isempty(pportaddr)
+%     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+%     pportaddr = hex2dec(pportaddr);
+% 
+%     pportobj = io32;
+%     io32status = io32(pportobj);
+%     
+%     if io32status ~= 0
+%         error('io32 failure: could not initialise parallel port.\n');
+%     end
+% end
+
+
 %% ----------------------- CARGO DATOS ------------------------------------
 
-instrucciones_practica = fileread(fullfile('data','instrucciones_practica.txt'));
-instrucciones_bloque_par = fileread(fullfile('data','instrucciones_bloque_par.txt'));
-instrucciones_bloque_impar = fileread(fullfile('data','instrucciones_bloque_impar.txt'));
+instrucciones = fileread(fullfile('data','instrucciones.txt'));
 
 bloques_path = fullfile('data','bloques');
 bloques_files = dir(bloques_path);
@@ -84,31 +97,19 @@ end
 
 %% ------------------------ PSYCHOTOOLBOX INIT ----------------------------
 
-ListenChar(2);
+% ListenChar(2);
 HideCursor;
 hd = init_psych();
 
-%% Parallel Port
+%% ------------------ INSTRUCCIONES --------------------------------------
 
-% global pportobj pportaddr
-% 
-% pportaddr = 'C020';
-% 
-% if exist('pportaddr','var') && ~isempty(pportaddr)
-%     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-%     pportaddr = hex2dec(pportaddr);
-% 
-%     pportobj = io32;
-%     io32status = io32(pportobj);
-%     
-%     if io32status ~= 0
-%         error('io32 failure: could not initialise parallel port.\n');
-%     end
-% end
+textoCentrado(instrucciones, 0.04);
+Screen('Flip',hd.window);
+KbPressWait;
 
-% % ------------------ PRACTICA ----------------------------------
+%% ------------------ PRACTICA ----------------------------------
 
-exit = CorrerBloque(instrucciones_practica, practica, botones_bloque_impar, []);
+exit = CorrerBloque(practica, botones, [], false);
 
 if exit
     Screen('CloseAll'); % Cierro ventana del Psychtoolbox
@@ -120,28 +121,24 @@ end
 %% ------------------ CORRO CADA BLOQUE ----------------------------------
 
 textoCentrado(PREGUNTA_TEXTO, TEXT_SIZE);
-Screen('Flip',hd.window);
+Screen('Flip', hd.window);
 KbPressWait;
 
 for i = 1:length(bloques)
 
-    if mod(i,2) == 1 % Bloque impar
-        [exit, log{1,i}] = CorrerBloque(instrucciones_bloque_impar, bloques{1,i}, botones_bloque_impar, log{1,i});
-    else % Bloque par
-        [exit, log{1,i}] = CorrerBloque(instrucciones_bloque_par, bloques{1,i}, botones_bloque_par, log{1,i});
-    end
-        
+    [exit, log{1,i}] = CorrerBloque(bloques{1,i}, botones, log{1,i}, true);
+
     if exit
         break;
     end    
     
     if i == length(bloques)
         textoCentrado(FIN_TEXTO, TEXT_SIZE);
-        Screen('Flip',hd.window);
+        Screen('Flip', hd.window);
         WaitSecs(3);
     else
         textoCentrado(PAUSA_TEXTO, TEXT_SIZE);
-        Screen('Flip',hd.window);
+        Screen('Flip', hd.window);
         KbPressWait;
     end
         
@@ -151,10 +148,13 @@ end
 
 textoCentrado('Guardando Datos...', TEXT_SIZE);
 Screen('Flip', hd.window);
-GuardarLog(log, nombre);
+loadPOI;
+GuardarLog(log, nombre, LOG_PATH);
 
 %% -------------------------- END ----------------------------------------
 
-Screen('CloseAll'); % Cierro ventana del Psychtoolbox
-ListenChar(1);
+% ListenChar(1);
 ShowCursor;
+Screen('CloseAll'); % Cierro ventana del Psychtoolbox
+
+end

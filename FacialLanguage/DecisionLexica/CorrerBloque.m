@@ -1,8 +1,12 @@
-function [exit, log] = CorrerBloque(bloque, botones, log)
+function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
 
     global hd;
    
     exit = false;
+    MARCA_INICIO = 255;
+    MARCA_ESTIMULO = 5;
+    MARCA_ACCURACY = 100;
+    MARCA_FIN = 13;
     
     experimental = true;
     if isempty(log)
@@ -11,6 +15,13 @@ function [exit, log] = CorrerBloque(bloque, botones, log)
     
     %% ------------------- INICIO DEL BLOQUE -----------------------
     
+    if (marcas) 
+        io32(pportobj,pportaddr,MARCA_INICIO);
+        WaitSecs(0.05);
+        io32(pportobj,pportaddr,0);
+    end 
+
+    
     log.inicio = GetSecs;
     for i = 1:length(bloque.palabra)
         %% ----------------- FIJACION -------------------------------
@@ -18,6 +29,7 @@ function [exit, log] = CorrerBloque(bloque, botones, log)
         duracion = randi([700 1000], 1)/1000;
         textoCentrado('+', 0.05);
         [~, OnSetTime] = Screen('Flip',hd.window);
+         
         if experimental
             log.fijacion_time{1,i} = OnSetTime;
         end
@@ -27,6 +39,11 @@ function [exit, log] = CorrerBloque(bloque, botones, log)
 
         textoCentrado(bloque.palabra{i}, 0.05);
         [~, OnSetTime] = Screen('Flip',hd.window);
+        if (marcas) 
+            io32(pportobj,pportaddr,MARCA_ESTIMULO);
+            WaitSecs(0.05);
+            io32(pportobj,pportaddr,0);
+        end
         if experimental
             log.stim_time{i} = OnSetTime;
         end
@@ -46,10 +63,16 @@ function [exit, log] = CorrerBloque(bloque, botones, log)
                     log.reaction_time{i} = log.resp_time{i} - log.stim_time{i}; 
 
                     if strcmp(bloque.categoria{i}, '-')
-                        log.accuracy{i} = 0;
+                        accuracy = 0;
                     else
-                        log.accuracy{i} = 1;
+                        accuracy = 1;
                     end
+                    if (marcas) 
+                        io32(pportobj,pportaddr, MARCA_ACCURACY + accuracy);
+                        WaitSecs(0.05);
+                        io32(pportobj,pportaddr,0);
+                    end
+                    log.accuracy{i} = accuracy;
                 end    
             elseif keyCode(botones.No)
                 continuar = false;
@@ -58,10 +81,16 @@ function [exit, log] = CorrerBloque(bloque, botones, log)
                     log.reaction_time{i} = log.resp_time{i} - log.stim_time{i}; 
 
                     if strcmp(bloque.categoria{i}, '-')
-                        log.accuracy{i} = 1;
+                        accuracy = 1;
                     else
-                        log.accuracy{i} = 0;
+                        accuracy = 0;
                     end
+                    if (marcas) 
+                        io32(pportobj,pportaddr, MARCA_ACCURACY + accuracy);
+                        WaitSecs(0.05);
+                        io32(pportobj,pportaddr,0);
+                    end
+                    log.accuracy{i} = accuracy;
                 end
             elseif keyCode(botones.Salir)
                 continuar = false;
@@ -73,9 +102,16 @@ function [exit, log] = CorrerBloque(bloque, botones, log)
         end
         
         %% ------------- ESPERA ---------------------------------------
+        
         duracion = randi([700 1000], 1)/1000;
         WaitSecs(duracion);
         
+    end
+    
+    if (marcas)
+        io32(pportobj,pportaddr,MARCA_FIN);
+        WaitSecs(0.05);
+        io32(pportobj,pportaddr,0);
     end
     log.fin = GetSecs;
         
