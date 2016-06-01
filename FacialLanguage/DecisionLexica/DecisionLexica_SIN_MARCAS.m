@@ -85,7 +85,7 @@ hd = init_psych();
 
 %% ------------------ INSTRUCCIONES --------------------------------------
 
-textoCentrado(instrucciones, 0.04);
+textoCentrado(instrucciones, TEXT_SIZE);
 Screen('Flip',hd.window);
 KbPressWait;
 

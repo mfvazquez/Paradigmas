@@ -1,90 +1,66 @@
-2;MANEJAR
-3;FALLAR
--;HANAÑA
--;ESFAPAR
--;FERMAR
-2;PASEAR
--;EMBEZAR
-3;MANDAR
-2;TREPAR
-1;COLOCAR
-3;ENSEÑAR
-3;EMPEZAR
-3;ORDENAR
--;GULPEAR
-3;AVISAR
--;COLTAR
-1;LIMPIAR
--;FRETAR
--;IMOTAR
-1;ATAR
-3;NEGAR
--;MOAR
-1;LAVAR
-3;JURAR
--;DIEBLO
--;BASERA
-1;BORRAR
-3;ACABAR
--;FOMAR
-1;FREGAR
-2;TEMBLAR
-3;ENGAÑAR
--;TAGA
--;PRASA
-3;INVITAR
-2;CANTAR
-2;BAILAR
--;ESFEJO
-3;CREAR
-1;FIRMAR
-2;NADAR
--;ENLIDIA
-1;AFEITAR
--;SIELLA
-2;GRITAR
-1;LANZAR
--;BOJELLA
--;CAPINAR
-3;MOSTRAR
-2;BESAR
-1;FUMAR
-2;SENTAR
--;MANTAR
-3;ODIAR
-1;MEZCLAR
-2;MEAR
-2;MASCAR
-2;CHARLAR
-2;IMITAR
-1;TOCAR
-1;BATIR
--;AMIRTAD
-2;SALTAR
--;RIGLA
--;ESPAFA
-2;VOMITAR
--;MOPINO
-1;CORTAR
-1;SOLTAR
-3;MEJORAR
-2;DEVORAR
-3;BROMEAR
-3;DESEAR
--;MEBORAR
-1;GOLPEAR
--;SUEBO
-2;PISAR
-1;PINTAR
-3;GUARDAR
--;JUPAR
-1;ABRAZAR
-3;ESTRENAR
-2;CAMINAR
-1;SEÑALAR
-3;SOÑAR
--;NETAR
--;CHASLAR
-2;ESCAPAR
--;TILIDEZ
-1;CAZAR
+NO CARA	;	aullar	;	FILL-NHA
+CARA	;	diente	;	FBP
+CARA	;	pipa	;	FILL-FO
+NO CARA	;	anhelar	;	FILL-AP
+NO CARA	;	firmar	;	NFA
+NO CARA	;	bailar	;	NFA
+CARA	;	párpados	;	FBP
+NO CARA	;	desear	;	FILL-AP
+CARA	;	pañuelo	;	FILL-FO
+NO CARA	;	proyectar	;	FILL-AP
+CARA	;	máscara	;	FILL-FO
+NO CARA	;	volar	;	FILL-NHA
+CARA	;	frente	;	FBP
+NO CARA	;	pincel	;	NFO
+NO CARA	;	espalda	;	NFBP
+CARA	;	chalina	;	FILL-FO
+CARA	;	chupete	;	FILL-FO
+NO CARA	;	nuca	;	NFBP
+NO CARA	;	reloj	;	NFO
+CARA	;	hablar	;	FA
+NO CARA	;	panza	;	NFBP
+CARA	;	bufanda	;	FILL-FO
+NO CARA	;	dedo	;	NFBP
+CARA	;	collar	;	FILL-FO
+CARA	;	mandíbula	;	FBP
+NO CARA	;	cámara	;	NFO
+NO CARA	;	axilas	;	NFBP
+CARA	;	pestañas	;	FBP
+NO CARA	;	matar	;	NFA
+NO CARA	;	empollar	;	FILL-NHA
+CARA	;	cara	;	FBP
+NO CARA	;	borrar	;	NFA
+CARA	;	vincha	;	FILL-FO
+NO CARA	;	moneda	;	NFO
+NO CARA	;	cacarear	;	FILL-NHA
+CARA	;	tabique	;	FBP
+CARA	;	gritar	;	FA
+NO CARA	;	pecho	;	NFBP
+NO CARA	;	ladrar	;	FILL-NHA
+NO CARA	;	meñique	;	NFBP
+CARA	;	bigote	;	FBP
+NO CARA	;	suponer	;	FILL-AP
+CARA	;	reír	;	FA
+NO CARA	;	cable	;	NFO
+NO CARA	;	coser	;	NFA
+CARA	;	nariz	;	FBP
+NO CARA	;	pelota	;	NFO
+NO CARA	;	queso	;	NFO
+CARA	;	gorro	;	FILL-FO
+NO CARA	;	amar	;	FILL-AP
+CARA	;	antifaz	;	FILL-FO
+NO CARA	;	sospechar	;	FILL-AP
+NO CARA	;	rueda	;	NFO
+CARA	;	anteojos	;	FILL-FO
+NO CARA	;	rebuznar	;	FILL-NHA
+CARA	;	masticar	;	FA
+NO CARA	;	recordar	;	FILL-AP
+CARA	;	oreja	;	FBP
+NO CARA	;	galopar	;	FILL-NHA
+NO CARA	;	dudar	;	FILL-AP
+NO CARA	;	aletear	;	FILL-NHA
+NO CARA	;	codo	;	NFBP
+CARA	;	diente	;	FBP
+NO CARA	;	acariciar	;	NFA
+CARA	;	morder	;	FA
+NO CARA	;	nadar	;	NFA

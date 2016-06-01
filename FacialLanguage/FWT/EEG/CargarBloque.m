@@ -8,7 +8,8 @@ function bloque = CargarBloque(path, name)
     while ischar(tline)
         linea = strsplit(tline, ';');
         bloque.categoria{n} = linea{1};
-        bloque.palabra{n} = lower(linea{2}(1:end));
+        bloque.palabra{n} = lower(linea{2});
+        bloque.codigo{n} = linea{3};
         tline = fgets(fid);
         n = n + 1;
     end

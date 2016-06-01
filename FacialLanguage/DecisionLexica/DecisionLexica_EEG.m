@@ -19,7 +19,7 @@ PAUSA_TEXTO = '¡Hagamos una pausa!\n\n Presiona cualquier tecla para continuar';
 FIN_TEXTO = 'Fin de la prueba \n ¡MUCHAS GRACIAS!';
 PREGUNTA_TEXTO = '¿Tienes alguna pregunta? \n\n Presiona cualquier tecla para continuar';
 
-LOG_PATH = fullfile('log','sin_marcas');
+LOG_PATH = fullfile('log','con_marcas');
 
 %% ----------------------- BOTONES ---------------------------------------
 
@@ -40,23 +40,23 @@ if isempty(nombre)
 end
 nombre = nombre{1};
 
-%% ------------------ PUERTO PARALELO --------------------------
+% ------------------ PUERTO PARALELO --------------------------
 
-% global pportobj pportaddr
-% 
-% pportaddr = 'C020';
-% 
-% if exist('pportaddr','var') && ~isempty(pportaddr)
-%     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-%     pportaddr = hex2dec(pportaddr);
-% 
-%     pportobj = io32;
-%     io32status = io32(pportobj);
-%     
-%     if io32status ~= 0
-%         error('io32 failure: could not initialise parallel port.\n');
-%     end
-% end
+global pportobj pportaddr
+
+pportaddr = 'C020';
+
+if exist('pportaddr','var') && ~isempty(pportaddr)
+    fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+    pportaddr = hex2dec(pportaddr);
+
+    pportobj = io32;
+    io32status = io32(pportobj);
+    
+    if io32status ~= 0
+        error('io32 failure: could not initialise parallel port.\n');
+    end
+end
 
 
 %% ----------------------- CARGO DATOS ------------------------------------
@@ -103,7 +103,7 @@ hd = init_psych();
 
 %% ------------------ INSTRUCCIONES --------------------------------------
 
-textoCentrado(instrucciones, 0.04);
+textoCentrado(instrucciones, TEXT_SIZE);
 Screen('Flip',hd.window);
 KbPressWait;
 

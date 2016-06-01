@@ -1,90 +1,66 @@
--;MANTAR
-2;IMITAR
--;COLTAR
-2;TEMBLAR
--;SIELLA
-2;PISAR
-1;GOLPEAR
-1;MEZCLAR
-3;ESTRENAR
--;RIGLA
-3;BROMEAR
-1;LAVAR
--;FRETAR
-3;ODIAR
-1;COLOCAR
--;BASERA
--;MEBORAR
-1;PINTAR
-1;CORTAR
--;CAPINAR
--;GULPEAR
-3;DESEAR
--;TAGA
-3;INVITAR
-3;AVISAR
-3;FALLAR
-2;SALTAR
-3;ENGAÑAR
-1;BATIR
-2;MASCAR
-2;MEAR
--;MOAR
-1;LANZAR
--;ESPAFA
-3;NEGAR
--;JUPAR
-1;LIMPIAR
-2;ESCAPAR
-2;BESAR
-2;GRITAR
-3;EMPEZAR
-2;DEVORAR
--;ESFAPAR
-2;NADAR
--;MOPINO
-1;TOCAR
-3;ORDENAR
-3;SOÑAR
-1;SOLTAR
--;ESFEJO
-1;AFEITAR
--;SUEBO
--;DIEBLO
-2;CAMINAR
-3;ENSEÑAR
-3;CREAR
--;ENLIDIA
-3;MEJORAR
-1;CAZAR
--;PRASA
-1;BORRAR
-3;ACABAR
-1;SEÑALAR
--;EMBEZAR
--;TILIDEZ
--;BOJELLA
--;FOMAR
-2;MANEJAR
--;AMIRTAD
--;HANAÑA
-3;GUARDAR
-3;MOSTRAR
-1;ABRAZAR
-1;FIRMAR
-2;BAILAR
-1;FUMAR
-2;PASEAR
--;FERMAR
-2;TREPAR
-3;MANDAR
-2;CHARLAR
-3;JURAR
--;CHASLAR
-2;CANTAR
--;IMOTAR
--;NETAR
-1;FREGAR
-2;SENTAR
-1;ATAR
-2;VOMITAR
+CARA	;	chupetín	;	FILL-FO
+CARA	;	cigarro	;	FILL-FO
+NO CARA	;	brazo	;	NFBP
+NO CARA	;	ombligo	;	NFBP
+CARA	;	barbilla	;	FBP
+CARA	;	escupir	;	FA
+NO CARA	;	rodilla	;	NFBP
+NO CARA	;	acariciar	;	NFA
+CARA	;	barba	;	FBP
+CARA	;	labio	;	FBP
+NO CARA	;	orinar	;	NFA
+NO CARA	;	papel	;	NFO
+NO CARA	;	vaso	;	NFO
+NO CARA	;	pierna	;	NFBP
+CARA	;	rostro	;	FBP
+NO CARA	;	imaginar	;	FILL-AP
+CARA	;	ceja	;	FBP
+NO CARA	;	mano	;	NFBP
+NO CARA	;	olvidar	;	FILL-AP
+CARA	;	sonreír	;	FA
+NO CARA	;	aplaudir	;	NFA
+CARA	;	capucha	;	FILL-FO
+NO CARA	;	andar	;	NFA
+NO CARA	;	seno	;	NFBP
+NO CARA	;	maullar	;	FILL-NHA
+NO CARA	;	relinchar	;	FILL-NHA
+CARA	;	boca	;	FBP
+NO CARA	;	torta	;	NFO
+CARA	;	besar	;	FA
+NO CARA	;	taza	;	NFO
+NO CARA	;	libro	;	NFO
+NO CARA	;	escribir	;	NFA
+CARA	;	bandana	;	FILL-FO
+CARA	;	mentón	;	FBP
+NO CARA	;	pensar	;	FILL-AP
+CARA	;	mejilla	;	FBP
+CARA	;	sombrero	;	FILL-FO
+CARA	;	comer	;	FA
+NO CARA	;	cadera	;	NFBP
+NO CARA	;	mugir	;	FILL-NHA
+CARA	;	pómulos	;	FBP
+CARA	;	oler	;	FA
+NO CARA	;	ahorrar	;	FILL-AP
+NO CARA	;	jarra	;	NFO
+NO CARA	;	talones	;	NFBP
+CARA	;	gafas	;	FILL-FO
+NO CARA	;	cuchillo	;	NFO
+NO CARA	;	muslo	;	NFBP
+CARA	;	beber	;	FA
+NO CARA	;	carta	;	NFO
+NO CARA	;	pie	;	NFBP
+CARA	;	babero	;	FILL-FO
+CARA	;	monóculo	;	FILL-FO
+NO CARA	;	descamar	;	FILL-NHA
+NO CARA	;	botella	;	NFO
+CARA	;	hablar	;	FA
+NO CARA	;	torta	;	NFO
+NO CARA	;	foco	;	NFO
+CARA	;	lentes	;	FILL-FO
+NO CARA	;	nudillos	;	NFBP
+CARA	;	ojo	;	FBP
+NO CARA	;	martillo	;	NFO
+NO CARA	;	cintura	;	NFBP
+CARA	;	aros	;	FILL-FO
+NO CARA	;	uña	;	NFBP
+NO CARA	;	botella	;	NFO

@@ -62,7 +62,7 @@ function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
                     log.resp_time{i} = GetSecs;
                     log.reaction_time{i} = log.resp_time{i} - log.stim_time{i}; 
 
-                    if strcmp(bloque.categoria{i}, '-')
+                    if strcmp(bloque.categoria{i}, 'NO CARA')
                         accuracy = 0;
                     else
                         accuracy = 1;
@@ -80,7 +80,7 @@ function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
                     log.resp_time{i} = GetSecs;
                     log.reaction_time{i} = log.resp_time{i} - log.stim_time{i}; 
 
-                    if strcmp(bloque.categoria{i}, '-')
+                    if strcmp(bloque.categoria{i}, 'NO CARA')
                         accuracy = 1;
                     else
                         accuracy = 0;

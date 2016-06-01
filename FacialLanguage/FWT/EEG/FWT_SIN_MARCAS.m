@@ -1,4 +1,4 @@
-function DecisionLexica_SIN_MARCAS()
+function FWT_SIN_MARCAS()
 
 
 % Clear the workspace
@@ -14,7 +14,7 @@ addpath(fullfile('lib','strings'));
 
 global hd;
 
-TEXT_SIZE = 0.04;
+TEXT_SIZE = 0.03;
 
 PAUSA_TEXTO = '¡Hagamos una pausa!\n\n Presiona cualquier tecla para continuar';
 FIN_TEXTO = 'Fin de la prueba \n ¡MUCHAS GRACIAS!';
@@ -29,9 +29,13 @@ escKey = KbName('ESCAPE');
 vKey = KbName('v');
 bKey = KbName('b');
 
-botones.Si = vKey;
-botones.No = bKey;
-botones.Salir = escKey;
+botones_impar.Si = vKey;
+botones_impar.No = bKey;
+botones_impar.Salir = escKey;
+
+botones_par.Si = bKey;
+botones_par.No = vKey;
+botones_par.Salir = escKey;
 
 %% ------------------------ NOMBRE ---------------------------------------
 
@@ -43,7 +47,11 @@ nombre = nombre{1};
 
 %% ----------------------- CARGO DATOS ------------------------------------
 
-instrucciones = fileread(fullfile('data','instrucciones.txt'));
+instrucciones_impar = fileread(fullfile('data','instrucciones_impar.txt'));
+instrucciones_par = fileread(fullfile('data','instrucciones_par.txt'));
+
+practica_impar = CargarBloque('data', 'practica_impar.txt');
+practica_par = CargarBloque('data', 'practica_par.txt');
 
 bloques_path = fullfile('data','bloques');
 bloques_files = dir(bloques_path);
@@ -57,8 +65,6 @@ for i = 1:length(bloques_files)
     bloques{1,i} = CargarBloque(bloques_path ,bloques_files{i});    
 end
 
-practica = CargarBloque('data', 'practica.txt');
-
 %% ----------------------- PREPARO LOG ----------------------------------
 
 log = cell(1, length(bloques));
@@ -67,6 +73,7 @@ for i = 1:length(log)
     largo = length(bloques{1,i}.palabra);
     log{i}.palabra = bloques{1,i}.palabra;
     log{i}.categoria = bloques{1,i}.categoria;
+    log{i}.codigo = bloques{1,i}.codigo;
     log{i}.fijacion_time = cell(1,largo);
     log{i}.stim_time = cell(1,largo);    
     log{i}.resp_time = cell(1,largo);
@@ -83,36 +90,43 @@ end
 HideCursor;
 hd = init_psych();
 
-%% ------------------ INSTRUCCIONES --------------------------------------
-
-textoCentrado(instrucciones, 0.04);
-Screen('Flip',hd.window);
-KbPressWait;
-
-%% ------------------ PRACTICA ----------------------------------
-
-exit = CorrerBloque(practica, botones, [], false);
-
-if exit
-    Screen('CloseAll'); % Cierro ventana del Psychtoolbox
-    ListenChar(1);
-    ShowCursor;
-    return
-end
-
-%% ------------------ CORRO CADA BLOQUE ----------------------------------
-
-textoCentrado(PREGUNTA_TEXTO, TEXT_SIZE);
-Screen('Flip', hd.window);
-KbPressWait;
-
 for i = 1:length(bloques)
 
+    if mod(i,2) == 1
+        instrucciones = instrucciones_impar;
+        practica = practica_impar;
+        botones = botones_impar;
+    else
+        instrucciones = instrucciones_par;
+        practica = practica_par;
+        botones = botones_par;
+    end
+    
+    
+    %% ------------------ INSTRUCCIONES -----------------------------
+    textoCentrado(instrucciones, TEXT_SIZE);
+    Screen('Flip',hd.window);
+    KbPressWait;
+
+    %% ------------------ PRACTICA ----------------------------------
+    exit = CorrerBloque(practica, botones, [], false);
+
+    if exit
+        break;
+    end
+
+    textoCentrado(PREGUNTA_TEXTO, TEXT_SIZE);
+    Screen('Flip', hd.window);
+    KbPressWait;
+    
+    %% ------------------ BLOQUE ------------------------------------
     [exit, log{1,i}] = CorrerBloque(bloques{1,i}, botones, log{1,i}, false);
 
     if exit
         break;
     end    
+    
+    %% ------------------ FIN BLOQUE --------------------------------
     
     if i == length(bloques)
         textoCentrado(FIN_TEXTO, TEXT_SIZE);

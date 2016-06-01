@@ -1,0 +1,66 @@
+CARA	;	chupete	;	FILL-FO
+NO CARA	;	empollar	;	FILL-NHA
+CARA	;	nariz	;	FBP
+CARA	;	vincha	;	FILL-FO
+CARA	;	hablar	;	FA
+NO CARA	;	cable	;	NFO
+NO CARA	;	meñique	;	NFBP
+NO CARA	;	suponer	;	FILL-AP
+CARA	;	antifaz	;	FILL-FO
+CARA	;	bigote	;	FBP
+CARA	;	collar	;	FILL-FO
+CARA	;	pestañas	;	FBP
+NO CARA	;	recordar	;	FILL-AP
+NO CARA	;	codo	;	NFBP
+CARA	;	tabique	;	FBP
+NO CARA	;	cacarear	;	FILL-NHA
+NO CARA	;	dudar	;	FILL-AP
+NO CARA	;	rebuznar	;	FILL-NHA
+NO CARA	;	coser	;	NFA
+NO CARA	;	borrar	;	NFA
+CARA	;	cara	;	FBP
+NO CARA	;	cámara	;	NFO
+CARA	;	chalina	;	FILL-FO
+NO CARA	;	volar	;	FILL-NHA
+CARA	;	oreja	;	FBP
+NO CARA	;	sospechar	;	FILL-AP
+CARA	;	máscara	;	FILL-FO
+NO CARA	;	pecho	;	NFBP
+CARA	;	diente	;	FBP
+CARA	;	anteojos	;	FILL-FO
+CARA	;	bufanda	;	FILL-FO
+NO CARA	;	moneda	;	NFO
+CARA	;	párpados	;	FBP
+NO CARA	;	pelota	;	NFO
+NO CARA	;	reloj	;	NFO
+NO CARA	;	rueda	;	NFO
+NO CARA	;	galopar	;	FILL-NHA
+NO CARA	;	acariciar	;	NFA
+NO CARA	;	bailar	;	NFA
+NO CARA	;	firmar	;	NFA
+NO CARA	;	amar	;	FILL-AP
+NO CARA	;	axilas	;	NFBP
+CARA	;	masticar	;	FA
+NO CARA	;	espalda	;	NFBP
+CARA	;	diente	;	FBP
+NO CARA	;	proyectar	;	FILL-AP
+NO CARA	;	panza	;	NFBP
+NO CARA	;	pincel	;	NFO
+NO CARA	;	nuca	;	NFBP
+NO CARA	;	queso	;	NFO
+CARA	;	pañuelo	;	FILL-FO
+NO CARA	;	aullar	;	FILL-NHA
+CARA	;	pipa	;	FILL-FO
+NO CARA	;	anhelar	;	FILL-AP
+NO CARA	;	desear	;	FILL-AP
+CARA	;	mandíbula	;	FBP
+CARA	;	gorro	;	FILL-FO
+CARA	;	gritar	;	FA
+NO CARA	;	aletear	;	FILL-NHA
+NO CARA	;	nadar	;	NFA
+NO CARA	;	matar	;	NFA
+CARA	;	reír	;	FA
+NO CARA	;	dedo	;	NFBP
+NO CARA	;	ladrar	;	FILL-NHA
+CARA	;	morder	;	FA
+CARA	;	frente	;	FBP
