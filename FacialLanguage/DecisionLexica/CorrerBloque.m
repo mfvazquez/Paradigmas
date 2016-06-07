@@ -2,6 +2,8 @@ function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
 
     global hd;
    
+    global pportobj pportaddr
+    
     exit = false;
     MARCA_INICIO = 255;
     MARCA_ESTIMULO = 5;

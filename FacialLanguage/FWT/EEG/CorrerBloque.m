@@ -3,10 +3,12 @@ function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
     global hd;
    
     exit = false;
-    MARCA_INICIO = 255;
+    MARCA_INICIO = 200;
     MARCA_ESTIMULO = 5;
     MARCA_ACCURACY = 100;
     MARCA_FIN = 13;
+    
+    global pportobj pportaddr
     
     experimental = true;
     if isempty(log)
