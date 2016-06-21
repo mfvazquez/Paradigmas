@@ -1,7 +1,5 @@
-function iniciarPsych()
+function hd = init_psych()
    
-    global hd
-
     hd.bgcolor = [0 0 0] ;
     hd.dispscreen = 0;
     hd.itemsize = 100;

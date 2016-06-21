@@ -11,18 +11,27 @@ function Envidia()
 
     %PsychJavaTrouble
 
+    LARGO_LINEA = 36;
+    LARGO_INSTRUCCIONES = 50;
+    
     % ------------------- CONSTANTES GLOBALES -----------------------------
 
     global hd; 
-    global window;
-    global scrnsize;
-    global pportobj;
-    global pportaddr;
+    global escKey;
+    global rightKey;
+    global leftKey;
+    global spaceKey;
     
+    KbName('UnifyKeyNames');
+    escKey = KbName('ESCAPE');
+    rightKey = KbName('RightArrow');
+    leftKey = KbName('LeftArrow');
+    spaceKey = KbName('space');
+       
     % -------------------- CONSTANTES -------------------------------------
     
     envidia_opciones.pregunta = '¿Qué tanta insatisfacción le produce?';
-    envidia_opciones.minimo = 'Ninguna';
+    envidia_opciones.minimo   = 'Ninguna';
     envidia_opciones.medio = 'Neutral';
     envidia_opciones.maximo = 'Mucha';
     
@@ -34,65 +43,41 @@ function Envidia()
     % ------------------- INICIALIZO PSYCHOTOOLBOX ------------------------
     ListenChar(2);
     HideCursor;
-    [window, scrnsize] = init_psych(hd);
+    hd = init_psych();
     
-    % ----------------------- CARGO DATOS ---------------------------------
+    
+%%    ----------------------- CARGO DATOS ---------------------------------
+
+    % --------------------- MENSAJE DE ESPERA -----------------------------
+    
+    textoCentrado('Cargando Datos...', 0.04);
+    Screen('Flip', hd.window);
+    
 
     personajeA.historia = fileread(fullfile('..','data','HistoriaA.txt'));
+    personajeA.historia = AgregarFinLinea(personajeA.historia, LARGO_LINEA);
+    
     imagen = imread(fullfile('..','data','PersonajeA.jpg'));
-    personajeA.textura = Screen('MakeTexture', window, imagen);
+    personajeA.textura = Screen('MakeTexture', hd.window, imagen);
     
     personajeB.historia = fileread(fullfile('..','data','HistoriaB.txt'));
+    personajeB.historia = AgregarFinLinea(personajeB.historia, LARGO_LINEA);
+    
     imagen = imread(fullfile('..','data','PersonajeB.jpg'));
-    personajeB.textura = Screen('MakeTexture', window, imagen);
+    personajeB.textura = Screen('MakeTexture', hd.window, imagen);
     
     envidia = CargarDatos(fullfile('..','data','envidia'));
+    envidia = DividirTextos(envidia, LARGO_LINEA, LARGO_INSTRUCCIONES);
     schan = CargarDatos(fullfile('..','data','schadenfreude'));
+    schan = DividirTextos(schan, LARGO_LINEA, LARGO_INSTRUCCIONES);
   
-    % ------------------- INICIALIZO PUERTO PARALELO ----------------------
-
-    % Init Puerto Paralelo (io32.dll debe estar en la carpeta del proyecto y la 
-    % input32.dll en c:\windows\system32 y/o c:\windows\system)
-
-    pportaddr = 'C020';
-    % pportaddr = '378';
-
-    if exist('pportaddr','var') && ~isempty(pportaddr)
-
-        fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-        pportaddr = hex2dec(pportaddr);
-        pportobj = io32;
-        io32status = io32(pportobj);
-        io32(pportobj,pportaddr,0)
-
-        if io32status ~= 0
-            error('io32 failure: could not initialise parallel port.\n');
-        end
-
-    end
-
-    % ------------------- ESPERA AL RESONADOR -----------------------------
-    
-    textoCentrado(0, 'Esperando al resonador...');
-    % Sincronización con el resonador
-    start_signal= 4;
-
-    wait_start = true;
-    while (wait_start)
-           input_data=io32(pportobj,pportaddr);
-           input_data=bitand(input_data, 4);
-           if input_data == start_signal %Una vez que ocurra la señal del resonador, arranca
-               wait_start=false;
-           end
-    end
-    
     % ------------------- INICIO DEL PARADIGMA ----------------------------
     
     log_envidia = Preguntas(envidia, personajeA, personajeB, envidia_opciones);
     log_schan = Preguntas(schan, personajeA, personajeB, schan_opciones);
     
     % ---------------------- FIN DEL PARADIGMA ---------------------------
-
+    
     Screen('CloseAll'); % Cierro ventana del Psychtoolbox
     ListenChar(1);
     ShowCursor;

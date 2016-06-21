@@ -3,18 +3,19 @@ function Moral()
 clc;
 sca;
 close all;
-clearvars;
+% clearvars;
 
 addpath(fullfile('..','lib'));
 
-%PsychJavaTrouble
-global hd; 
-
 % -------------------- CONSTANTES -------------------------------------
+
+LARGO_OPCIONES = 35;
+LINEAS_HISTORIA = 7;
+LARGO_LINEA = 65;
 
 TIEMPO_INICIAL_CENTRADO = 8;
 TIEMPO_PRE_HISTORIA = 3;
-TIEMPO_POST_HISTORIA = 6;
+TIEMPO_POST_HISTORIA = 4;
 
 textos_opciones.pregunta = '¿Cuanto castigo considera que merece Juan?';
 textos_opciones.minimo = 'Ningún castigo';
@@ -22,9 +23,7 @@ textos_opciones.medio = 'Neutral';
 textos_opciones.maximo = 'Mucho castigo';
 
 tamanio_fijacion = 0.05;
-tamanio_historia = 0.035;
-
-LARGO_LINEA = 65;
+tamanio_historia = 0.04;
 
 INSTRUCCIONES = 'A continuación se le presentarán una serie de situaciones. Por favor léalas y responda las preguntas usando las escalas correspondientes.';
 INSTRUCCIONES = AgregarFinLinea(INSTRUCCIONES, round(LARGO_LINEA/2));
@@ -62,6 +61,7 @@ for i = 1:length(historias)
     archivo = fullfile(historias_path, historias_arch{i});
     historias{1,i} = fileread(archivo);
     historias{1,i} = AgregarFinLinea(historias{1,i}, LARGO_LINEA);
+    historias{1,i} = SepararHistoria(historias{1,i}, LINEAS_HISTORIA);    
 end
 
 % ------------------- RESERVO ESPACIO PARA EL LOG ---------------------
@@ -76,48 +76,50 @@ log.respuestas = cell(1, length(historias));
 log.respuesta_PrimerMovimiento = cell(1, length(historias));
 
 % ------------------- INICIALIZO PSYCHOTOOLBOX ------------------------
-ListenChar(2);
+% ListenChar(2);
 HideCursor;
-init_psych();
+global hd
+hd = init_psych();
 
 % ------------------- INICIALIZO PUERTO PARALELO ----------------------
 
 % Init Puerto Paralelo (io32.dll debe estar en la carpeta del proyecto y la 
 % input32.dll en c:\windows\system32 y/o c:\windows\system)
 
-pportaddr = 'C020';
-% pportaddr = '378';
+% pportaddr = 'C020';
+% % pportaddr = '378';
+% pportaddr = 'E000';
+% 
+% if exist('pportaddr','var') && ~isempty(pportaddr)
+% 
+%     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+%     pportaddr = hex2dec(pportaddr);
+%     pportobj = io32;
+%     io32status = io32(pportobj);
+%     io32(pportobj,pportaddr,0)
+% 
+%     if io32status ~= 0
+%         error('io32 failure: could not initialise parallel port.\n');
+%     end
+% 
+% end
 
-if exist('pportaddr','var') && ~isempty(pportaddr)
-
-    fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-    pportaddr = hex2dec(pportaddr);
-    pportobj = io32;
-    io32status = io32(pportobj);
-    io32(pportobj,pportaddr,0)
-
-    if io32status ~= 0
-        error('io32 failure: could not initialise parallel port.\n');
-    end
-
-end
-
-------------------- ESPERA AL RESONADOR -----------------------------
-    
-textoCentrado('Esperando al resonador...', tamanio_fijacion);
-Screen('Flip',hd.window);
-WaitSecs(2);
-% Sincronización con el resonador
-start_signal= 4;
-
-wait_start = true;
-while (wait_start)
-       input_data=io32(pportobj,pportaddr);
-       input_data=bitand(input_data, 4);
-       if input_data == start_signal %Una vez que ocurra la señal del resonador, arranca
-           wait_start=false;
-       end
-end
+% % ------------------- ESPERA AL RESONADOR -----------------------------
+%     
+% textoCentrado('Esperando al resonador...', tamanio_fijacion);
+% Screen('Flip',hd.window);
+% WaitSecs(2);
+% % Sincronización con el resonador
+% start_signal= 4;
+% 
+% wait_start = true;
+% while (wait_start)
+%        input_data=io32(pportobj,pportaddr);
+%        input_data=bitand(input_data, 4);
+%        if input_data == start_signal %Una vez que ocurra la señal del resonador, arranca
+%            wait_start=false;
+%        end
+% end
 
 % ------------------- INICIO DEL PARADIGMA ----------------------------
 
@@ -130,7 +132,7 @@ WaitSecs(TIEMPO_INICIAL_CENTRADO);
 % ------------------- INTRODUCCION -----------------------------------
 
 textoCentrado(INSTRUCCIONES, tamanio_fijacion);
-[~, OnSetTime] = Screen('Flip', hd.window);
+[asda, OnSetTime] = Screen('Flip', hd.window);
 log.instrucciones_inicio = OnSetTime;
 % KbPressWait;
 EsperarBoton(pportobj,pportaddr);
@@ -149,9 +151,13 @@ for i = 1:length(historias)
 
     % ------------------- HISTORIA ---------------------------------------
 
-    textoCentrado(historias{1,i}, tamanio_historia);
-    [~, OnSetTime] = Screen('Flip', hd.window);
-    log.historia_inicio{1,i} = OnSetTime;
+    log.historia_inicio{1,i} = GetSecs;
+    for x = 1:length(historias{1,i})
+        textoCentrado(historias{1,i}{x}, tamanio_historia);
+        Screen('Flip', hd.window);
+        KbPressWait;
+    end
+    log.historia_fin{1,i} = GetSecs;
 
 %     KbPressWait;
     EsperarBoton(pportobj,pportaddr);
@@ -166,7 +172,7 @@ for i = 1:length(historias)
     % ------------------- OPCIONES ---------------------------------------
     elegido = 5;
     dibujarOpciones(elegido, textos_opciones);
-    [~, OnSetTime] = Screen('Flip',hd.window);
+    [asd, OnSetTime] = Screen('Flip',hd.window);
     log.respuesta_inicio{1,i} = OnSetTime;
     
     primer_movimiento = -1;
@@ -174,7 +180,7 @@ for i = 1:length(historias)
     while continuar
         dibujarOpciones(elegido, textos_opciones);
         Screen('Flip', hd.window);
-        [elegido, continuar] = EsperarRespuesta(elegido);
+        [elegido, continuar] = EsperarRespuesta(elegido, pportobj, pportaddr);
         if primer_movimiento == -1
             primer_movimiento = GetSecs;
         end

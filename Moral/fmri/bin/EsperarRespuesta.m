@@ -1,15 +1,15 @@
-function [elegido, continuar] = EsperarRespuesta(elegido)
+function [elegido, continuar] = EsperarRespuesta(elegido, pportobj, pportaddr)
 
-    RIGHT = 2;
-    LEFT = 1;
-    ACCEPT = 16;
+    RIGHT = 16;
+    LEFT = 8;
+    ACCEPT = 24;
         
     continuar = true;
     leer_puerto = true;
     while leer_puerto
 
         input_data=io32(pportobj,pportaddr);
-        input_data=bitand(input_data, 19); % filtro bits 4, 1 y 0
+        input_data=bitand(input_data, 24); % filtro bits 4, 1 y 0
         
         if input_data == RIGHT && elegido < 9
             elegido = elegido + 1;

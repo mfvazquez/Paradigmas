@@ -1,12 +1,22 @@
-function OnSetTime = PresentarSituacion(texto, textura, mensaje)
+function exit = PresentarSituacion(texto, textura, mensaje)
 
-    global window;
-    global pportobj;
-    global pportaddr;
-   
-    DibujarSituacion(texto, textura, mensaje);
-    OnSetTime = blink();
+    global escKey;
+    global spaceKey;
+    global hd;
+
+    DibujarSituacion(texto, textura, mensaje);    
+    Screen('Flip', hd.window);    
     
-    EsperarBoton(pportobj,pportaddr);
+    exit = false;
+    esperar = true;
+    while esperar
+        [~, keyCode, ~] = KbPressWait;
+        if keyCode(spaceKey)
+            esperar = false;
+        elseif keyCode(escKey)
+            esperar = false;
+            exit = true;
+        end   
+    end
     
 end

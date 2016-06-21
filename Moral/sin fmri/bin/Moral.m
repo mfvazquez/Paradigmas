@@ -3,7 +3,7 @@ function Moral()
 clc;
 sca;
 close all;
-clearvars;
+% clearvars;
 
 addpath(fullfile('..','lib'));
 
@@ -13,6 +13,8 @@ global hd;
 % -------------------- CONSTANTES -------------------------------------
 
 LARGO_OPCIONES = 35;
+LINEAS_HISTORIA = 7;
+LARGO_LINEA = 65;
 
 textos_conducta.pregunta = '¿En términos de conducta moral, cómo calificaría la acción de Juan?';
 textos_conducta.pregunta = AgregarFinLinea(textos_conducta.pregunta, LARGO_OPCIONES);
@@ -29,7 +31,6 @@ textos_danio.maximo = 'Muy dañino';
 tamanio_fijacion = 0.05;
 tamanio_historia = 0.035;
 
-LARGO_LINEA = 65;
 
 INSTRUCCIONES = 'A continuación se le presentarán una serie de situaciones. Por favor léalas y responda las preguntas usando las escalas correspondientes.';
 INSTRUCCIONES = AgregarFinLinea(INSTRUCCIONES, round(LARGO_LINEA/2));
@@ -79,6 +80,7 @@ for i = 1:length(historias)
     archivo = fullfile(historias_path, historias_arch{i});
     historias{1,i} = fileread(archivo);
     historias{1,i} = AgregarFinLinea(historias{1,i}, LARGO_LINEA);
+    historias{1,i} = SepararHistoria(historias{1,i}, LINEAS_HISTORIA);
 end
 
 % ------------------- RESERVO ESPACIO PARA EL LOG ---------------------
@@ -98,16 +100,16 @@ log.danio_respuesta = cell(1, length(historias));
 log.danio_PrimerMovimiento = cell(1, length(historias));
 
 % ------------------- INICIALIZO PSYCHOTOOLBOX ------------------------
-ListenChar(2);
+% ListenChar(2);
 HideCursor;
-init_psych();
+hd = init_psych();
 
 % ------------------- INICIO DEL PARADIGMA ----------------------------
 
 % ------------------- INTRODUCCION -----------------------------------
 
 textoCentrado(INSTRUCCIONES, tamanio_fijacion);
-[~, OnSetTime] = Screen('Flip', hd.window);
+[asd, OnSetTime] = Screen('Flip', hd.window);
 log.instrucciones_inicio = OnSetTime;
 KbWait;
 log.instrucciones_fin = GetSecs;
@@ -119,10 +121,12 @@ for i = 1:length(historias)
 
     % ------------------- HISTORIA ---------------------------------------
 
-    textoCentrado(historias{1,i}, tamanio_historia);
-    [~, OnSetTime] = Screen('Flip', hd.window);
-    log.historia_inicio{1,i} = OnSetTime;
-    KbPressWait;
+    log.historia_inicio{1,i} = GetSecs;
+    for x = 1:length(historias{1,i})
+        textoCentrado(historias{1,i}{x}, tamanio_historia);
+        Screen('Flip', hd.window);
+        KbPressWait;
+    end
     log.historia_fin{1,i} = GetSecs;
 
     % ------------------- PREGUNTA CONDUCTA ------------------------------
@@ -160,7 +164,7 @@ GuardarLog(log, nombre, version);
 % ---------------------- FIN DEL PARADIGMA ---------------------------
 
 Screen('CloseAll'); % Cierro ventana del Psychtoolbox
-ListenChar(1);
+% ListenChar(1);
 ShowCursor;
 
 end

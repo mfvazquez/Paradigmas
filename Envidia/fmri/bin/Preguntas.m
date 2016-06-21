@@ -1,8 +1,6 @@
 function log = Preguntas(bloque, personajeA, personajeB, opciones)
 
-    global window;
-    global pportobj;
-    global pportaddr;
+    global hd;
     
     
     TIEMPO_CRUZ_ANTES_PREGUNTA = 5.5;
@@ -11,8 +9,9 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
     TIEMPO_INICIAL_CENTRADO = 5;
     TIEMPO_PERSONAJE = 8;
 
-    MENSAJE_CONTINUAR = 'Presione cualquier boton cuando termine de leer';
+    MENSAJE_CONTINUAR = '';
         
+       
     % --------------------- PREPARO LOG -----------------------------------
     
     largo = length(bloque.situaciones);
@@ -34,18 +33,20 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
     % ------------------- PRESENTACION DE LOS PERSONAJES ------------------
 
     PresentarImagen(personajeA.historia, personajeA.textura);
-    Screen('Flip', window);    
+    Screen('Flip', hd.window);    
     WaitSecs(TIEMPO_PERSONAJE);
     
     PresentarImagen(personajeB.historia, personajeB.textura);
-    Screen('Flip', window);    
+    Screen('Flip', hd.window);    
     WaitSecs(TIEMPO_PERSONAJE);
     
     
     % ------------------- INSTRUCCIONES -----------------------------------
 
-    textoCentradoBoton(bloque.instrucciones);
-
+    textoCentrado(bloque.instrucciones, 0.04);
+    Screen('Flip', hd.window);
+    KbWait;
+    
     for i = 1:length(bloque.situaciones)
 
         % -------------------- ESTIMULO ---------------------------------------
@@ -74,7 +75,7 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
         continuar = true;
         while continuar
             dibujarOpciones(elegido, opciones, true);
-            Screen('Flip', window);
+            Screen('Flip', hd.window);
             [elegido, continuar] = EsperarRespuesta(elegido);
             if primer_movimiento == -1
                 primer_movimiento = GetSecs;

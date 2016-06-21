@@ -1,27 +1,23 @@
-function [elegido, continuar] = EsperarRespuesta(elegido)
+function [elegido, continuar, exit] = EsperarRespuesta(elegido)
+   
+    global escKey;
+    global rightKey;
+    global leftKey;
+    global spaceKey;
 
-    RIGHT = 2;
-    LEFT = 1;
-    ACCEPT = 16;
-    
+    exit = false;
     continuar = true;
-    leer_puerto = true;
-    while leer_puerto
+    [~, keyCode, ~] = KbPressWait;
 
-        input_data=io32(pportobj,pportaddr);
-        input_data=bitand(input_data, 19); % filtro bits 4, 1 y 0
-        
-        if input_data == RIGHT && elegido < 9
-            elegido = elegido + 1;
-            leer_puerto = false;
-        elseif input_data == LEFT && elegido > 1
-            elegido = elegido - 1;
-            leer_puerto = false;
-        elseif input_data == ACCEPT
-            leer_puerto = false;
-            continuar = false;
-        end
-        
-    end
+    if keyCode(rightKey) && elegido < 9
+        elegido = elegido + 1;
+    elseif keyCode(leftKey) && elegido > 1
+        elegido = elegido - 1;
+    elseif keyCode(spaceKey)
+        continuar = false;
+    elseif keyCode(escKey)
+        continuar = false;
+        exit = true;
+    end   
 
 end

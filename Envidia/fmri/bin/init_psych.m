@@ -1,4 +1,4 @@
-function [window,scrnsize] = iniciarPsych(hd)
+function hd = iniciarPsych()
    
     hd.bgcolor = [0 0 0] ;
     hd.dispscreen = 0;
@@ -25,6 +25,7 @@ function [window,scrnsize] = iniciarPsych(hd)
     % Open Psychtoolbox main window
 
     [window,scrnsize] = Screen('OpenWindow', hd.dispscreen, hd.bgcolor);
+    hd.scrnsize = scrnsize;
     hd.window = window;
     hd.centerx = scrnsize(3)/2;
     hd.centery = scrnsize(4)/2;
@@ -51,4 +52,9 @@ function [window,scrnsize] = iniciarPsych(hd)
 
     %Para que los dots sean circulares.
     Screen('BlendFunction', window, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    hd.white = [255 255 255];
+    hd.red = [255 0 0];
+    hd.black = [0 0 0];
+    
 end

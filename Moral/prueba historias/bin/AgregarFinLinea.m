@@ -22,6 +22,14 @@ function texto = AgregarFinLinea(str, largo)
             contador = contador + length(palabras{i}) + 1;
         end
     end
-    texto = [texto char(10) linea];
+    if i == 1
+        texto = linea;
+    else
+        texto = [texto char(10) linea];
+    end
+    
     texto = strjoin(texto, '');
+    if (texto(1) == char(10))
+        texto(1) = [];
+    end
 end

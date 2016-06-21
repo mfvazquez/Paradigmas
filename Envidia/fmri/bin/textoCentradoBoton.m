@@ -1,21 +1,16 @@
 function textoCentradoBoton(texto)
+   
+    global hd;
 
-    global window;
-    global pportobj;
-    global pportaddr;
-    
-    
-    [~, screenYpixels] = Screen('WindowSize', window);
+    [~, screenYpixels] = Screen('WindowSize', hd.window);
     
     white = [255 255 255];
 
     textSize = round(screenYpixels*0.04);
 
-    Screen('TextSize', window, textSize);
-    DrawFormattedText(window, texto, 'center','center', white, [],[],[], 2,[],[]);
-    Screen('Flip', window);
-%     KbWait;
-    EsperarBoton(pportobj,pportaddr);
-
+    Screen('TextSize', hd.window, textSize);
+    DrawFormattedText(hd.window, texto, 'center','center', white, [],[],[], 1.2,[],[]);
+    Screen('Flip', hd.window);
+    KbWait;
 
 end

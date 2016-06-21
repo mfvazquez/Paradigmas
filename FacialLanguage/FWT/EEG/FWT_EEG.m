@@ -126,17 +126,17 @@ for i = 1:length(bloques)
     Screen('Flip',hd.window);
     KbPressWait;
 
-% % %     %% ------------------ PRACTICA ----------------------------------
-% % %     exit = CorrerBloque(practica, botones, [], false);
-% % % 
-% % %     if exit
-% % %         break;
-% % %     end
-% % % 
-% % %     textoCentrado(PREGUNTA_TEXTO, TEXT_SIZE);
-% % %     Screen('Flip', hd.window);
-% % %     KbPressWait;
-% % %     
+    %% ------------------ PRACTICA ----------------------------------
+    exit = CorrerBloque(practica, botones, [], false);
+
+    if exit
+        break;
+    end
+
+    textoCentrado(PREGUNTA_TEXTO, TEXT_SIZE);
+    Screen('Flip', hd.window);
+    KbPressWait;
+    
     %% ------------------ BLOQUE ------------------------------------
     [exit, log{1,i}] = CorrerBloque(bloques{1,i}, botones, log{1,i}, true);
 

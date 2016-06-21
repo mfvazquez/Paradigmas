@@ -8,7 +8,7 @@ function dibujarOpciones(elegido, textos)
     xLength = round(screenXpixels * 0.5); % ancho del rectangulo
     yLength = round(screenYpixels * 0.1); % alto del rectangulo
     xPos = xCenter - round(xLength/2); %posicion X del rectangulo
-    yPos = yCenter + round(yLength/2); %posicion Y del rectangulo
+    yPos = yCenter - round(yLength); %posicion Y del rectangulo
 
     BoxXLength = round(xLength/9); % ancho de cada cajita
 

@@ -7,6 +7,10 @@ function Preguntas(bloque, personajeA, personajeB, opciones)
     global leftKey;
     global spaceKey;
 
+    
+    global pportobj;
+    global pportaddr;
+    
     TIEMPO_CRUZ_ANTES_PREGUNTA = 1.5;
     TIEMPO_CRUZ_DESPUES_PREGUNTA = 2;
 

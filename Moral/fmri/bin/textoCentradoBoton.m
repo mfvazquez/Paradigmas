@@ -2,7 +2,7 @@ function textoCentradoBoton(texto)
 
     global hd;
     
-    [~, screenYpixels] = Screen('WindowSize', hd.window);
+    [asd, screenYpixels] = Screen('WindowSize', hd.window);
     
     textSize = round(screenYpixels*0.035);
 

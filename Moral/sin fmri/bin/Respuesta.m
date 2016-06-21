@@ -11,13 +11,13 @@ function [exit, log] = Respuesta(textos_opciones)
 
     elegido = 5;
     dibujarOpciones(elegido, textos_opciones);
-    [~, OnSetTime] = Screen('Flip', hd.window);
+    [asd, OnSetTime] = Screen('Flip', hd.window);
     log.respuesta_inicio = OnSetTime;
     log.primer_movimiento = -1;
     continuar = true;
     while continuar
 
-        [~, keyCode, ~] = KbPressWait;
+        [asd, keyCode, asdasd] = KbPressWait;
         
         if (log.primer_movimiento == -1)
            log.primer_movimiento = GetSecs; 

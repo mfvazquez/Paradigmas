@@ -1,9 +1,9 @@
 function DibujarSituacion(texto, textura, mensaje)
-    global window;
+    global hd;
 
     PresentarImagen(texto, textura);
     
-    [screenXpixels, screenYpixels] = Screen('WindowSize', window);
+    [screenXpixels, screenYpixels] = Screen('WindowSize', hd.window);
     white = [255 255 255];
     
     Ypos = round(screenYpixels * 0.8);
@@ -11,7 +11,7 @@ function DibujarSituacion(texto, textura, mensaje)
     rect = [0  Ypos+YLength screenXpixels screenYpixels];
     
     textSize = round(screenYpixels*0.03);
-    Screen('TextSize', window, textSize);
-    DrawFormattedText(window, mensaje, 'center','center', white, [],[],[],2,[],rect);
+    Screen('TextSize', hd.window, textSize);
+    DrawFormattedText(hd.window, mensaje, 'center','center', white, [],[],[],2,[],rect);
     
 end

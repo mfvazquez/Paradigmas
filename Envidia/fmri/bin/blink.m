@@ -1,4 +1,4 @@
 function OnSetTime = blink()
-    global window;
-    [~, OnSetTime] = Screen('Flip', window);
+    global hd;
+    [~, OnSetTime] = Screen('Flip', hd.window);
 end

@@ -1,4 +1,4 @@
-function iniciarPsych()
+function hd = init_psych()
    
     global hd
 

@@ -1,7 +1,5 @@
-function iniciarPsych()
+function hd = init_psych()
    
-    global hd
-
     hd.bgcolor = [0 0 0] ;
     hd.dispscreen = 0;
     hd.itemsize = 100;
@@ -53,8 +51,8 @@ function iniciarPsych()
     %Teclas de respuesta
     KbName('UnifyKeyNames');
 
-    topPriorityLevel = MaxPriority(window);
-    Priority(topPriorityLevel);
+%     topPriorityLevel = MaxPriority(window);
+%     Priority(topPriorityLevel);
 
     %Para que los dots sean circulares.
     Screen('BlendFunction', window, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
