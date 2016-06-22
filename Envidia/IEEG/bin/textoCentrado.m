@@ -1,4 +1,4 @@
-function textoCentrado(tiempo, texto)
+function textoCentrado(texto)
 
     global window;
 
@@ -11,6 +11,5 @@ function textoCentrado(tiempo, texto)
     Screen('TextSize', window, textSize);
     DrawFormattedText(window, texto, 'center','center', white);
     Screen('Flip', window);
-    WaitSecs(tiempo);
 
 end
