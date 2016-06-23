@@ -4,7 +4,6 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
     global rightKey;
     global leftKey;
     global spaceKey;
-    global auxKey;
     
     
     TIEMPO_CRUZ_ANTES_PREGUNTA = 5.5;
@@ -49,12 +48,18 @@ function log = Preguntas(bloque, personajeA, personajeB, opciones)
 
     textoCentrado(bloque.instrucciones, 0.04);
     Screen('Flip', hd.window);
-    esperar = true;
-    while esperar
-        tecla = GetChar;
-        if tecla == spaceKey || tecla == rightKey || tecla == leftKey || tecla == auxKey
-            esperar = false;
-        end   
+    tecla = GetChar;
+    continuar = true;
+    
+    global rightKey;
+    global leftKey;
+    global spaceKey;
+    
+    
+    while continuar
+        if tecla == rightKey || tecla == leftKey || tecla == '3' || tecla == '4' 
+            continuar = false;
+        end
     end
     
     for i = 1:length(bloque.situaciones)

@@ -17,17 +17,18 @@ function Envidia()
     % ------------------- CONSTANTES GLOBALES -----------------------------
 
     global hd; 
-    global escKey;
     global rightKey;
     global leftKey;
     global spaceKey;
+    global auxKey;
+
+    rightKey =  '2';
+    leftKey = '1';
+    spaceKey = '4';
+    auxKey = '3';
+    triggerKey = '5';
     
-    KbName('UnifyKeyNames');
-    escKey = KbName('ESCAPE');
-    rightKey = KbName('RightArrow');
-    leftKey = KbName('LeftArrow');
-    spaceKey = KbName('space');
-       
+
     % -------------------- CONSTANTES -------------------------------------
     
     envidia_opciones.pregunta = '¿Qué tanta insatisfacción le produce?';
@@ -65,12 +66,15 @@ function Envidia()
     
     imagen = imread(fullfile('..','data','PersonajeB.jpg'));
     personajeB.textura = Screen('MakeTexture', hd.window, imagen);
-    
     envidia = CargarDatos(fullfile('..','data','envidia'));
     envidia = DividirTextos(envidia, LARGO_LINEA, LARGO_INSTRUCCIONES);
     schan = CargarDatos(fullfile('..','data','schadenfreude'));
     schan = DividirTextos(schan, LARGO_LINEA, LARGO_INSTRUCCIONES);
-  
+
+    %% -------------------- ESPERO AL RESONADOR ---------------------------
+    textoCentrado('Esperando al resonador...', 0.04);
+    Screen('Flip', hd.window);
+    
     % ------------------- INICIO DEL PARADIGMA ----------------------------
     
     log_envidia = Preguntas(envidia, personajeA, personajeB, envidia_opciones);
