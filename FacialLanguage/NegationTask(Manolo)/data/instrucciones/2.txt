@@ -1,0 +1,18 @@
+A continuación leerás una serie de frases sencillas, referidas a acciones, que se 
+presentarán automáticamente palabra por palabra.
+Las frases pueden ser afirmativas o negativas, por ejemplo:
+
+- Ahora / sí / encenderás / el / televisor.
+
+- Ahora / no / firmarás / el / documento.
+
+Tienes que leerlas con atención, comprendiéndolas.
+
+Encima del verbo de la oración aparecerá rápidamente un punto que puede ser amarillo o azul:
+
+* Si el punto es amarillo, DEBES PULSAR lo más rápido que puedas la tecla que está señalada 
+en el teclado con una pegatina amarilla.
+
+* Si el punto es azul, NO DEBES PRESIONAR NINGUNA TECLA.
+
+(pulsa espacio para continuar)
