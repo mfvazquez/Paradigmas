@@ -88,7 +88,7 @@ while continuar
     if GetSecs - tstart > OnTime + OffTime
         inicio = true;
     end
-%     WaitSecs(INCREMENTO/2);
+% %     WaitSecs(INCREMENTO/2);
 end
 
 
