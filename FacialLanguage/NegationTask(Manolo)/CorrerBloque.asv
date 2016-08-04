@@ -19,11 +19,11 @@ function [exit, log] = CorrerBloque(bloque, entrenamiento, log)
             if exit
                 return;
             end
-            [exit, accuracy, stat, ~] = CorrerSecuencia(bloque{i}, entrenamiento, stat, []);
         else    
-            [exit, accuracy, stat, log{n}] = CorrerSecuencia(bloque{i}, entrenamiento, stat, log{n});
+            
         end
         
+        [exit, accuracy, stat, log{n}] = CorrerSecuencia(bloque{i}, entrenamiento, stat, log{n});
         if exit
             return;
         end

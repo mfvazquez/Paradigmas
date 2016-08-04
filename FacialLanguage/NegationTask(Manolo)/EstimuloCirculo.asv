@@ -9,7 +9,7 @@ function [exit, respuesta] = EstimuloCirculo(texto, TIEMPOS, amarillo)
     [screenXpixels, screenYpixels] = Screen('WindowSize', hd.window);
     dot_size = round(DOT.SIZE*screenYpixels);    
     dot_pos(1) = round(screenXpixels*DOT.POS(1) - dot_size/2);
-    dot_pos(2) = round(screenYpixels*DOT.POS(2) - dot_size/2);
+    dot_pos(2) = round(screenYpixels*DOT.POS(2));
     dot_pos(3) = dot_pos(1) + round(DOT.SIZE*screenYpixels);
     dot_pos(4) = dot_pos(2) + round(DOT.SIZE*screenYpixels);
     
@@ -21,8 +21,10 @@ function [exit, respuesta] = EstimuloCirculo(texto, TIEMPOS, amarillo)
         TextoCentrado(texto, TEXT_SIZE_STIM);
         if i == DOT.STIM(2)
             if amarillo
+%                 Screen('DrawDots', hd.window, dot_pos, dot_size, DOT.AMARILLO, [], 2);
                 Screen(hd.window,'FillOval',DOT.AMARILLO, dot_pos);
             else
+%                 Screen('DrawDots', hd.window, dot_pos, dot_size, DOT.AZUL, [], 2);
                 Screen(hd.window,'FillOval',DOT.AZUL, dot_pos);
             end
         end

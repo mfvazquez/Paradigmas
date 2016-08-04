@@ -134,16 +134,18 @@ end
 %% LOG
 
 log = cell(1,length(bloques));
+% log.estimulo = cell(1,length(bloques));
+% log.respuesta = cell(1,length(bloques));
+% log.amarillo = cell(1,length(bloques));
 for k = 1:length(log)
     log{k} = cell(1,length(bloques{k}));
     for i = 1:length(log{k})
         aux.estimulo = cell(1,length(T_ESTIMULOS));
-        aux.respuesta.tiempo = [];
-        aux.respuesta.accuracy = [];
-        aux.amarillo = [];
+%         aux.respuesta = cell(1,length(bloques{k}));
+%         aux.amarillo = cell(1,length(bloques{k}));
         log{k}{i} = aux;
         for j = 1:length(log{k}{i}.estimulo)
-            log{k}{i}.estimulo{j} = cell(1,length(T_ESTIMULOS{j}));
+            log{k}{i}.estimulo = cell(1,length(T_ESTIMULOS{j}));
         end
     end
 end
@@ -162,7 +164,7 @@ end
 
 %% ENTRENAMIENTO
 
-[exit, ~] = CorrerBloque(entrenamiento, true, []);
+exit = CorrerBloque(entrenamiento, true);
 if exit
     Salir;
     return;
@@ -181,7 +183,7 @@ end
 %% BLOQUES
 
 for i = 1:length(bloques)
-    [exit, log{i}] = CorrerBloque(bloques{i}, false, log{i});
+    exit = CorrerBloque(bloques{i}, false);
     if exit
         Salir;
         return;

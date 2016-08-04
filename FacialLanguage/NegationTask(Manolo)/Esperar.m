@@ -17,7 +17,7 @@ function [exit, respuesta] = Esperar(tiempo, botonSalida, botones)
             for i = 1:length(botones)
                 if keyCode(botones{i}.KEY)
                     respuesta.valor = botones{i}.KEY_VALUE;
-                    respuesta.tiempo = GetSecs - tStart;
+                    respuesta.tiempo = GetSecs;
                     return;
                 end
             end

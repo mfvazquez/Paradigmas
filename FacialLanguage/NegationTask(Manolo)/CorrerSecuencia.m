@@ -1,4 +1,4 @@
-function [exit, accuracy, stat] = CorrerSecuencia(secuencia, entrenamiento, stat)
+function [exit, accuracy, stat, log] = CorrerSecuencia(secuencia, entrenamiento, stat, log)
 
     global hd
     global ExitKey
@@ -28,9 +28,14 @@ function [exit, accuracy, stat] = CorrerSecuencia(secuencia, entrenamiento, stat
         
         if i == DOT.STIM(1)
             [exit, respuesta_dot] = EstimuloCirculo(secuencia{i}, TIEMPOS.ESTIMULOS{i}, amarillo);
+            if exit
+                return
+            end
         elseif i == PREGUNTA.STIM;
             [exit, respuesta] = EstimuloPregunta(secuencia{i}, TIEMPOS.ESTIMULOS{i});
-            
+            if exit
+                return
+            end
                 if isempty(respuesta.valor) % Sin respuesta
                     accuracy = 0;
                 elseif respuesta.valor == secuencia{end-1} % Respuesta Correcta
@@ -48,10 +53,10 @@ function [exit, accuracy, stat] = CorrerSecuencia(secuencia, entrenamiento, stat
             else
                 [exit, ~] = EstimuloComun(secuencia{i}, TIEMPOS.ESTIMULOS{i}, []);
             end
+            if exit
+                return
+            end
         end
-        if exit
-            return
-        end     
         
         Screen('Flip', hd.window);
         if amarillo && isempty(respuesta_dot.valor) && i >= DOT.STIM(1) && i <= DOT.STIM(1)+1
