@@ -1,0 +1,11 @@
+Bienvenido!
+
+En este experimento, dos palabras se presentarán en el centro de la pantalla. 
+La primera palabra se presentará sólo por un tiempo corto, mientras que la segunda 
+palabra se quedará en la pantalla más tiempo.
+Identifique si esta segunda palabra es algo vivo o no vivo.
+Presione la tecla izquierda ( V )  si la palabra describe una entidad viva
+Presione la tecla derecha ( B ) si la palabra describe una entidad no viva
+
+Cuando esté listo presione cualquier tecla para iniciar algunos ensayos de práctica
+

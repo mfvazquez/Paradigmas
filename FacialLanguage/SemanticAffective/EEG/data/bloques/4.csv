@@ -1,0 +1,45 @@
+L,NEG,NEG,dañino,araña,vivo
+L,NEG,NEG,malo,araña,vivo
+L,NEG,NEU,sucio,lobo,vivo
+L,NEG,POS,malo,canguro,vivo
+L,NEU,NEG,filmado,buitre,vivo
+L,NEU,NEU,filmado,lobo,vivo
+L,NEU,POS,cercano,ardilla,vivo
+L,NEU,POS,filmado,perro,vivo
+L,POS,NEG,bueno,mosca,vivo
+L,POS,NEU,maravilloso,gaviota,vivo
+L,POS,POS,genial,canguro,vivo
+L,POS,POS,maravilloso,canguro,vivo
+NL,NEG,NEG,horrible,jeringa,no vivo
+NL,NEG,NEG,asqueroso,droga,no vivo
+NL,NEG,NEU,dañino,anguila,vivo
+NL,NEG,POS,dañino,vela,no vivo
+NL,NEU,NEG,visible,bomba,no vivo
+NL,NEU,NEU,cercano,muleta,no vivo
+NL,NEU,POS,lindo,vela,no vivo
+NL,NEU,POS,filmado,esquí,no vivo
+NL,POS,NEG,bueno,jeringa,no vivo
+NL,POS,NEU,hermoso,escoba,no vivo
+NL,POS,POS,hermoso,cafetera,no vivo
+NL,POS,POS,hermoso,avión,no vivo
+S,NEG,NEG,horrible,sepulturero,vivo
+S,NEG,NEG,sucio,ladrón,vivo
+S,NEG,NEU,dañino,gasolinera,no vivo
+S,NEG,POS,horrible,futbolista,vivo
+S,NEU,NEG,visible,banquero,vivo
+S,NEU,NEU,lindo,cajero,vivo
+S,NEU,POS,lindo,heladero,vivo
+S,NEU,POS,filmado,cocinero,vivo
+S,POS,NEG,genial,banquero,vivo
+S,POS,NEU,maravilloso,gasolinera,no vivo
+S,POS,POS,hermoso,cocinero,vivo
+S,POS,POS,extraordinario,futbolista,vivo
+L,NEG,NEU,asqueroso,gaviota,vivo
+L,NEU,NEU,cercano,gaviota,vivo
+L,POS,NEG,maravilloso,buitre,vivo
+NL,NEG,NEU,malo,anguila,vivo
+NL,NEU,NEU,cercano,anguila,vivo
+NL,POS,NEG,hermoso,hojas de afeitar,no vivo
+S,NEG,NEU,sucio,profesor,vivo
+S,NEU,NEU,filmado,bombero,vivo
+S,POS,NEG,maravilloso,sacerdote,vivo

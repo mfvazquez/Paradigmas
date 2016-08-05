@@ -1,0 +1,45 @@
+L,NEG,NEG,malo,buitre,vivo
+L,NEG,NEG,dañino,ratón,vivo
+L,NEG,NEU,sucio,aguja,vivo
+L,NEG,POS,sucio,ardilla ,vivo
+L,NEG,POS,dañino,perro,vivo
+L,NEU,NEG,cercano,mosca,vivo
+L,NEU,NEG,visible,buitre,vivo
+L,NEU,NEU,lindo,gaviota,vivo
+L,NEU,POS,filmado,canguro,vivo
+L,NEU,POS,ligero,ardilla,vivo
+L,POS,NEG,genial,tiburón,vivo
+L,POS,NEU,hermoso,cocodrilo,vivo
+L,POS,NEU,hermoso,gaviota,vivo
+L,POS,POS,hermoso,pollito,vivo
+L,POS,POS,hermoso,ardilla,vivo
+NL,NEG,NEG,malo,droga,no vivo
+NL,NEG,NEG,malo,pistola,no vivo
+NL,NEG,NEU,dañino,martillo,no vivo
+NL,NEG,POS,dañino,esquí,no vivo
+NL,NEG,POS,sucio,esquí,no vivo
+NL,NEU,NEG,filmado,droga,no vivo
+NL,NEU,NEG,ligero,bomba,no vivo
+NL,NEU,NEU,visible,anguila,vivo
+NL,NEU,POS,cercano,cafetera,no vivo
+NL,NEU,POS,ligero,esquí,no vivo
+NL,POS,NEG,extraordinario,pistola,no vivo
+NL,POS,NEU,maravilloso,palo,no vivo
+NL,POS,NEU,maravilloso,martillo,no vivo
+NL,POS,POS,maravilloso,bicicleta,no vivo
+NL,POS,POS,genial,bicicleta,no vivo
+S,NEG,NEG,asqueroso,político,vivo
+S,NEG,NEG,sucio,político,vivo
+S,NEG,NEU,sucio,bombero,vivo
+S,NEG,POS,sucio,heladero,vivo
+S,NEG,POS,malo,futbolista,vivo
+S,NEU,NEG,visible,político,vivo
+S,NEU,NEG,visible,sacerdote ,vivo
+S,NEU,NEU,cercano,gasolinera,no vivo
+S,NEU,POS,visible,arquitecto,vivo
+S,NEU,POS,cercano,heladero,vivo
+S,POS,NEG,extraordinario,ladrón,vivo
+S,POS,NEU,hermoso,trabajador,vivo
+S,POS,NEU,hermoso,cajero,vivo
+S,POS,POS,extraordinario,cocinero,vivo
+S,POS,POS,bueno,heladero,vivo

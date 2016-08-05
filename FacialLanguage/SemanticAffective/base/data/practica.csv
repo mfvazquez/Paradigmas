@@ -1,0 +1,9 @@
+L,NEG,NEU,dañino,cocodrilo,vivo
+L,NEU,NEU,visible,gaviota,vivo
+L,POS,NEU,bueno,burro,vivo
+NL,NEG,NEU,malo,palo,no vivo
+NL,NEU,NEU,filmado,bomba,no vivo
+NL,POS,NEU,bueno,martillo,no vivo
+S,NEG,NEU,horrible,trabajador,vivo
+S,NEU,NEU,cercano,profesor,vivo
+S,POS,NEU,extraordinario, bombero,vivo

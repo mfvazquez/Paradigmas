@@ -1,0 +1,45 @@
+L,NEG,NEG,asqueroso, araña,vivo
+L,NEG,NEU,sucio,burro,vivo
+L,NEG,NEU,malo,lobo,vivo
+L,NEG,POS,sucio,pollito,vivo
+L,NEG,POS,sucio,canguro,vivo
+L,NEU,NEG,filmado,tiburón,vivo
+L,NEU,NEG,ligero,araña,vivo
+L,NEU,NEU,filmado,cocodrilo,vivo
+L,NEU,NEU,ligero,gaviota,vivo
+L,NEU,POS,cercano,perro,vivo
+L,POS,NEG,maravilloso,tiburón,vivo
+L,POS,NEG,hermoso,tiburón,vivo
+L,POS,NEU,maravilloso,lobo,vivo
+L,POS,NEU,hermoso,lobo,vivo
+L,POS,POS,genial,caballo,vivo
+NL,NEG,NEG,malo,bomba,no vivo
+NL,NEG,NEU,dañino,palo,no vivo
+NL,NEG,NEU,sucio,escoba,no vivo
+NL,NEG,POS,malo,avión,no vivo
+NL,NEG,POS,dañino,avión,no vivo
+NL,NEU,NEG,visible,pistola,no vivo
+NL,NEU,NEG,ligero,pistola,no vivo
+NL,NEU,NEU,ligero,martillo,no vivo
+NL,NEU,NEU,cercano,escoba,no vivo
+NL,NEU,POS,ligero,bicicleta,no vivo
+NL,POS,NEG,extraordinario,droga,no vivo
+NL,POS,NEG,extraordinario,bomba,no vivo
+NL,POS,NEU,bueno,anguila,vivo
+NL,POS,NEU,hermoso,palo,no vivo
+NL,POS,POS,hermoso,bicicleta,no vivo
+S,NEG,NEG,dañino,ladrón,vivo
+S,NEG,NEU,sucio,cajero,vivo
+S,NEG,NEU,horrible,bombero,vivo
+S,NEG,POS,malo,cocinero,vivo
+S,NEG,POS,sucio,médico,vivo
+S,NEU,NEG,filmado,ladrón,vivo
+S,NEU,NEG,filmado,político,vivo
+S,NEU,NEU,cercano,bombero,vivo
+S,NEU,NEU,visible,bombero,vivo
+S,NEU,POS,visible,médico,vivo
+S,POS,NEG,extraordinario,político,vivo
+S,POS,NEG,bueno,sacerdote ,vivo
+S,POS,NEU,hermoso,profesor,vivo
+S,POS,NEU,extraordinario,profesor,vivo
+S,POS,POS,extraordinario,médico,vivo
