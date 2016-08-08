@@ -34,7 +34,8 @@ function [exit, log] = CorrerBloque(bloque, practica, version, log)
         
         %% MASK
         Screen('Flip', hd.window);
-        WaitSecs(TIEMPOS.MASK);
+        WaitSecs(0.5);
+%         WaitSecs(AleatorioEntre(TIEMPOS.MASK(1),TIEMPOS.MASK(2)));
         
         %% TARGET
         TextoCentrado(bloque{i}{5}, TEXT_SIZE_STIM);
@@ -54,13 +55,15 @@ function [exit, log] = CorrerBloque(bloque, practica, version, log)
 
             log{n}.respuesta = respuesta.tiempo;
             
-            if strcmp(respuesta.valor, bloque{i}{end})
+            if isempty(respuesta.valor)
+                log{n}.accuracy = 0;
+            elseif strcmp(respuesta.valor, bloque{i}{end})
                 log{n}.accuracy = 1;
                 io32(pportobj,pportaddr, MARCAS.CORRECTO);
                 WaitSecs(MARCAS.DURACION);
                 io32(pportobj,pportaddr,0);
             else
-                log{n}.accuracy = 0;  
+                log{n}.accuracy = -1;  
                 io32(pportobj,pportaddr, MARCAS.ERROR);
                 WaitSecs(MARCAS.DURACION);
                 io32(pportobj,pportaddr,0);

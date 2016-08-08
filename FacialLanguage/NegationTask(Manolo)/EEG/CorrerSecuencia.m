@@ -6,6 +6,7 @@ function [exit, accuracy, stat, log] = CorrerSecuencia(secuencia, entrenamiento,
     global PREGUNTA
     global TIEMPOS
     global MARCAS
+    global pportobj pportaddr
     
     accuracy = 0;
     exit = false;

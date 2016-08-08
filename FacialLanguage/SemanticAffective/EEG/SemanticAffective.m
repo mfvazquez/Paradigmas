@@ -1,4 +1,4 @@
-% function SemanticAffective()
+function SemanticAffective()
 % Negation Task
 
 clc;
@@ -28,7 +28,7 @@ TEXT_SIZE_INST = 0.025;
 TEXT_SIZE_STIM = 0.04;
 KbName('UnifyKeyNames');
 ExitKey = KbName('ESCAPE');
-MASK_DURATION = [50 200];
+MASK_DURATION = [0.05 0.2];
 
 OPCION_DIST = 0.3;
 
@@ -67,7 +67,7 @@ VERSIONES{2} = OPCIONES;
 
 TIEMPOS.FIJACION = 0.5;
 TIEMPOS.PRIME = 0.15;
-TIEMPOS.MASK = 0.05;
+TIEMPOS.MASK = MASK_DURATION;
 TIEMPOS.TARGET = 2.7;
 TIEMPOS.ESPERA = 0.5;
 
@@ -81,7 +81,7 @@ if exist('pportaddr','var') && ~isempty(pportaddr)
 
     pportobj = io32;
     io32status = io32(pportobj);
-    
+    io32(pportobj,pportaddr, 0);
     if io32status ~= 0
         error('io32 failure: could not initialise parallel port.\n');
     end
@@ -167,4 +167,4 @@ MostrarMensaje(FIN, TEXT_SIZE_INST, hd.window);
 GuardarLog(log, nombre, 'log', 'SemanticAffective', 'bloques');
 
 Salir;
-% end
+end
