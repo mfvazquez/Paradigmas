@@ -3,11 +3,11 @@ function blink(PsyParams, time)
     black = PsyParams.black;
     white = PsyParams.white;
     
-    pdpix=[100 50];
+    pdpix=[200 75];
     blink_left=[0 0 pdpix];
     
     Screen('FillRect', window ,white, blink_left);
-    [VBLTimestamp OnSetTime] = Screen('Flip', window, [], 1)
+    [VBLTimestamp OnSetTime] = Screen('Flip', window, [], 1);
     Screen('FillRect', window ,black, blink_left);
     Screen('Flip', window, OnSetTime+time);
 end

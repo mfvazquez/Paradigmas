@@ -1,0 +1,19 @@
+function [exit, respuesta, log] = EstimuloComun(texto, TIEMPO, botones, log)
+        
+    global hd
+    global TEXT_SIZE_STIM
+    global ExitKey
+    
+    
+    TextoCentrado(texto, TEXT_SIZE_STIM);
+    log = blink;
+    
+    respuesta.valor = '';
+    respuesta.tiempo = NaN;
+    
+    [exit, respuesta] = Esperar(TIEMPO, ExitKey, botones);
+    if exit
+        return
+    end
+
+end

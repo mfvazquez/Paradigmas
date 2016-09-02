@@ -23,6 +23,9 @@ global OPCION_DER
 global OPCION_DIST
 global TEXTO_CONTINUAR
 global TIEMPOS
+global BLINK_DURATION
+
+BLINK_DURATION = 20e-3;
 
 %% CONSTANTES
 
@@ -65,6 +68,7 @@ versiones = {'V1' 'V2'};
 choice = menu('Version a correr:',versiones);
 version = versiones{choice};
 data_dir = fullfile('data', version);
+nombre = no
 
 OPCION_IZQ.KEY = KbName('v');
 OPCION_IZQ.KEY_VALUE = 'v';
@@ -139,11 +143,11 @@ end
 
 %% ENTRENAMIENTO
 
-[exit, log_entrenamiento{1}] = CorrerBloque(entrenamiento, true, log_entrenamiento{1});
-if exit
-    Salir;
-    return;
-end
+% [exit, log_entrenamiento{1}] = CorrerBloque(entrenamiento, true, log_entrenamiento{1});
+% if exit
+%     Salir;
+%     return;
+% end
 
 %% COMIENZO
 
@@ -160,6 +164,8 @@ end
 for i = 1:length(bloques)
     [exit, log{i}] = CorrerBloque(bloques{i}, false, log{i});
     if exit
+        GuardarLog(log, nombre, 'log', 'NegationTask', 'bloques');
+        GuardarLog(log_entrenamiento, nombre, 'log', 'NegationTask', 'entrenamiento');
         Salir;
         return;
     end
