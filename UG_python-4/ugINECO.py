@@ -49,7 +49,10 @@ class GameState:
         self.offer = 0
         self.answer = None
         self.logit = None
+        self.log_temporal = []
+        self.log_trials = []
 
+	
     def newOffer(self, offer):
         self.lastOffer = self.offer
         self.offer = offer
@@ -74,21 +77,30 @@ class GameState:
         self.round += 1
 
     def log(self):
-        filename = FILENAME_PREFIX + "_log.txt"
+        self.log_trials.append(self.log_temporal)
+        self.log_temporal = []
+
+    def guardar_log(self):
+        filename = FILENAME_PREFIX + "_" + str(SUBJECT_ID) + "_log.txt"
         outfile = None
         
         if os.path.exists(filename):
             outfile = open(filename, "a")
         else:
             outfile = open(filename, "w")
-            outfile.write("\t".join(["SUBJECT", "OFFER", "ANSWER", "LOGIT", "OPPONENT"]) + "\n")
-        
-        outfile.write("\t".join([SUBJECT_ID, str(self.offer), str(self.answer), str(self.logit), str(self.opponent)]) + "\n")
+            outfile.write(",".join(["screenOffer", "tiempo de respuesta", "respuesta", "historial saldo", "tiempo espera", "resultado", "tiempo resultado", "monto usuario", "monto oponente"]) + "\n")
+
+        for x in range(len(self.log_trials)):
+            outfile.write(str(self.log_trials[x]) + "\n")
+
         outfile.flush()
         outfile.close()
-
+		
+    def guardar_en_log_temporal(self, dato):
+        self.log_temporal.append(dato)		
+	
     def writeResults(self):
-        filename = FILENAME_PREFIX + "_results.txt"
+        filename = FILENAME_PREFIX + "_" + str(SUBJECT_ID) + "_results.txt"
         outfile = open(filename, "a")
         outfile.write("JUGADOR\t%d\n" % self.total1)
         outfile.write("OPONENTE\t%d\n" % self.total2)
@@ -213,6 +225,9 @@ ACCEPT = pygame.Surface((S, S))
 REJECT = pygame.Surface((S, S))
 ANIM = loadAnim(os.path.join("anim","frame_%04d.png"), range(1,11))
 
+RECTANGULO_BLINK = (0,0,300,75)
+TIME_BLINK = 50
+
 def drawAnim():
     frameNum = (pygame.time.get_ticks() / 120) % len(ANIM)
     sfce = ANIM[frameNum]
@@ -300,13 +315,13 @@ def screenPresent():
     drawPlayer(1)
     drawYouAre()
     pygame.display.update()
-    pygame.time.wait(2000)
+    pygame.time.delay(2000)
 
 def screenConnecting(test=False):
     deleteScreen()
     drawTitle2("Conectando ...")
     pygame.display.update()
-    pygame.time.wait(1000)
+    pygame.time.delay(1000)
     drawPlayer(1)
     pygame.display.update()
     delay = 2000 if test else random.randint(2000,6000)
@@ -318,103 +333,142 @@ def screenConnecting(test=False):
         drawTitle2("Conectando %s%s" % ("." * ndots, " " * (4-ndots)))
         drawPlayer(1)
         pygame.display.update()
-        pygame.time.wait(20)
+        pygame.time.delay(20)
     deleteScreen()
     drawTitle2("Conectado")
     drawPlayer(1)
     drawPlayer(2)
     pygame.display.update()
-    pygame.time.wait(2000)
+    pygame.time.delay(2000)
 
 def screenStartRound(text):
     deleteScreen()
     drawTitle(text)
     pygame.display.update()
    # eci.synchronize()
-    pygame.time.wait(3000)
+    pygame.time.delay(3000)
 
-def screenOffer(gameState):
+def screenOffer(gameState, test):
     offer = TOP_OFFER
     deleteScreen()
     drawOffer(offer)
+    if not test:
+        tiempo_respuesta = blink()
+        gameState.guardar_en_log_temporal(tiempo_respuesta)
+
     pygame.display.update()
     lastOffer = TOP_OFFER
+    tiempo_respuesta = []
+    opcion_respuesta = []
+    historial_saldo = [offer]
     while True:
         key = getKey()
-        if key == 1:
+        if key == 1 and offer < TOP_OFFER:
             offer += 10
             sendMark(1)
-        elif key == 2:
+            opcion_respuesta.append('incremento')
+            historial_saldo.append(offer)
+        elif key == 2 and offer > 0:
             offer -= 10
             sendMark(2)
+            opcion_respuesta.append('decremento')
+            historial_saldo.append(offer)
         elif key == 3:
             sendMark(3)
             break
         elif key == -1:
             finalize()
-        if offer > TOP_OFFER:
-            offer = TOP_OFFER
-        elif offer < 0:
-            offer = 0
+ 
         if offer != lastOffer:
             lastOffer = offer
             deleteScreen()
             drawOffer(offer)
+            log_respuesta = blink()
+            tiempo_respuesta.append(log_respuesta)
             pygame.display.update()
+
+    if not test:
+        gameState.guardar_en_log_temporal(tiempo_respuesta)
+        gameState.guardar_en_log_temporal(opcion_respuesta)
+        gameState.guardar_en_log_temporal(historial_saldo)
+
     gameState.newOffer(offer)
 
-def screenWaitAnswer(gameState):
+def screenWaitAnswer(gameState, test):
     deleteScreen()
     drawTitle2("?")
     drawOffer(gameState.offer)
     code = 22 if test_mode else 20
+
+    if not test:
+        tiempo_respuesta = blink()
+        gameState.guardar_en_log_temporal(tiempo_respuesta)
+
     pygame.display.update()
     sendMark(code)
-    pygame.time.wait(random.randint(1000,4000))
+    pygame.time.delay(random.randint(1000- TIME_BLINK,4000- TIME_BLINK))
 
-def screenShowAnswer(gameState):
+def screenShowAnswer(gameState, test):
     deleteScreen()
     drawSign(gameState.answer)
     drawOffer(gameState.offer, not gameState.answer)
     codes = [52,53] if test_mode else [50, 51]
+
+    if not test:
+        tiempo_respuesta = blink()
+        gameState.guardar_en_log_temporal(tiempo_respuesta)
+
     pygame.display.update()
     sendMark(codes[gameState.answer])
-    pygame.time.wait(1000)
+    pygame.time.delay(1000 - TIME_BLINK)
 
 def screenFix():
     deleteScreen()
     drawTitle("Mira fijamente la cruz, evitando parpadear")
     drawFix()
     pygame.display.update()
-    pygame.time.wait(2000)
+    pygame.time.delay(2000)
     deleteScreen()
     drawFix()
     pygame.display.update()
     sendMark(11)
-    pygame.time.wait(10000)
+    pygame.time.delay(10000)
     sendMark(12)
 
-def screenTotal(gameState):
+def screenTotal(gameState, test):
     deleteScreen()
     drawPlayerTitle(1)
     drawPlayerTitle(2)
     drawTotals(gameState.total1, gameState.total2)
-    pygame.display.update()
-    pygame.time.wait(3000)
 
+    if not test:
+        tiempo_respuesta = blink()
+        gameState.guardar_en_log_temporal(tiempo_respuesta)
+        gameState.log()
+
+    pygame.display.update()
+    pygame.time.delay(3000-TIME_BLINK)
+
+def blink():
+    pygame.draw.rect(screen, WHITE, RECTANGULO_BLINK)
+    pygame.display.update()
+    tiempo = pygame.time.get_ticks()
+    pygame.time.delay(TIME_BLINK)
+    pygame.draw.rect(screen, BLACK, RECTANGULO_BLINK)
+    return tiempo
 
 def playMovie():
     screen.fill(BLACK)
     pygame.display.update()
     movie = pygame.movie.Movie('web_streaming.mpg')
     MH = H * 0.8
-    MW = MH * 22. / 15.
-    x = (H - MH) / 2.0
-    y = (W - MW) / 2.0
+    MW = W * 0.8
+    y = (H - MH) / 2.0
+    x = (W - MW) / 2.0
     movie.set_display(screen, pygame.Rect(x,y,MW,MH))
     movie.play()
     while movie.get_busy():
-        pygame.time.wait(100)
+        pygame.time.delay(100)
 
 
 # Procedure
@@ -426,11 +480,19 @@ def proc(gameState, numTrials, title, test=False):
         screenFix()
     screenConnecting(test)
     for i in range(numTrials):
-        screenOffer(gameState)
-        screenWaitAnswer(gameState)
+        screenOffer(gameState, test)
+        screenWaitAnswer(gameState, test)
         gameState.simAnswer()
-        screenShowAnswer(gameState)
-        gameState.log()
+        if not test:
+            gameState.guardar_en_log_temporal(gameState.answer)
+
+        screenShowAnswer(gameState, test)
+
+        if not test:
+            gameState.guardar_en_log_temporal(gameState.total1)
+            gameState.guardar_en_log_temporal(gameState.total2)
+            gameState.log()
+
     screenTotal(gameState)    
 
 
@@ -473,11 +535,11 @@ try:
         FILENAME_PREFIX = RUN_FILENAME_PREFIX
         for i in range(TASK_REPETITIONS):
             gameState = GameState(opponents[i])
-            sendMark(30)
             proc(gameState, 20, "Juego con otra persona")
             gameState.writeResults()
             if i == (TASK_REPETITIONS/2 - 1):
                 pause()
+            gameState.guardar_log()
 
     screenImage("end.png", [-1])
 
