@@ -1,0 +1,10 @@
+Estimado participante.
+Gracias por participar en esta investigación.
+Ahora va a hacer una tarea breve y sencilla.
+
+En esta pantalla va a ver algunas palabras 
+reales (con sentido) y otras inventadas (sin sentido). 
+Su tarea es decidir si la palabra que ve es una palabra 
+real o inventada. 
+
+Presione cualquier tecla para continuar.

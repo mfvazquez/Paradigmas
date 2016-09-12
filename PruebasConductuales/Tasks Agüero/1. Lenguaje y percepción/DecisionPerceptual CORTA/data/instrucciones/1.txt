@@ -1,0 +1,12 @@
+Estimado participante.
+Antes que nada deseamos agradecer su participación en esta investigación.  
+Ahora va a hacer una tarea cuya duración es de aproximadamente 15 minutos.
+
+En esta pantalla va a ver dos objetos. El primero será siempre una flecha. 
+El segundo podrá ser un rectángulo o un triángulo. Su tarea es decidir si 
+el segundo objeto es un rectángulo. Si piensa que lo es, apriete la tecla 
+«sí/yes» (flecha izquierda); si piensa que no lo es, apriete 
+la tecla «no»(flecha derecha), ambas teclas están marcadas en el teclado 
+y debe apretarlas con los dedos índice de cada mano. 
+
+Presione cualquier tecla para continuar.

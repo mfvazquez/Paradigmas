@@ -23,15 +23,15 @@ DownONKey = KbName('D');
 UpOFFKey = KbName('J');
 DownOFFKey = KbName('H');
 
-INCREMENTO = 0.005;
+INCREMENTO = 0.1e-3;
 % ------------------- INICIALIZO PSYCHOTOOLBOX ------------------------
 %     ListenChar(2);
 HideCursor;
 hd = init_psych();
 
 
-OnTime = 1;
-OffTime = 1;
+OnTime = 2e-3;
+OffTime = 2e-3;
 
 continuar = true;
 inicio = true;
@@ -88,6 +88,8 @@ while continuar
     if GetSecs - tstart > OnTime + OffTime
         inicio = true;
     end
+    OnTime
+    OffTime
 % %     WaitSecs(INCREMENTO/2);
 end
 
