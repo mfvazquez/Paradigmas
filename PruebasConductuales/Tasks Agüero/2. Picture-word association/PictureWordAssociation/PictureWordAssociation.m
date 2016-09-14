@@ -1,4 +1,4 @@
-% function PictureWordAssociation()
+function PictureWordAssociation()
 
 clc;
 sca;
@@ -56,15 +56,16 @@ for i = 1:length(bloques)
     bloques{i} = CargarBloque(data_dir);
 end
 
-% %% LOG
-% 
-% log = cell(1, length(secuencia_bloques));
-
+%% LOG
+log = cell(1, length(bloques));
+for i = 1:length(bloques)
+    log{i} = cell(length(bloques{i}.bloque_texturas), 1);
+end
 
 % PARADIGMA
 
 for i = 1:length(bloques)
-    exit = CorrerBloque(bloques{i});
+    [exit, log{i}] = CorrerBloque(bloques{i}, log{i});
     if exit
         break;
     end
@@ -73,9 +74,9 @@ end
 
 %% GUARDO LOG
 
-% nombre_archivo_log = PrepararLog('log', nombre, 'DecisionPerceptual');
-% save(nombre_archivo_log, 'log');
+nombre_archivo_log = PrepararLog('log', nombre, 'PictureWordAssociation');
+save(nombre_archivo_log, 'log');
 
 Salir;
 
-% end
+end

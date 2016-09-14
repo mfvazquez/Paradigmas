@@ -80,10 +80,10 @@ KbStrokeWait;
 exit = CorrerBloque(secuencia_practica, AUXILIAR);
 
 %% BLOQUES
-TextoCentrado(MENSAJE_BLOQUES, TAMANIO_INSTRUCCIONES);
-Screen('Flip', hd.window);
-KbStrokeWait;
 if ~exit
+    TextoCentrado(MENSAJE_BLOQUES, TAMANIO_INSTRUCCIONES);
+    Screen('Flip', hd.window);
+    KbStrokeWait;
     for i = 1:length(secuencia_bloques)
         [~, log] = CorrerBloque(secuencia_bloques{i}, AUXILIAR, log);
     end 

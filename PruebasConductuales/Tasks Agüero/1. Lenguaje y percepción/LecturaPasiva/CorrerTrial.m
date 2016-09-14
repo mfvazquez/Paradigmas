@@ -35,7 +35,7 @@ function [exit, log_trial] = CorrerTrial(palabra, auxiliar, botones, respuestas,
         TextoCentrado(pregunta, TAMANIO_TEXTO_PREGUNTA);
         [~, OnSetTime] = Screen('Flip', hd.window);
         log_trial.pregunta = OnSetTime;
-        [exit, respuesta, momento] = Esperar(1, ExitKey, botones);
+        [exit, respuesta, momento] = Esperar(5, ExitKey, botones);
         if respuesta == 0
             [~, OnSetTime] = Screen('Flip', hd.window);
             log_trial.pregunta_blank = OnSetTime;

@@ -1,4 +1,4 @@
-function exit = CorrerBloque(bloque)
+function [exit, log] = CorrerBloque(bloque, log)
 
     global hd
     global TAMANIO_INSTRUCCIONES
@@ -29,7 +29,7 @@ function exit = CorrerBloque(bloque)
     Screen('Flip', hd.window);
     KbStrokeWait;
     if ~exit
-        exit = CorrerSecuencia(bloque.bloque_texturas);
+        [exit, log] = CorrerSecuencia(bloque.bloque_texturas, bloque.estimulos, log);
     end
 
 end
