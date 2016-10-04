@@ -1,0 +1,11 @@
+Su tarea es decidir si la segunda palabra en cada par es realmente 
+una palabra o no. Si piensa que lo es, apriete la tecla «sí/yes» (flecha izquierda); 
+si piensa que no lo es, apriete la tecla «no» (flecha derecha), ambas teclas están 
+marcadas en el teclado y debe apretarlas con los dedos índice de cada mano. 
+
+Debe intentar hacer esto con la mayor rapidez y precisión posible. 
+
+Es importante que lo haga rápido, pero es más importante que lo haga sin fallos. 
+Recuerde, tiene que decidir si la segunda palabra existe.
+
+Presione cualquier tecla para continuar.

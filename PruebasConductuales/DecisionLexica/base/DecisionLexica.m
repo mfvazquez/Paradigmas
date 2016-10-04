@@ -23,6 +23,7 @@ global TAMANIO_TEXTO
 
 KbName('UnifyKeyNames');
 ExitKey = KbName('ESCAPE');
+
 AfirmativeKey = KbName('LeftArrow');
 NegativeKey = KbName('RightArrow');
 
@@ -64,6 +65,9 @@ AUXILIAR = fileread(fullfile(datos_dir, 'auxiliar.txt'));
 %% LOG
 
 log = cell(1, length(secuencia_bloques));
+for i = 1:length(secuencia_bloques)
+    log{i} = cell(length(secuencia_bloques{i}), 1);
+end
 
 %% INICIO PSYCHOTOOLBOX
 
@@ -86,12 +90,12 @@ KbStrokeWait;
 exit = CorrerBloque(secuencia_practica, AUXILIAR);
 
 %% BLOQUES
-TextoCentrado(MENSAJE_BLOQUES, TAMANIO_INSTRUCCIONES);
-Screen('Flip', hd.window);
-KbStrokeWait;
 if ~exit
+    TextoCentrado(MENSAJE_BLOQUES, TAMANIO_INSTRUCCIONES);
+    Screen('Flip', hd.window);
+    KbStrokeWait;
     for i = 1:length(secuencia_bloques)
-        [~, log] = CorrerBloque(secuencia_bloques{i}, AUXILIAR, log);
+        [~, log{i}] = CorrerBloque(secuencia_bloques{i}, AUXILIAR, log{i});
     end 
 end
 

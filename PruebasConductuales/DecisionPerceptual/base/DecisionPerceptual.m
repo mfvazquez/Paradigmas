@@ -68,7 +68,9 @@ texturas.tri = CargarTextura(fullfile('data','imagenes','tri.jpg'));
 %% LOG
 
 log = cell(1, length(secuencia_bloques));
-
+for i = 1:length(secuencia_bloques)
+    log{i} = cell(length(secuencia_bloques{i}), 1);
+end
 
 %% INSTRUCCIONES
 
@@ -85,12 +87,12 @@ KbStrokeWait;
 exit = CorrerBloque(secuencia_practica, texturas);
 
 %% BLOQUES
-TextoCentrado(MENSAJE_BLOQUES, TAMANIO_INSTRUCCIONES);
-Screen('Flip', hd.window);
-KbStrokeWait;
 if ~exit
+    TextoCentrado(MENSAJE_BLOQUES, TAMANIO_INSTRUCCIONES);
+    Screen('Flip', hd.window);
+    KbStrokeWait;
     for i = 1:length(secuencia_bloques)
-        [~, log] = CorrerBloque(secuencia_bloques{i}, texturas, log);
+        [~, log{i}] = CorrerBloque(secuencia_bloques{i}, texturas, log{i});
     end
 end
 

@@ -24,7 +24,7 @@ global TAMANIO_TEXTO_PREGUNTA
 
 KbName('UnifyKeyNames');
 ExitKey = KbName('ESCAPE');
-ContinueKey = KbName('SPACE');
+
 AfirmativeKey = KbName('LeftArrow');
 NegativeKey = KbName('RightArrow');
 
@@ -61,6 +61,9 @@ PREGUNTA = fileread(fullfile(datos_dir, 'pregunta.txt'));
 %% LOG
 
 log = cell(1, length(secuencia_bloques));
+for i = 1:length(secuencia_bloques)
+    log{i} = cell(length(secuencia_bloques{i}), 1);
+end
 
 %% INICIO PSYCHOTOOLBOX
 
@@ -78,7 +81,7 @@ end
 %% BLOQUES
 
 for i = 1:length(secuencia_bloques)
-    [~, log] = CorrerBloque(secuencia_bloques{i}, AUXILIAR, PREGUNTA, log);
+    [~, log{i}] = CorrerBloque(secuencia_bloques{i}, AUXILIAR, PREGUNTA, log{i});
 end
 
 %% GUARDO LOG

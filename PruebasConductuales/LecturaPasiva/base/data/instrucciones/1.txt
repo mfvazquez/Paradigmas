@@ -9,4 +9,8 @@ aparecen en pantalla durante un periodo breve de tiempo. Seguidamente
 aparecerá un verbo, que a veces serán palabras reales, y a veces 
 serán palabras sin sentido. 
 
+Su tarea es simplemente leer las oraciones con atención
+y responder solo cuando se le pregunte si el verbo leído
+implica un movimiento corporal.
+
 Presione cualquier tecla para continuar.
