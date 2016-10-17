@@ -19,9 +19,7 @@ bloques = dir(fullfile('data','bloques'));
 bloques(1) = [];
 bloques(1) = [];
 
-
-
-%% CHEQUEA SI LOS ARCHIVOS EXISTEN
+% CHEQUEA SI LOS ARCHIVOS EXISTEN
 for x = 1:length(bloques)
     
     str = fileread(fullfile('data','bloques',bloques(x).name));
@@ -39,3 +37,4 @@ for x = 1:length(bloques)
     end
     
 end
+
