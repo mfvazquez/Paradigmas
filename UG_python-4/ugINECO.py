@@ -383,8 +383,10 @@ def screenOffer(gameState, test):
             lastOffer = offer
             deleteScreen()
             drawOffer(offer)
-            log_respuesta = blink()
-            tiempo_respuesta.append(log_respuesta)
+            if not test:
+                log_respuesta = blink()
+                tiempo_respuesta.append(log_respuesta)
+
             pygame.display.update()
 
     if not test:
@@ -482,18 +484,16 @@ def proc(gameState, numTrials, title, test=False):
     for i in range(numTrials):
         screenOffer(gameState, test)
         screenWaitAnswer(gameState, test)
-        gameState.simAnswer()
-        if not test:
-            gameState.guardar_en_log_temporal(gameState.answer)
-
+        gameState.simAnswer()    
         screenShowAnswer(gameState, test)
 
         if not test:
+            gameState.guardar_en_log_temporal(gameState.answer)
             gameState.guardar_en_log_temporal(gameState.total1)
             gameState.guardar_en_log_temporal(gameState.total2)
             gameState.log()
 
-    screenTotal(gameState)    
+    screenTotal(gameState, test)    
 
 
 try:
