@@ -16,20 +16,20 @@ TAMANIO_TEXTO = 0.05;
 TAMANIO_INSTRUCCIONES = 0.03;
 
 %% PUERTO PARALELO
-% % % 
-% % % pportaddr = 'C020';
-% % % 
-% % % if exist('pportaddr','var') && ~isempty(pportaddr)
-% % %     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-% % %     pportaddr = hex2dec(pportaddr);
-% % % 
-% % %     pportobj = io32;
-% % %     io32status = io32(pportobj);
-% % %     
-% % %     if io32status ~= 0
-% % %         error('io32 failure: could not initialise parallel port.\n');
-% % %     end
-% % % end
+% % 
+% % pportaddr = 'C020';
+% % 
+% % if exist('pportaddr','var') && ~isempty(pportaddr)
+% %     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+% %     pportaddr = hex2dec(pportaddr);
+% % 
+% %     pportobj = io32;
+% %     io32status = io32(pportobj);
+% %     
+% %     if io32status ~= 0
+% %         error('io32 failure: could not initialise parallel port.\n');
+% %     end
+% % end
 
 
 %% NOMBRE DEL PACIENTE
@@ -46,7 +46,41 @@ secuencia_actual = secuencias(1);
 %% PSYCHOTOOLBOX
 hd = init_psych;
 
+%% LOG
+log.secuencia = secuencia_actual;
+log.nombre = nombre;
+
+
 %% CARGO DATOS DE INTERO
+
+log.intero = cell(length(secuencia_actual.intero),1);
+intero.bloques = cell(length(secuencia_actual.intero),1);
+for i = 1:length(secuencia_actual.intero)
+    bloque = secuencia_actual.intero{i};
+    data_dir = fullfile('data', 'intersujeto', bloque);
+    bloques_dir = fullfile(data_dir, 'bloques');
+    bloques_carpetas = ArchivosDeCarpeta(bloques_dir);
+    
+    intero.bloques = cell(length(bloques_carpetas), 1);
+    
+    for i = 1:length(intero.bloques)
+        carpeta = fullfile(bloques_dir, bloques_carpetas{i});
+        intero.bloques{i} = CargarBloqueInteroMotor(carpeta);
+    end
+    
+    practica_dir = fullfile(data_dir, 'practica');
+    intero.practica = [];
+    if exist(practica_dir, 'dir') == 7;
+        intero.practica = CargarBloqueInteroMotor(practica_dir);
+    end
+    
+    instrucciones_principales = fullfile(data_dir, 'instrucciones.txt');
+    intero.instrucciones = [];
+    if exist(instrucciones_principales, 'file') == 2
+        intero.instrucciones = fileread(instrucciones_principales);
+    end
+    
+end
 
 %% CARGO DATOS DE EMOCIONES
 
@@ -60,18 +94,17 @@ bloques_dir = fullfile('data','emociones','bloques');
 valueSet = CargarTexturas(directorio_imagenes, nombres_imagenes, 'JPG', hd.window);
 map = containers.Map(keySet,valueSet);
 
-emociones_bloques = cell(length(secuencia_actual.emociones),1);
-for i = 1:length(emociones_bloques)
+log.emociones = cell(length(secuencia_actual.emociones), 1);
+emociones.bloques = cell(length(secuencia_actual.emociones),1);
+for i = 1:length(emociones.bloques)
     bloque = secuencia_actual.emociones(i);
-    emociones_bloques{i} = CargarArchivo(fullfile(bloques_dir, [bloque '.dat']));
-    emociones_bloques{i} = Decodificar(emociones_bloques{i}, map);
+    archivo = CargarArchivo(fullfile(bloques_dir, [bloque '.dat']));
+    emociones.bloques{i} = Decodificar(archivo, map);
+    log.emociones{i} = cell(length(emociones.bloques{i}),1);
 end
 
-%% LOG
-log.secuencia = secuencia_actual;
-log.nombre = nombre;
-log.intero = cell(length(secuencia_actual.intero),1);
-log.emociones = cell(length(secuencia_actual.emociones),1);
+emociones.instrucciones = fileread(fullfile('data','emociones','instrucciones.txt'));
+
 
 %% INSTRUCCIONES PRINCIPALES
 instrucciones = fileread(fullfile('data','instrucciones.txt'));
@@ -83,11 +116,11 @@ KbStrokeWait;
 %% PARADIGMA
 exit = false;
 for i = 1:length(secuencia_actual.intero)
-%     [log.intero{i}, exit] = BloqueIntero(secuencia_actual.intero{i}, hd);
+    [log.intero{i}, exit] = BloqueIntero(intero, i, hd, log.intero{i});
 %     if exit
 %         break;
 %     end
-    [log.emociones{i}, exit] = BloqueEmociones(emociones_bloques{i}, hd);
+%     [log.emociones{i}, exit] = BloqueEmociones(emociones, i, hd, log.emociones{i});
 %     if exit
 %         break;
 %     end

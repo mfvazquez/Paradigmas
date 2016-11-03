@@ -1,4 +1,4 @@
-function [log, exit] = BloqueEmociones(bloque, hd)
+function [log, exit] = BloqueEmociones(datos, corrida, hd, log)
 
     exit = false;
 
@@ -12,11 +12,8 @@ function [log, exit] = BloqueEmociones(bloque, hd)
     teclas.exit = ExitKey;
     teclas.afirmativo = AfirmativeKey;
     teclas.negativo = NegativeKey;
-
-    %% PREPARO LOG
-    log = cell(length(bloque),1);
-
+    
     %% CORRO EL PARADIGMA
-    [log, exit] = CorrerSecuenciaPriming(bloque, hd, teclas, log);
+    [log, exit] = CorrerSecuenciaPriming(datos.bloques{corrida}, datos.instrucciones, hd, teclas, log);
 
 end

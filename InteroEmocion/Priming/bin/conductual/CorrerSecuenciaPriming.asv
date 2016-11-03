@@ -1,4 +1,4 @@
-function [log, exit] = CorrerSecuenciaPriming(texturas, instrucciones, hd, teclas, log)
+function [log, exit] = CorrerSecuenciaPriming(texturas, hd, teclas, log)
 
     ExitKey = teclas.exit;
     AfirmativeKey = teclas.afirmativo;

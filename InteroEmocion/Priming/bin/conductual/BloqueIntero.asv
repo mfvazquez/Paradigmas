@@ -1,4 +1,4 @@
-function [log, exit] = BloqueIntero(datos, num_corrida, hd, log)
+function [log, exit] = BloqueIntero(datos, corrida, hd, log)
     exit = false;
     global TAMANIO_INSTRUCCIONES
     
@@ -47,8 +47,8 @@ function [log, exit] = BloqueIntero(datos, num_corrida, hd, log)
     end
     
     % SI HAY PRACTICA ARRANCA LAS PRACTICAS
-    if ~isempty(datos.practica) && num_corrida == 1
-        [~, exit] = CorrerSecuenciaIntero(datos.practica, teclas, hd);
+    if ~isempty(practica) && num_corrida == 1
+        [~, exit] = CorrerSecuenciaIntero(practica, teclas, hd);
         if exit
             return
         end
@@ -56,10 +56,14 @@ function [log, exit] = BloqueIntero(datos, num_corrida, hd, log)
     
     
     % CORRE LOS BLOQUES
-    for i = 1:length(datos.bloques)
-        [log_bloque.secuencia, exit] = CorrerSecuenciaIntero(datos.bloques{i}, teclas, hd);
-        log{i} = log_bloque;
+    for i = 1:length(bloques)
+        [log_bloque.secuencia, exit] = CorrerSecuenciaIntero(bloques{i}, teclas, hd);
         
+        if exit
+            return
+        end
+        
+        log{i} = log_bloque;
         if exit
             return
         end
