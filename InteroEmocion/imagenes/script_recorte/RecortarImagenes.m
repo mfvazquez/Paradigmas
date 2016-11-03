@@ -1,4 +1,4 @@
-rect = [0   25 340  410];
+rect = [0   50 320  410];
 
 archivos = dir('recortar');
 archivos(1) = [];
@@ -10,8 +10,8 @@ for x = 1:length(archivos)
     I = imread(fullfile('recortar',nombre));
 %     [I_recortado, rect] = imcrop(I);
     I_recortado = imcrop(I, rect);
-    nombre = [nombre(1:8) nombre(end-3:end)];
-    nombre = upper(nombre);
+%     nombre = [nombre(1:8) nombre(end-3:end)];
+%     nombre = upper(nombre);
     imwrite(I_recortado,fullfile('recortados',nombre),'jpg');
     
 end

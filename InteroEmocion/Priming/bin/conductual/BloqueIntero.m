@@ -6,23 +6,7 @@ function [log, exit] = BloqueIntero(bloque, hd)
 
     KbName('UnifyKeyNames');
     teclas.ExitKey = KbName('ESCAPE');
-    teclas.LeftKey = KbName('LeftArrow');
-    teclas.RighteKey = KbName('RightArrow');
-    teclas.EnterKey = KbName('DownArrow');
     teclas.LatidosKey = KbName('Z');
-    
-    preguntas = cell(2,1);
-    
-    textos_opciones.pregunta = '¿Cuánto escuchó o sintió el latido del\n corazón en una escala del 1 al 9?';
-    textos_opciones.minimo = 'Nada';
-    textos_opciones.medio = '';
-    textos_opciones.maximo = 'Mucho';
-    
-    preguntas{1} = textos_opciones;
-    
-    textos_opciones.pregunta = '¿Cuán acertadas cree qeu fueron sus\n respuestas en una escala de 1 a 9?';
-    
-    preguntas{2} = textos_opciones;
     
     %% DATOS
     
@@ -63,7 +47,7 @@ function [log, exit] = BloqueIntero(bloque, hd)
     end
     
     % SI HAY PRACTICA ARRANCA LAS PRACTICAS
-    if ~isempty(practica)
+    if ~isempty(practica) && num_corrida == 1
         [~, exit] = CorrerSecuenciaIntero(practica, teclas, hd);
         if exit
             return
@@ -75,18 +59,8 @@ function [log, exit] = BloqueIntero(bloque, hd)
     for i = 1:length(bloques)
         [log_bloque.secuencia, exit] = CorrerSecuenciaIntero(bloques{i}, teclas, hd);
         
-        log_bloque.preguntas = preguntas;
-        log_bloque.respuestas = cell(length(preguntas),1);
         if exit
             return
-        end
-        
-        for j = 1:length(preguntas)
-            [exit, log_respuesta] = Respuesta(preguntas{j}, teclas, hd);
-            if exit
-                return
-            end
-            log_bloque.respuestas{j} = log_respuesta;
         end
         
         log{i} = log_bloque;

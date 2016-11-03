@@ -1,4 +1,4 @@
-function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, practica)
+function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd)
 
     global TAMANIO_INSTRUCCIONES
     exit = false;
@@ -55,7 +55,7 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, practica)
         end
     
        if ~isempty(bloque.audio)
-            status = PsychPortAudio('GetStatus',hd.pahandle); % Me fijo si esta reproduciendo   
+            status = PsychPortAudio('GetStatus', hd.pahandle); % Me fijo si esta reproduciendo   
        else
            if GetSecs-inicio < 120
                status.Active = 1;
