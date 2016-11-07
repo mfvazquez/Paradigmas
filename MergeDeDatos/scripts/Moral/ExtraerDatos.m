@@ -1,24 +1,23 @@
-function datos = ExtraerDatos(log, estimulos, abilitados)
+function datos = ExtraerDatos(log, estimulos, abilitados, referencia)
  
-    datos = [];
-
+    n = 0;
     for i = 1:length(log.historia_inicio)
         
-        if ~isempty(estimulos) && estimulos(i) ~= abilitados
+        if ~isempty(estimulos) && estimulos(i) ~= abilitados 
             continue
         end
-
-        actual.onset_lectura = log.historia_inicio{i};
-        actual.duracion_lectura = log.historia_fin{i} - log.historia_inicio{i};
-        actual.onset_fijacion = log.historia_fin{i};
-        actual.duracion_fijacion = log.respuesta_inicio{i} - log.historia_fin{i};
-        actual.onset_opciones = log.respuesta_inicio{i};
-        actual.duracion_opciones = log.respuesta_fin{i} - log.respuesta_inicio{i};
-        actual.respuestas = log.respuestas{i};   
-        actual.estimulo = i;
+        n = n+1;
+       
         
-        datos = [datos actual];
-
+        datos.onset_lectura{n} = log.historia_inicio{i} - referencia;        
+        datos.duracion_lectura{n} = log.historia_fin{i} - log.historia_inicio{i};
+        datos.onset_fijacion{n} = log.historia_fin{i} - referencia;
+        datos.duracion_fijacion{n} = log.respuesta_inicio{i} - log.historia_fin{i};
+        datos.onset_opciones{n} = log.respuesta_inicio{i} - referencia;
+        datos.duracion_opciones{n} = log.respuesta_fin{i} - log.respuesta_inicio{i};
+        datos.respuestas{n} = log.respuestas{i};   
+        datos.estimulo{n} = i;
+        
     end
         
 end

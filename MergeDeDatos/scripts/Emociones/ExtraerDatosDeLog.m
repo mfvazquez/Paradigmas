@@ -1,6 +1,10 @@
-function datos = ExtraerDatosDeLog(log, estimulos, perfiles, seleccionado)
+function datos = ExtraerDatosDeLog(log, perfiles, seleccionado, referencia, estimulos)
 
-    datos = {};
+    datos.total = CeldasVacias();
+    datos.merecimiento = CeldasVacias();
+    datos.neutral  = CeldasVacias();
+    datos.legal = CeldasVacias();
+    datos.moral = CeldasVacias();
 
     for i = 1:length(log.estimulo_inicio)
         
@@ -8,29 +12,20 @@ function datos = ExtraerDatosDeLog(log, estimulos, perfiles, seleccionado)
             continue
         end
         
-        total.onset_lectura = log.estimulo_inicio{i};
-        total.duraciones_lectura = log.estimulo_fin{i} - log.estimulo_inicio{i};
-        total.onset_fijacion = log.estimulo_fin{i};
-        total.duracion_fijacion = log.opciones_inicio{i} - log.estimulo_fin{i};
-        total.onset_opciones = log.opciones_inicio{i};
-        total.duracion_opciones = log.opciones_fin{i} - log.opciones_inicio{i};
-        total.respuesta = log.respuesta{i};
+        datos.total = AgregarDatos(log, referencia, i, datos.total);
         
-        actual.total = total;
+        
         
         if strcmp(estimulos{i}, 'merecimiento')
-            actual.merecimiento = total;
+            datos.merecimiento = AgregarDatos(log, referencia, i, datos.merecimiento);
         elseif strcmp(estimulos{i}, 'neutral')
-            actual.neutral = total;
+            datos.neutral = AgregarDatos(log, referencia, i, datos.neutral);
         elseif strcmp(estimulos{i}, 'legal')
-            actual.legal = total;
+            datos.legal = AgregarDatos(log, referencia, i, datos.legal);            
         elseif strcmp(estimulos{i}, 'moral')
-            actual.moral = total;
+            datos.moral = AgregarDatos(log, referencia, i, datos.moral);            
         end
-                
-        datos = [datos actual];
         
     end
     
-
 end

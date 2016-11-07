@@ -4,7 +4,6 @@ function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
    
     exit = false;
     MARCA_INICIO = 200;
-    MARCA_ESTIMULO = 5;
     MARCA_ACCURACY = 100;
     MARCA_FIN = 13;
     
@@ -42,7 +41,7 @@ function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
         textoCentrado(bloque.palabra{i}, 0.05);
         [~, OnSetTime] = Screen('Flip',hd.window);
         if (marcas) 
-            io32(pportobj,pportaddr,MARCA_ESTIMULO);
+            io32(pportobj,pportaddr,bloque.marca{i});
             WaitSecs(0.05);
             io32(pportobj,pportaddr,0);
         end

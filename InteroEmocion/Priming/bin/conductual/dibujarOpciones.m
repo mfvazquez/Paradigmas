@@ -1,6 +1,4 @@
-function dibujarOpciones(elegido, textos, cursor)
-
-    global hd;
+function dibujarOpciones(elegido, textos, cursor, hd)
 
     window = hd.window;
     scrnsize = hd.scrnsize;

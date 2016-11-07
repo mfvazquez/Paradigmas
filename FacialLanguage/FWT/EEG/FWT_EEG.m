@@ -57,7 +57,7 @@ if exist('pportaddr','var') && ~isempty(pportaddr)
 
     pportobj = io32;
     io32status = io32(pportobj);
-    
+    io32(pportobj,pportaddr, 0);
     if io32status ~= 0
         error('io32 failure: could not initialise parallel port.\n');
     end
@@ -163,7 +163,7 @@ end
 textoCentrado('Guardando Datos...', TEXT_SIZE);
 Screen('Flip', hd.window);
 loadPOI;
-GuardarLog(log, nombre, LOG_PATH);
+GuardarLog(log, [nombre '_FWT'], LOG_PATH);
 
 %% -------------------------- END ----------------------------------------
 

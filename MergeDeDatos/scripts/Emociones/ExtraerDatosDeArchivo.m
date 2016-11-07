@@ -7,6 +7,7 @@ function datos = ExtraerDatosDeArchivo(archivo_log, dir_log)
     estimulos_satisfaccion = {'legal' 'neutral' 'merecimiento' 'legal' 'moral' 'neutral' 'merecimiento' 'moral' 'moral' 'legal' 'neutral' 'merecimiento' 'merecimiento' 'neutral' 'moral' 'moral' 'legal' 'merecimiento' 'legal' 'neutral'};
     
     version = ObtenerVersion(archivo_log);
+    datos.nombre = archivo_log(1:end-4);
 
     perfiles = ObtenerPerfiles(version);
     
@@ -14,13 +15,13 @@ function datos = ExtraerDatosDeArchivo(archivo_log, dir_log)
     log_insatisfaccion = log.log_envidia;
     log_satisfaccion = log.log_schan;
     
-    insatisfaccion.alto = ExtraerDatosDeLog(log_insatisfaccion, estimulos_insatisfaccion, perfiles, ALTO);
-    insatisfaccion.bajo = ExtraerDatosDeLog(log_insatisfaccion, estimulos_insatisfaccion, perfiles, BAJO);
-    insatisfaccion.todo = ExtraerDatosDeLog(log_insatisfaccion, estimulos_insatisfaccion, [], []);
+    insatisfaccion.alto = ExtraerDatosDeLog(log_insatisfaccion, perfiles, ALTO, log_insatisfaccion.estimulo_inicio{1}, estimulos_insatisfaccion);
+    insatisfaccion.bajo = ExtraerDatosDeLog(log_insatisfaccion, perfiles, BAJO, log_insatisfaccion.estimulo_inicio{1}, estimulos_insatisfaccion);
+    insatisfaccion.todo = ExtraerDatosDeLog(log_insatisfaccion, [], [], log_insatisfaccion.estimulo_inicio{1}, estimulos_insatisfaccion);
     
-    satisfaccion.alto = ExtraerDatosDeLog(log_satisfaccion, estimulos_satisfaccion, perfiles, ALTO);
-    satisfaccion.bajo = ExtraerDatosDeLog(log_satisfaccion, estimulos_satisfaccion, perfiles, BAJO);
-    satisfaccion.todo = ExtraerDatosDeLog(log_satisfaccion, estimulos_satisfaccion, [], []);
+    satisfaccion.alto = ExtraerDatosDeLog(log_satisfaccion, perfiles, ALTO, log_insatisfaccion.estimulo_inicio{1}, estimulos_satisfaccion);
+    satisfaccion.bajo = ExtraerDatosDeLog(log_satisfaccion, perfiles, BAJO, log_insatisfaccion.estimulo_inicio{1}, estimulos_satisfaccion);
+    satisfaccion.todo = ExtraerDatosDeLog(log_satisfaccion, [], [], log_insatisfaccion.estimulo_inicio{1}, estimulos_satisfaccion);
     
     datos.satisfaccion = satisfaccion;
     datos.insatisfaccion = insatisfaccion;

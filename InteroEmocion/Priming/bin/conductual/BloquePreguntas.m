@@ -1,15 +1,7 @@
-function [log, exit] = BloquePreguntas(hd)
+function [log, exit] = BloquePreguntas(hd, teclas)
 
     exit = false;
-    
-    %% TECLAS
-    
-    KbName('UnifyKeyNames');
-    teclas.ExitKey = KbName('ESCAPE');
-    teclas.LeftKey = KbName('LeftArrow');
-    teclas.RighteKey = KbName('RightArrow');
-    teclas.EnterKey = KbName('DownArrow');
-    
+        
     %% TEXTOS DE PREGUNTAS
 
     preguntas = cell(2,1);
@@ -27,21 +19,24 @@ function [log, exit] = BloquePreguntas(hd)
     
 
 
-    log_bloque.pregunta = preguntas;
+    log_bloque.preguntas = preguntas;
     log_bloque.respuestas = cell(length(preguntas),1);
 
     log = cell(length(preguntas),1);
     
 
     for j = 1:length(preguntas)
+
+        Screen('Flip',hd.window);
+        WaitSecs(0.5);
         
-        log_actual.pregunta = preguntas{1};
-        [exit, log_respuesta] = Respuesta(preguntas{j}, teclas, hd);
-        if exit
-            return
+        [exit, log_respuesta, saltear_bloque] = Respuesta(preguntas{j}, teclas, hd);
+        if exit || saltear_bloque
+            return;
         end
-        log_actual.respuesta = log_respuesta;
-        log{j} = log_actual;
+        log_bloque.respuesta{j} = log_respuesta;
+        log{j} = log_bloque;
+        
     end
 
     

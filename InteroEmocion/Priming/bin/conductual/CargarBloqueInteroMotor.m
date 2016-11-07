@@ -4,11 +4,11 @@ function bloque = CargarBloqueInteroMotor(carpeta)
     bloque.freq = [];
     bloque.instrucciones = [];
     
-    archivo_instrucciones = fullfile(carpeta, 'instrucciones.txt');
-    archivo_audio = fullfile(carpeta, 'audio.wav');
+    archivo_audio = fullfile(carpeta, 'audio.wav');    
+    carpeta_instrucciones = fullfile(carpeta, 'instrucciones');
     
-    if exist(archivo_instrucciones, 'file') == 2
-        bloque.instrucciones = fileread(archivo_instrucciones);
+    if exist(carpeta_instrucciones, 'dir') == 7
+        bloque.instrucciones = CargarTextosDeCarpeta(carpeta_instrucciones);
     end
     
     if exist(archivo_audio, 'file') == 2

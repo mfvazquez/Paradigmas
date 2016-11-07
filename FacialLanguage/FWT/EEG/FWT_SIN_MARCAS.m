@@ -145,7 +145,7 @@ end
 textoCentrado('Guardando Datos...', TEXT_SIZE);
 Screen('Flip', hd.window);
 loadPOI;
-GuardarLog(log, nombre, LOG_PATH);
+GuardarLog(log, [nombre '_FWT' ], LOG_PATH);
 
 %% -------------------------- END ----------------------------------------
 

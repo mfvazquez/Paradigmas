@@ -1,6 +1,5 @@
 function hd = init_psych()
    
-    global hd
     ListenChar(2);
     HideCursor;
 
@@ -23,7 +22,6 @@ function hd = init_psych()
     hd.red = [255 0 0];
     hd.green = [0 255 0];
     hd.blue = [0 0 255];
-
 
 %   Screen('Preference', 'Verbosity', 0);
 
@@ -95,6 +93,5 @@ function hd = init_psych()
     end
     
     InitializePsychSound(1);
-
 
 end

@@ -1,4 +1,4 @@
-rect = [0   50 320  410];
+rect = [20   50 280  410];
 
 archivos = dir('recortar');
 archivos(1) = [];
