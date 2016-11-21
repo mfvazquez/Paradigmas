@@ -10,7 +10,7 @@ function [exit, log_trial] = CorrerTrial(palabra, auxiliar, botones, respuestas)
     log_trial.respuesta_momento = 0;
 
   %% RESPONSE VERBO
-    EscribirPalabras(auxiliar, palabra, TAMANIO_TEXTO, SEPARACION_PALABRAS);
+    TextoCentrado(palabra, TAMANIO_TEXTO, hd.white);
     [~, OnSetTime] = Screen('Flip', hd.window);
     [exit, respuesta, momento] = Esperar(0.5, ExitKey, botones);
     log_trial.verbo_on = OnSetTime;
@@ -22,7 +22,6 @@ function [exit, log_trial] = CorrerTrial(palabra, auxiliar, botones, respuestas)
     %% RESPONSE BLANK
     log_trial.verbo_off = 0;
     if respuesta == 0
-        EscribirPalabras(auxiliar, '', TAMANIO_TEXTO, SEPARACION_PALABRAS);
         [~, OnSetTime] = Screen('Flip', hd.window);
         [exit, respuesta, momento] = Esperar(1, ExitKey, botones);
         log_trial.verbo_off = OnSetTime;
@@ -38,7 +37,6 @@ function [exit, log_trial] = CorrerTrial(palabra, auxiliar, botones, respuestas)
     end
     
     %% OFFSET
-    EscribirPalabras(auxiliar, '', TAMANIO_TEXTO, SEPARACION_PALABRAS);
     [~, OnSetTime] = Screen('Flip', hd.window);
     duracion = rand*0.2+0.3;
     [exit, ~, ~] = Esperar(duracion, ExitKey, {});

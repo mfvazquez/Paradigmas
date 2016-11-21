@@ -1,0 +1,10 @@
+Si piensa que lo es, apriete la tecla «sí» (flecha izquierda); 
+si piensa que no lo es, apriete la tecla «no» (flecha derecha), 
+ambas teclas están marcadas en el teclado y debe apretarlas 
+con los dedos mayor e índice. 
+
+Debe intentar hacer esto con la mayor rapidez y precisión posible. 
+Es importante que lo haga rápido, pero es más importante que lo 
+haga sin fallos. Recuerde, tiene que decidir si la palabra es real.
+
+Presione cualquier tecla para continuar.

@@ -1,4 +1,4 @@
-ï»¿CARA	;	chupar; -
+CARA	;	chupar; -
 NO CARA	;	alfombra; -
 CARA	;	cantar; -
 NO CARA	;	ojota; -
@@ -7,6 +7,6 @@ NO CARA	;	planchar; -
 NO CARA	;	tobillo; -
 CARA	;	sonrisa; -
 NO CARA	;	nalga; -
-NO CARA	;	rÃ³tula; -
-CARA	;	guiÃ±o; -
+NO CARA	;	rótula; -
+CARA	;	guiño; -
 CARA	;	ojera; -
