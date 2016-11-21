@@ -1,10 +1,11 @@
-function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones, hd, teclas, log, marcas)
+function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones, hd, teclas, log, marcas, mensaje_practica)
 
     ExitKey = teclas.ExitKey;
     AfirmativeKey = teclas.afirmativo;
     NegativeKey = teclas.negativo;
     
     botones = {AfirmativeKey NegativeKey};
+    texto_botones = {'Si expresa emoción MARCA' 'Si NO expresa emoción MARCA'};
     botones_salteado = teclas.botones_salteado;
     
     global TAMANIO_TEXTO
@@ -13,9 +14,14 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
 
     
     %% INSTRUCCIONES
-    TextoCentrado(instrucciones, TAMANIO_INSTRUCCIONES, hd);
+    EmocionesInstrucciones(instrucciones, TAMANIO_INSTRUCCIONES, botones, texto_botones, hd);
     Screen('Flip', hd.window);
     KbStrokeWait;
+    if ~isempty(mensaje_practica)
+        TextoCentrado(mensaje_practica, TAMANIO_INSTRUCCIONES, hd);
+        Screen('Flip', hd.window);
+        KbStrokeWait;
+    end
     
     %% FIJACION
     TextoCentrado('+', TAMANIO_TEXTO, hd);

@@ -47,8 +47,8 @@ end
 KbName('UnifyKeyNames');
 teclas.ExitKey = KbName('ESCAPE');
 teclas.LatidosKey = KbName('Z'); 
-teclas.afirmativo = KbName('LeftArrow');
-teclas.negativo = KbName('RightArrow');
+teclas.afirmativo = KbName('V');
+teclas.negativo = KbName('N');
 teclas.botones_salteado = [KbName('P') KbName('Q')];
 teclas.RightKey = KbName('RightArrow');
 teclas.LeftKey = KbName('LeftArrow');
@@ -124,26 +124,23 @@ emociones.practica = CargarTexturasDeCarpeta(practica_dir, hd.window);
 emociones.practica = emociones.practica(randperm(numel(emociones.practica)));
 
 %% INSTRUCCIONES PRINCIPALES
-instrucciones = fileread(fullfile('data','instrucciones.txt'));
-TextoCentrado(instrucciones, TAMANIO_INSTRUCCIONES, hd);
-Screen('Flip',hd.window);
-KbStrokeWait;
-
-exit = false;
+instrucciones = CargarTextosDeCarpeta(fullfile('data','instrucciones'));
+for x = 1:length(instrucciones)
+    TextoCentrado(instrucciones{x}, TAMANIO_INSTRUCCIONES, hd);
+    Screen('Flip',hd.window);
+    KbStrokeWait;
+end
+    
 
 %% PRACTICAS
-
+exit = false;
 [~, exit] = CorrerSecuenciaIntero(intero.practica, teclas, hd, TIEMPO_MOTOR_PRACTICA, true);
 if exit
     Salir;
     return
 end
 
-TextoCentrado(emociones.instrucciones, TAMANIO_INSTRUCCIONES, hd);
-Screen('Flip',hd.window);
-KbStrokeWait;
-
-[~, exit] = CorrerSecuenciaEmociones(emociones.practica, [], emociones.mensaje_practica, hd, teclas, []);
+[~, exit] = CorrerSecuenciaEmociones(emociones.practica, [], emociones.instrucciones, hd, teclas, [], [], emociones.mensaje_practica);
 if exit
     Salir;
     return
@@ -156,7 +153,7 @@ for i = 1:length(secuencia_actual.intero)
     if exit
         break;
     end
-    [log.emociones{i}, exit] = CorrerSecuenciaEmociones(emociones.bloques{i}, emociones.codigos{i} ,emociones.instrucciones,hd, teclas, log.emociones{i}, codigos_emociones);
+    [log.emociones{i}, exit] = CorrerSecuenciaEmociones(emociones.bloques{i}, emociones.codigos{i} ,emociones.instrucciones, hd, teclas, log.emociones{i}, codigos_emociones, []);
     if exit
         break;
     end

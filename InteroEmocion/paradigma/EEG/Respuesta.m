@@ -1,9 +1,7 @@
 function [exit, log, saltear] = Respuesta(textos_opciones, teclas, hd)
 
     exit = false;
-    saltear = false;
-
-    
+    saltear = false;      
     
     elegido = 5;
     dibujarOpciones(elegido, textos_opciones, true, hd);

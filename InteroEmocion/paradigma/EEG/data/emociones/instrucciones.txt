@@ -2,8 +2,14 @@ A continuación se le presentarán rostros de personas que
 pueden expresar algún tipo de emoción o no. 
 
 Usted debe responder lo más rápido posible apretando 
-la tecla (flecha izquierda) si el rostro expresa a una emoción o 
-la tecla (flecha derecha) si no.
+las siguientes teclas:
+
+
+
+
+
+
+
 
 
 Presione cualquier tecla para continuar...

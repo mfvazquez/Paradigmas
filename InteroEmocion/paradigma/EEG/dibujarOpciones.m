@@ -25,6 +25,9 @@ function dibujarOpciones(elegido, textos, cursor, hd)
     rectText = [0  round(textYpos/2) screenXpixels textYpos];
     DrawFormattedText(window, textos.pregunta, 'center', 'center', white, [],[],[], 2,[],rectText);
 
+    texto_instrucciones = 'Utilice las flechas (izquierda o derecha) para elegir la respuesta que considere adecuada,\n una vez que esté seguro de su respuesta presione la flecha hacia abajo';
+    MensajeContinuar(texto_instrucciones, hd);
+    
     if cursor
     
     % ------------------------ OPCIONES -----------------------------------
@@ -58,8 +61,5 @@ function dibujarOpciones(elegido, textos, cursor, hd)
             end
             DrawFormattedText(window, int2str(n), 'center','center', black, [],[],[],[],[], textRec);
         end
-    else
-        MENSAJE_CONTINUAR = 'Presione la barra espaciadora cuando termine de leer';
-        MensajeContinuar(MENSAJE_CONTINUAR)    
     end
 end

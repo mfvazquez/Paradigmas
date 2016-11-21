@@ -1,6 +1,7 @@
 function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, practica)
 
     global TAMANIO_INSTRUCCIONES
+    global TAMANIO_TEXTO
     global EEG
     
     exit = false;
@@ -13,7 +14,7 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
         KbStrokeWait;
     end
         
-    TextoCentrado('+', TAMANIO_INSTRUCCIONES, hd);
+    TextoCentrado('+', TAMANIO_TEXTO, hd);
     Screen('Flip', hd.window);
     if EEG && ~practica
         EnviarMarca(125);
