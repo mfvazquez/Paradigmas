@@ -85,12 +85,12 @@ for i = 1:length(secuencia_actual.intero)
     bloque = secuencia_actual.intero{i};
     data_dir = fullfile(intero_dir, bloque);
     
-    intero.bloques{i} = CargarBloqueInteroMotor(data_dir);    
+    intero.bloques{i} = CargarBloqueInteroMotor(data_dir, i);    
     
 end
 
 practica_dir = fullfile(intero_dir, 'practica');
-intero.practica = CargarBloqueInteroMotor(practica_dir);
+intero.practica = CargarBloqueInteroMotor(practica_dir, 1);
 
 %% CARGO DATOS DE EMOCIONES
 
@@ -164,6 +164,8 @@ for i = 1:length(secuencia_actual.intero)
     
 end
 
+TextoCentrado('Usted lo hizo muy bien, gracias por participar', TAMANIO_INSTRUCCIONES, hd, hd.white);
+Screen('Flip',hd.window);
 
 
 %% GUARDO LOG
@@ -174,6 +176,8 @@ if ~exit
     secuencias(1).contador = secuencias(1).contador + 1;
     save(fullfile('data','secuencias.mat'), 'secuencias');
 end
+
+WaitSecs(2);
 
 %% SALIR
 Salir(hd);

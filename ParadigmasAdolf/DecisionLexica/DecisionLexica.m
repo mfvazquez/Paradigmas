@@ -7,6 +7,9 @@ clearvars;
 %% LIBRERIAS
 
 addpath('lib');
+addpath(fullfile('lib','xlwrite','xlwrite'));
+addpath(fullfile('lib','strings'));
+
 
 %% CONSTANTES GLOBALES
 
@@ -103,6 +106,8 @@ end
 
 nombre_archivo_log = PrepararLog('log', nombre, 'DecisionLexica', idioma);
 save(nombre_archivo_log, 'log');
+
+GuardarLogExcel(log, nombre_archivo_log(1:end-4));
 
 Salir;
 end

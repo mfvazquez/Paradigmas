@@ -78,8 +78,10 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
             if codigos{i}(1) == 'N'
                 respuesta_correcta = 2;
             end
-
-            if respuesta_correcta == respuesta
+            
+            if isempty(respuesta)
+                log_trial.accuracy = 9;
+            elseif respuesta_correcta == respuesta
                 log_trial.accuracy = 1;
             else
                 log_trial.accuracy = 0;

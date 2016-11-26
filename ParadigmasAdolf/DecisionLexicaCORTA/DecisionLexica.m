@@ -7,6 +7,8 @@ clearvars;
 %% LIBRERIAS
 
 addpath('lib');
+addpath(fullfile('lib','xlwrite','xlwrite'));
+addpath(fullfile('lib','strings'));
 
 %% CONSTANTES GLOBALES
 
@@ -85,7 +87,7 @@ if ~exit
     Screen('Flip', hd.window);
     KbStrokeWait;
     for i = 1:length(secuencia_bloques)
-        [~, log] = CorrerBloque(secuencia_bloques{i}, AUXILIAR, log);
+        [~, log{i}] = CorrerBloque(secuencia_bloques{i}, AUXILIAR, log{i});
     end 
 end
 
@@ -93,6 +95,8 @@ end
 
 nombre_archivo_log = PrepararLog('log', nombre, 'DecisionLexica');
 save(nombre_archivo_log, 'log');
+
+GuardarLogExcel(log, nombre_archivo_log(1:end-4));
 
 Salir;
 end
