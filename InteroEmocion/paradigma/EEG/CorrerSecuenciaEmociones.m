@@ -16,11 +16,17 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
     %% INSTRUCCIONES
     EmocionesInstrucciones(instrucciones, TAMANIO_INSTRUCCIONES, botones, texto_botones, hd);
     Screen('Flip', hd.window);
-    KbStrokeWait;
+    exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
+    if exit
+        return;
+    end
     if ~isempty(mensaje_practica)
         TextoCentrado(mensaje_practica, TAMANIO_INSTRUCCIONES, hd);
         Screen('Flip', hd.window);
-        KbStrokeWait;
+        exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
+        if exit
+            return;
+        end
     end
     
     %% FIJACION
@@ -94,6 +100,7 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
         end
         
         log_trial.respuesta_tiempo = tiempo;
+        log_trial.reaction_time = log_trial.respuesta_tiempo - log_trial.imagen;
         
         
         

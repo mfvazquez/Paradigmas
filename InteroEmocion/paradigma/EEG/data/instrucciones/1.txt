@@ -11,4 +11,4 @@ CRUZ(+) presente
 ¡Gracias!
 
 
-Presione cualquier tecla para comenzar.
+Presione la barra espaciadora para comenzar.

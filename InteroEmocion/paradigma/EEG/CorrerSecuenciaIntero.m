@@ -11,7 +11,10 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
     for x = 1:length(bloque.instrucciones)
         TextoCentrado(bloque.instrucciones{x}, TAMANIO_INSTRUCCIONES, hd);
         Screen('Flip', hd.window);
-        KbStrokeWait;
+        exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
+        if exit
+            return;
+        end
     end
         
     TextoCentrado('+', TAMANIO_TEXTO, hd);

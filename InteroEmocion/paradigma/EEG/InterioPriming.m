@@ -1,3 +1,5 @@
+function InteroPriming()
+
 clc;
 sca;
 close all;
@@ -53,6 +55,7 @@ teclas.botones_salteado = [KbName('P') KbName('Q')];
 teclas.RightKey = KbName('RightArrow');
 teclas.LeftKey = KbName('LeftArrow');
 teclas.EnterKey = KbName('DownArrow');
+teclas.Continuar = KbName('SPACE');
 
 
 %% NOMBRE DEL PACIENTE
@@ -128,7 +131,11 @@ instrucciones = CargarTextosDeCarpeta(fullfile('data','instrucciones'));
 for x = 1:length(instrucciones)
     TextoCentrado(instrucciones{x}, TAMANIO_INSTRUCCIONES, hd);
     Screen('Flip',hd.window);
-    KbStrokeWait;
+    exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
+    if exit
+        Salir(hd);
+        return;
+    end
 end
     
 
@@ -136,13 +143,13 @@ end
 exit = false;
 [~, exit] = CorrerSecuenciaIntero(intero.practica, teclas, hd, TIEMPO_MOTOR_PRACTICA, true);
 if exit
-    Salir;
+    Salir(hd);
     return
 end
 
 [~, exit] = CorrerSecuenciaEmociones(emociones.practica, [], emociones.instrucciones, hd, teclas, [], [], emociones.mensaje_practica);
 if exit
-    Salir;
+    Salir(hd);
     return
 end
 
@@ -181,3 +188,4 @@ WaitSecs(2);
 
 %% SALIR
 Salir(hd);
+end
