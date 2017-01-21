@@ -13,6 +13,7 @@ function texto = AgregarFinLinea(str, largo)
     contador = 0;
     for i = 1:length(palabras)
         if contador + length(palabras{i}) + 1 > largo
+            display 'fin de linea'
             texto = [texto char(10) linea];
 
             contador = length(palabras{i});
