@@ -1,0 +1,16 @@
+Estimado participante.
+Gracias por colaborar con este estudio.
+
+A continuación verá una imagen y una palabra.
+Su tarea es decidir si la palabra se corresponde con la imagen.
+
+Cuando la palabra se corresponda con la imagen, presione 
+“SÍ” (flecha izquierda).
+Cuando la palabra NO se corresponda con la imagen, presione 
+“NO” (flecha derecha).
+
+Debe intentar hacer esto con la mayor rapidez y precisión posible.
+Es importante que lo haga rápido, pero es más importante que lo haga 
+sin fallos.
+
+Presione cualquier tecla para continuar.
