@@ -42,12 +42,12 @@ function Envidia()
     
     envidia_opciones.pregunta = '¿Qué tanta insatisfacción le produce?';
     envidia_opciones.minimo   = 'Ninguna';
-    envidia_opciones.medio = 'Neutral';
+    envidia_opciones.medio = '';
     envidia_opciones.maximo = 'Mucha';
     
     schan_opciones.pregunta = '¿Qué tanta satisfacción le produce?';
     schan_opciones.minimo = 'Ninguna';
-    schan_opciones.medio = 'Neutral';
+    schan_opciones.medio = '';
     schan_opciones.maximo = 'Mucha';
     
     

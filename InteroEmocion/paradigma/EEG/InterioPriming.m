@@ -4,6 +4,7 @@ clc;
 sca;
 close all;
 clearvars;
+clear all;
 
 %% LIBRERIAS
 
@@ -49,14 +50,21 @@ end
 KbName('UnifyKeyNames');
 teclas.ExitKey = KbName('ESCAPE');
 teclas.LatidosKey = KbName('Z'); 
-teclas.afirmativo = KbName('V');
-teclas.negativo = KbName('N');
 teclas.botones_salteado = [KbName('P') KbName('Q')];
 teclas.RightKey = KbName('RightArrow');
 teclas.LeftKey = KbName('LeftArrow');
-teclas.EnterKey = KbName('DownArrow');
+teclas.DownKey = KbName('DownArrow');
+teclas.UpKey = KbName('UpArrow');
+teclas.EnterKey = KbName('DownArrow'); 
 teclas.Continuar = KbName('SPACE');
 
+emociones_textos_botones = {'Positiva' 'Neutral' 'Negativa' ; 'izquierda' 'abajo' 'derecha'};
+teclas.emociones = {KbName('LeftArrow') KbName('DownArrow') KbName('RightArrow')};
+if rand < 0.5
+    teclas.emociones = {KbName('LeftArrow') KbName('DownArrow') KbName('RightArrow')};
+    emociones_textos_botones = {'Negativa' 'Neutral' 'Positiva '; 'izquierda' 'abajo' 'derecha'};
+end
+log.emociones.textos_botones = emociones_textos_botones;
 
 %% NOMBRE DEL PACIENTE
 
@@ -98,25 +106,24 @@ intero.practica = CargarBloqueInteroMotor(practica_dir, 1);
 %% CARGO DATOS DE EMOCIONES
 
 % MAPA CON LAS IMAGENES CORRESPONDIENTES A CADA CODIGO
-keySet = {'N1'	    'N2'	    'N3'	    'N4'	    'N5'	    'N6'	    'N7'	    'N8'	    'N9'	    'N10'	'A1'	'A2'	'A3'	'A4'	'A5'	'A6'	'A7'	'A8'	'A9'	'A10'	'T1'	'T2'	'T3'	'T4'	'T5'	'T6'	'T7'	'T8'	'T9'	'T10'	'E1'	'E2'	'E3'	'E4'	'E5'	'E6'	'E7'	'E8'	'E9'	'E10'};
-nombres_imagenes = {'MC01_NEU'	'MC02_NEU'	'MC03_NEU'	'MC04_NEU'	'MC05_NEU'	'MC06_NEU'	'MC07_NEU'	'MC08_NEU'	'MC09_NEU'	'MC10_NEU'	'MC01_HAP'	'MC02_HAP'	'MC03_HAP'	'MC04_HAP'	'MC05_HAP'	'MC06_HAP'	'MC07_HAP'	'MC08_HAP'	'MC09_HAP'	'MC10_HAP'	'MC01_SAD'	'MC02_SAD'	'MC03_SAD'	'MC04_SAD'	'MC05_SAD'	'MC06_SAD'	'MC07_SAD'	'MC08_SAD'	'MC09_SAD'	'MC10_SAD'	'MC01_ANG'	'MC02_ANG'	'MC03_ANG'	'MC04_ANG'	'MC05_ANG'	'MC06_ANG'	'MC07_ANG'	'MC08_ANG'	'MC09_ANG'	'MC10_ANG'};
-
 emociones_dir = fullfile('data','emociones');
 directorio_imagenes = fullfile(emociones_dir,'imagenes');
 bloques_dir = fullfile(emociones_dir,'bloques');
 
-valueSet = CargarTexturas(directorio_imagenes, nombres_imagenes, 'JPG', hd.window);
+keySet = ArchivosDeCarpeta(directorio_imagenes);
+valueSet = CargarTexturas(directorio_imagenes, keySet, hd.window);
 map = containers.Map(keySet,valueSet);
-codigos_emociones = containers.Map(keySet, 1:length(keySet));
+
+codigos_emociones = containers.Map(keySet, 1:length(keySet)); % le asigna un numero a cada imagen para enviar como marca
 
 log.emociones = cell(length(secuencia_actual.emociones), 1);
-emociones.bloques = cell(length(secuencia_actual.emociones),1);
-emociones.codigos = cell(length(secuencia_actual.emociones),1);
-for i = 1:length(emociones.bloques)
+emociones.texturas = cell(length(secuencia_actual.emociones),1);
+emociones.archivos = cell(length(secuencia_actual.emociones),1);
+for i = 1:length(emociones.texturas)
     bloque = secuencia_actual.emociones(i);
     archivo = CargarArchivo(fullfile(bloques_dir, [bloque '.dat']));
-    [emociones.bloques{i}, emociones.codigos{i}] = Decodificar(archivo, map);
-    log.emociones{i} = cell(length(emociones.bloques{i}),1);
+    [emociones.texturas{i}, emociones.archivos{i}] = Decodificar(archivo, map);
+    log.emociones{i} = cell(length(emociones.texturas{i}),1);
 end
 
 emociones.instrucciones = fileread(fullfile(emociones_dir,'instrucciones.txt'));
@@ -147,7 +154,7 @@ if exit
     return
 end
 
-[~, exit] = CorrerSecuenciaEmociones(emociones.practica, [], emociones.instrucciones, hd, teclas, [], [], emociones.mensaje_practica);
+[~, exit] = CorrerSecuenciaEmociones(emociones.practica, [], emociones.instrucciones, hd, teclas, [], [], emociones.mensaje_practica, emociones_textos_botones);
 if exit
     Salir(hd);
     return
@@ -160,7 +167,7 @@ for i = 1:length(secuencia_actual.intero)
     if exit
         break;
     end
-    [log.emociones{i}, exit] = CorrerSecuenciaEmociones(emociones.bloques{i}, emociones.codigos{i} ,emociones.instrucciones, hd, teclas, log.emociones{i}, codigos_emociones, []);
+    [log.emociones{i}, exit] = CorrerSecuenciaEmociones(emociones.texturas{i}, emociones.archivos{i} ,emociones.instrucciones, hd, teclas, log.emociones{i}, codigos_emociones, [], emociones_textos_botones);
     if exit
         break;
     end

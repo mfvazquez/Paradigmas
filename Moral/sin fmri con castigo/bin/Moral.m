@@ -16,19 +16,19 @@ LARGO_LINEA = 55;
 textos_conducta.pregunta = '¿En términos de conducta moral, cómo calificaría la acción de Juan?';
 textos_conducta.pregunta = AgregarFinLinea(textos_conducta.pregunta, LARGO_OPCIONES);
 textos_conducta.minimo = 'Totalmente mala';
-textos_conducta.medio = 'Neutral';
+textos_conducta.medio = '';
 textos_conducta.maximo = 'Totalmente buena';
 
 textos_danio.pregunta = '¿Qué tan dañino considera que fue el resultado de la acción de Juan?';
 textos_danio.pregunta = AgregarFinLinea(textos_danio.pregunta, LARGO_OPCIONES);
 textos_danio.minimo = 'Nada dañino';
-textos_danio.medio = 'Neutral';
+textos_danio.medio = '';
 textos_danio.maximo = 'Muy dañino';
 
 textos_castigo.pregunta = '¿Cuanto castigo considera que merece Juan?';
 textos_castigo.pregunta = AgregarFinLinea(textos_castigo.pregunta, LARGO_OPCIONES);
 textos_castigo.minimo = 'Ningún castigo';
-textos_castigo.medio = 'Neutral';
+textos_castigo.medio = '';
 textos_castigo.maximo = 'Mucho castigo';
 
 tamanio_fijacion = 0.05;

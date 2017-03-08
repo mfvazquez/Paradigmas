@@ -21,7 +21,7 @@ TAMANIO = 0.075;
 
 textos_opciones.pregunta = '¿Cuanto castigo considera que merece Juan?';
 textos_opciones.minimo = 'Ningún castigo';
-textos_opciones.medio = 'Neutral';
+textos_opciones.medio = '';
 textos_opciones.maximo = 'Mucho castigo';
 
 INSTRUCCIONES = 'A continuación se le presentarán una serie de situaciones. Por favor léalas y responda las preguntas usando las escalas correspondientes. Presione el boton rojo para continuar.';
