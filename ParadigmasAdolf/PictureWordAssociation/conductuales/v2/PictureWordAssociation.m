@@ -25,7 +25,7 @@ global BLINK_DURATION
 
 BLINK_DURATION = 20e-3;
 
-IEEG = true;
+IEEG = false;
 
 %% CONSTANTES
 

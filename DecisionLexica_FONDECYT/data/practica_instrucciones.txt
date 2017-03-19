@@ -1,0 +1,11 @@
+Debes decidir si es una palabra real o inventada
+
+Hazlo lo más rápido que puedas, intentando no cometer errores
+
+Cuando sea una PALABRA REAL pulsa Ñ
+
+Cuando sea una PALABRA INVENTADA pulsa L
+
+Vamos a hacer algunos ejemplos
+
+Presiona ESPACIO para comenzar

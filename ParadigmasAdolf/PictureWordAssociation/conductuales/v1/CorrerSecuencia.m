@@ -25,7 +25,6 @@ function [exit, log] = CorrerSecuencia(texturas, estimulos, log)
         WaitSecs(0.3);        
         
         %% IMAGEN
-        estimulos{i,1}
         DibujarTextura(texturas(estimulos{i,1}));
         if IEEG
             DibujarCuadradoNegro();
