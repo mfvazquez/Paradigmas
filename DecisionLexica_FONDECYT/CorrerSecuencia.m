@@ -41,7 +41,7 @@ function [log, exit] = CorrerSecuencia(bloque, hd, teclas, log)
         %% VACIO
         if isempty(respuesta)
             [~, log_actual.vacio] = Screen('Flip', hd.window);
-            [exit, respuesta, tiempo_respuesta] = Esperar(TiempoDeEspera(TIEMPO_VACIO), teclas.ExitKey, botones);
+            [exit, respuesta, tiempo_respuesta] = Esperar(TIEMPO_VACIO, teclas.ExitKey, botones);
             if exit
                 return
             end
@@ -67,7 +67,7 @@ function [log, exit] = CorrerSecuencia(bloque, hd, teclas, log)
         
         %% ESPERA
         Screen('Flip', hd.window)
-        [exit, ~] = Esperar(TIEMPO_ESPERA, teclas.ExitKey, []);
+        [exit, ~] = Esperar(TiempoDeEspera(TIEMPO_ESPERA), teclas.ExitKey, []);
          
         if ~isempty(log)
            log{x} = log_actual;

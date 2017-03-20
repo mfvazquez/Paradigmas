@@ -27,8 +27,8 @@ TAMANIO_INSTRUCCIONES = 0.03;
 TAMANIO_ESTIMULOS = 0.05;
 
 TIEMPO_ESTIMULO = 0.15;
-TIEMPO_VACIO = [1.5 2.5];
-TIEMPO_ESPERA = 2.5;
+TIEMPO_VACIO = 2.5;
+TIEMPO_ESPERA = [1.5 2.5];
 
 TEXTO_PAUSA = 'Es momento de una pausa.\n\n\n Descanse y presione la ESPACIO para continuar';
 
