@@ -65,11 +65,7 @@ nombre = inputdlg('Nombre:');
 nombre = nombre{1};
 
 %% CARGO LA SECUENCIA A CORRER
-load(fullfile('data','secuencias.mat'));
-[~,IX] = sort([secuencias.contador]);
-secuencias = secuencias(IX);
-secuencia_actual = secuencias(1);
-
+secuencia_actual = {'motor' 'intero'};
 %% PSYCHOTOOLBOX
 hd = init_psych;
 
@@ -84,9 +80,6 @@ log.intero = cell(length(secuencia_actual.intero),1);
 intero.bloques = cell(length(secuencia_actual.intero),1);
 intero.marcas = cell(length(secuencia_actual.intero),1);
 
-contador_motor = 1;
-contador_intero = 2;
-
 intero_dir = fullfile('data','intersujeto');
 for i = 1:length(secuencia_actual.intero)
 
@@ -96,13 +89,11 @@ for i = 1:length(secuencia_actual.intero)
     intero.bloques{i} = CargarBloqueInteroMotor(data_dir, i);    
     
     if strcmp(bloque, 'motor')
-        marca.inicio = contador_motor;
-        marca.respuesta = 100 + contador_motor;
-        contador_motor = contador_motor + 2;
+        marca.inicio = i;
+        marca.respuesta = 100 + marca.inicio;
     else
-        marca.inicio = contador_intero;
-        marca.respuesta = 100 + contador_intero;
-        contador_intero = contador_intero + 2;
+        marca.inicio = i + 2;
+        marca.respuesta = 100 + marca.inicio;
     end
     
     intero.marcas{i} = marca;
@@ -154,13 +145,6 @@ Screen('Flip',hd.window);
 %% GUARDO LOG
 log_file = PrepararLog('log', nombre, 'Extero');
 save(log_file, 'log');
-
-%% ACTUALIZO SECUENCIAS
-if ~exit
-    secuencias(1).contador = secuencias(1).contador + 1;
-    save(fullfile('data','secuencias.mat'), 'secuencias');
-end
-
 
 %% SALIR
 Salir(hd);
