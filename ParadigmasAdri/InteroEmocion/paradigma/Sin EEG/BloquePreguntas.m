@@ -17,13 +17,7 @@ function [log, exit] = BloquePreguntas(hd, teclas)
     
     preguntas{2} = textos_opciones;
     
-
-
-    log_bloque.preguntas = preguntas;
-    log_bloque.respuestas = cell(length(preguntas),1);
-
     log = cell(length(preguntas),1);
-    
 
     for j = 1:length(preguntas)
 
@@ -34,7 +28,8 @@ function [log, exit] = BloquePreguntas(hd, teclas)
         if exit || saltear_bloque
             return;
         end
-        log_bloque.respuesta{j} = log_respuesta;
+        log_bloque.pregunta = preguntas{j};
+        log_bloque.respuesta = log_respuesta;
         log{j} = log_bloque;
         
     end

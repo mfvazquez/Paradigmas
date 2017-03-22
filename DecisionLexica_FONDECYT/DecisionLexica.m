@@ -32,6 +32,10 @@ TIEMPO_ESPERA = [1.5 2.5];
 
 TEXTO_PAUSA = 'Es momento de una pausa.\n\n\n Descanse y presione la ESPACIO para continuar';
 
+%% IMAGENES
+global numero_imagen
+numero_imagen = 1;
+
 %% BOTONES
 
 KbName('UnifyKeyNames');
@@ -42,27 +46,34 @@ teclas.Continuar = KbName('SPACE');
 
 %% DATOS
 
-practica_instrucciones = fileread(fullfile('data', 'practica_instrucciones.txt'));
-bloque_instrucciones = fileread(fullfile('data', 'bloque_instrucciones.txt'));
-
-vueltas_dir = fullfile('data', 'vueltas');
-vueltas = ArchivosDeCarpeta(vueltas_dir);
+vueltas = ArchivosDeCarpeta('data');
 choice = menu('Vuelta:',vueltas);
 vuelta = vueltas{choice};
 
-datos_dir = fullfile('data','vueltas',vuelta);
-bloques_dir = ArchivosDeCarpeta(datos_dir);
+vuelta_dir = fullfile('data',vuelta);
+bloques_dir = ArchivosDeCarpeta(vuelta_dir);
 bloques = cell(length(bloques_dir), 1);
+
 for x = 1:length(bloques)
-    aux.practica = CargarEstimulos(fullfile(datos_dir, bloques_dir{x}, 'practica.csv'), ';');
-    aux.estimulos = CargarEstimulos(fullfile(datos_dir, bloques_dir{x}, 'estimulos.csv'), ';');
-    bloques{x} = aux;
+    dir_actual = fullfile(vuelta_dir, bloques_dir{x});
+    % Instrucciones
+    bloque_actual.instrucciones = CargarTextosDeCarpeta(fullfile(dir_actual, 'instrucciones'));
+    % Practica
+    bloque_actual.practica.instrucciones = fileread(fullfile(dir_actual, 'practica.txt'));
+    bloque_actual.practica.estimulos = CargarEstimulos(fullfile(dir_actual, 'practica.csv'), ';');
+    % Bloque
+    bloque_actual.bloque.instrucciones = fileread(fullfile(dir_actual, 'bloque.txt'));
+    bloque_actual.bloque.estimulos = CargarEstimulos(fullfile(dir_actual, 'bloque.csv'), ';');
+    
+    bloques{x} = bloque_actual;
+    
 end
+
 
 %% LOG
 log = cell(length(bloques), 1);
 for i = 1:length(bloques)
-    log{i} = cell(length(bloques{i}.estimulos), 1);
+    log{i} = cell(length(bloques{i}.bloque.estimulos), 1);
 end
 %% INICIO PSYCHOTOOLBOX
 
@@ -73,24 +84,43 @@ Screen('Flip', hd.window);
 
 for x = 1:length(bloques)
 
-    TextoCentrado(practica_instrucciones, TAMANIO_INSTRUCCIONES, hd);
-    Screen('Flip', hd.window);
-    exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
+    % Instrucciones 
+    for y = 1:length(bloques{x}.instrucciones)
+        TextoCentrado(bloques{x}.instrucciones{y}, TAMANIO_INSTRUCCIONES, hd);        
+        Screen('Flip', hd.window);
+%         GuardarPantalla(hd);
+        exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
+        if exit
+            break
+        end
+    end
     if exit
         break
-    end
-    [~, exit] = CorrerSecuencia(bloques{x}.practica, hd, teclas, []);
+    end    
+    
+    % Practica
+    TextoCentrado(bloques{x}.practica.instrucciones, TAMANIO_INSTRUCCIONES, hd);
+    Screen('Flip', hd.window);
+%     GuardarPantalla(hd);
+    exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
     if exit
         break
     end
     
-    TextoCentrado(bloque_instrucciones, TAMANIO_INSTRUCCIONES, hd);
+    [~, exit] = CorrerSecuencia(bloques{x}.practica.estimulos, hd, teclas, []);
+    if exit
+        break
+    end
+    
+    % Bloque
+    TextoCentrado(bloques{x}.bloque.instrucciones, TAMANIO_INSTRUCCIONES, hd);
     Screen('Flip', hd.window);
+%     GuardarPantalla(hd);
     exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
     if exit
         break
     end
-    [log{x}, exit] = CorrerSecuencia(bloques{x}.estimulos, hd, teclas, log{x});
+    [log{x}, exit] = CorrerSecuencia(bloques{x}.bloque.estimulos, hd, teclas, log{x});
     if exit
         break
     end
@@ -98,6 +128,7 @@ for x = 1:length(bloques)
     if x ~= length(bloques)
         TextoCentrado(TEXTO_PAUSA, TAMANIO_INSTRUCCIONES, hd);
         Screen('Flip', hd.window);
+%         GuardarPantalla(hd);
         exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
         if exit
             break
@@ -109,8 +140,9 @@ end
 
 
 %% GUARDO LOG
-nombre_archivo_log = PrepararLog('log', nombre, 'DecisionLexica_FONDECYT');
+nombre_archivo_log = PrepararLog('log', [nombre '_' vuelta], 'DecisionLexica_FONDECYT');
 save(nombre_archivo_log, 'log');
+Log2Celda(log, [nombre_archivo_log(1:end-3) 'csv']);
 
 Salir;
 
