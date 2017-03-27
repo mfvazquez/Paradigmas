@@ -16,12 +16,20 @@ nombre = nombre{1};
 
 %% CONSTANTES GLOBALES
 
+global pportobj pportaddr MARCA_DURACION MARCAS
+
 global TAMANIO_INSTRUCCIONES
 global TAMANIO_ESTIMULOS
 
 global TIEMPO_ESTIMULO
 global TIEMPO_VACIO
 global TIEMPO_ESPERA
+
+MARCA_DURACION = 1e-3;
+
+keySet =   {'Wman', 'Wnman', 'Wabs', 'nWman', 'nWnman', 'nWabs'};
+valueSet = [1, 2, 3, 4, 5, 6];
+MARCAS = containers.Map(keySet,valueSet);
 
 TAMANIO_INSTRUCCIONES = 0.03;
 TAMANIO_ESTIMULOS = 0.05;
@@ -32,9 +40,25 @@ TIEMPO_ESPERA = [1.5 2.5];
 
 TEXTO_PAUSA = 'Es momento de una pausa.\n\n\n Descanse y presione la ESPACIO para continuar';
 
+%% PUERTO PARALELO
+
+pportaddr = 'C020';
+
+if exist('pportaddr','var') && ~isempty(pportaddr)
+    fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+    pportaddr = hex2dec(pportaddr);
+
+    pportobj = io32;
+    io32status = io32(pportobj);
+    EnviarMarca(0);
+    if io32status ~= 0
+        error('io32 failure: could not initialise parallel port.\n');
+    end
+end
+
 %% IMAGENES
-global numero_imagen
-numero_imagen = 1;
+% global numero_imagen
+% numero_imagen = 1;
 
 %% BOTONES
 
@@ -107,7 +131,7 @@ for x = 1:length(bloques)
         break
     end
     
-    [~, exit] = CorrerSecuencia(bloques{x}.practica.estimulos, hd, teclas, []);
+    [~, exit] = CorrerSecuencia(bloques{x}.practica.estimulos, hd, teclas, [], []);
     if exit
         break
     end
@@ -115,12 +139,16 @@ for x = 1:length(bloques)
     % Bloque
     TextoCentrado(bloques{x}.bloque.instrucciones, TAMANIO_INSTRUCCIONES, hd);
     Screen('Flip', hd.window);
+    if ~isempty(log)
+        marca = x 
+        EnviarMarca(marca);
+    end
 %     GuardarPantalla(hd);
     exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
     if exit
         break
     end
-    [log{x}, exit] = CorrerSecuencia(bloques{x}.bloque.estimulos, hd, teclas, log{x});
+    [log{x}, exit] = CorrerSecuencia(bloques{x}.bloque.estimulos, hd, teclas, log{x}, x);
     if exit
         break
     end

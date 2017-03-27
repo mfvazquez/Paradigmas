@@ -51,6 +51,7 @@ end
 archivos'
 
 archivosA = archivos;
+continuar = true;
 
 while continuar
 

@@ -13,15 +13,15 @@ LG1	= [ 1	0	0	1	0	1	0	0	1	1	1	1	0	0	1	0	1	1	1	0	0	1	0	0 ];
 LG2	= [ 0	1	1	0	1	0	1	1	0	0	0	0	1	1	0	1	0	0	0	1	1	0	1	1 ];
 
 
-controles_dir = fullfile('logs','Controles');
-controles_arch = ArchivosDeCarpeta(controles_dir);
-controles = OrganizarDatos(controles_arch);
-moral.controles = ObtenerDatosTotales(controles, controles_dir);
-
-
-for x = 1:length(moral.controles)
-    GuardarExcel(moral.controles(x), fullfile('excel','controles'));
-end
+% controles_dir = fullfile('logs','Controles');
+% controles_arch = ArchivosDeCarpeta(controles_dir);
+% controles = OrganizarDatos(controles_arch);
+% moral.controles = ObtenerDatosTotales(controles, controles_dir);
+% 
+% 
+% for x = 1:length(moral.controles)
+%     GuardarExcel(moral.controles(x), fullfile('excel','controles'));
+% end
 
 
 pacientes_dir = fullfile('logs','Pacientes');

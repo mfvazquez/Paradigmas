@@ -57,7 +57,6 @@ teclas.RightKey = KbName('RightArrow');
 teclas.LeftKey = KbName('LeftArrow');
 teclas.EnterKey = KbName('DownArrow');
 teclas.Continuar = KbName('SPACE');
-teclas.Enter = KbName('return');
 
 
 %% NOMBRE DEL PACIENTE
@@ -137,9 +136,6 @@ for i = 1:length(secuencia_actual.intero)
 %     if exit
 %         break;
 %     end
-
-    [respuesta, exit] = BloquePreguntaTextBox(hd, [], teclas)
-
 end
 
 TextoCentrado('Usted lo hizo muy bien, gracias por participar', TAMANIO_INSTRUCCIONES, hd, hd.white);
