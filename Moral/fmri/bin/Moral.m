@@ -39,7 +39,9 @@ global spaceKey;
 global auxKey;
 global botones;
 global escKey;
+global continueKey;
 
+continueKey = 'c';
 leftKey = '1';
 rightKey =  '2';
 auxKey = '3';
@@ -109,6 +111,10 @@ log.respuesta_fin = cell(1, length(historias));
 log.respuestas = cell(1, length(historias));
 log.respuesta_PrimerMovimiento = cell(1, length(historias));
 
+%% ------------------- ESPERO A QUE ESTE EL RESONADOR LISTO ------------
+Screen('Flip', hd.window);
+ButtonWait(continueKey);
+trigger_time = GetSecs;
 % ------------------- INTRODUCCION -----------------------------------
 
 textoCentrado(INSTRUCCIONES, TAMANIO);
@@ -190,13 +196,13 @@ end
 textoCentrado(MENSAJE_FINAL, TAMANIO);
 Screen('Flip', hd.window);
 
-GuardarLog(log, nombre, version);
+GuardarLog(log, nombre, version, trigger_time);
 
 % ---------------------- FIN DEL PARADIGMA ---------------------------
 
-WaitSecs(10);
+WaitSecs(5);
 Screen('Flip', hd.window);
-ButtonWait(triggerKey);
+ButtonWait(escKey);
 Salir;
 
 end

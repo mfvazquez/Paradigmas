@@ -24,6 +24,10 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
     
     status.Active = 1;
     inicio = GetSecs;
+    if EEG && ~practica
+%         marca = marcas.inicio
+        EnviarMarca(marcas.inicio);
+    end
     if ~isempty(bloque.audio)
         
         audiodevices = PsychPortAudio('GetDevices');
@@ -33,9 +37,6 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
         
         PsychPortAudio('FillBuffer', hd.pahandle, bloque.audio');    % Fill the audio playback buffer with the audio data 'wavedata':
         PsychPortAudio('Start', hd.pahandle, 1, 0, 1);
-        if EEG && ~practica
-            EnviarMarca(marcas.inicio);
-        end
         status = PsychPortAudio('GetStatus',hd.pahandle);  % Me fijo si esta reproduciendo
     end
     log.inicio = inicio;
@@ -46,6 +47,7 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
 
         if KeyCode(teclas.LatidosKey)  % apretó la 'z'
             if EEG && ~practica
+%                 marca = marcas.respuesta
                 EnviarMarca(marcas.respuesta);
             end
             
@@ -80,6 +82,11 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
     if ~isempty(bloque.audio)
         PsychPortAudio('Stop',hd.pahandle);
     end
+    if EEG && ~practica
+%         marca = marcas.fin
+        EnviarMarca(marcas.fin);
+    end
+    log.fin = GetSecs;
     log.indice = indice;
 
 end

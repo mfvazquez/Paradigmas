@@ -5,7 +5,7 @@ function bloque = CargarBloqueInteroMotor(carpeta, num_bloque)
     bloque.instrucciones = [];
     
     archivo_audio = fullfile(carpeta, 'audio.wav');
-    if num_bloque > 2
+    if num_bloque > 1
         carpeta_instrucciones = fullfile(carpeta, 'instrucciones_secundarias');
     else
         carpeta_instrucciones = fullfile(carpeta, 'instrucciones');

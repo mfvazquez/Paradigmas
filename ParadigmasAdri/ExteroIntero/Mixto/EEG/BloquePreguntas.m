@@ -1,6 +1,7 @@
 function [log, exit] = BloquePreguntas(hd, teclas)
 
     exit = false;
+    log = [];
         
     %% TEXTOS DE PREGUNTAS
 
@@ -19,10 +20,10 @@ function [log, exit] = BloquePreguntas(hd, teclas)
     
 
 
-    log_bloque.preguntas = preguntas;
-    log_bloque.respuestas = cell(length(preguntas),1);
-
-    log = cell(length(preguntas),1);
+%     log_bloque.preguntas = preguntas;
+%     log_bloque.respuestas = cell(length(preguntas),1);
+% 
+%     log = cell(length(preguntas),1);
     
 
     for j = 1:length(preguntas)

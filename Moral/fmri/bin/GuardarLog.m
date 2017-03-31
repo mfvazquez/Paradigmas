@@ -1,4 +1,4 @@
-function GuardarLog(log, nombre, version)
+function GuardarLog(log, nombre, version, trigger_time)
 
     log_dir = fullfile('..', 'log');
     
@@ -18,6 +18,6 @@ function GuardarLog(log, nombre, version)
        
     end
     
-    save(log_file, 'log');
+    save(log_file, 'log', 'trigger_time');
 
 end

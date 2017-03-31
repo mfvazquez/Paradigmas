@@ -1,5 +1,5 @@
 A continuación Usted deberá seguir los latidos de
-su PROPIO CORAZÓN por aproximadamente 2 minutos.
+su PROPIO CORAZÓN.
 
 Siga sus LATIDOS, ya sea que pueda sentirlos en
 alguna parte del cuerpo, o tratando de INTUIR cómo
@@ -7,8 +7,6 @@ late su corazón en este momento.
 
 NO DEBE tomar el pulso de sus muñecas ni de su
 cuello como ayuda.
-
-Recuerde seguir sus latidos presionando la tecla "Z".
 
 
 Presione la barra espaciadora para comenzar.

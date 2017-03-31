@@ -22,6 +22,9 @@ function Envidia()
     global botones;
     global triggerKey;
     global escKey;
+    global continueKey;
+    
+    continueKey = 'c';
     
     escKey = 'x';
     
@@ -72,7 +75,6 @@ function Envidia()
 %%    ----------------------- CARGO DATOS ---------------------------------
 
     % --------------------- MENSAJE DE ESPERA -----------------------------
-    
     textoCentrado('Cargando Datos...', TAMANIO);
     Screen('Flip', hd.window);
     
@@ -109,12 +111,18 @@ function Envidia()
     schan = CargarDatos(fullfile('..','data',genero,'schadenfreude'));
     schan = DividirTextos(schan, LARGO_LINEA, LARGO_INSTRUCCIONES);
     
+   
     
         % --------------------- PREPARO LOG -----------------------------------
     log_envidia = PrepararLog(envidia);
     log_schan = PrepararLog(schan);
 
 
+    %% ------------------- ESPERO A QUE ESTE EL RESONADOR LISTO ------------
+    Screen('Flip', hd.window);
+    ButtonWait(continueKey);
+    trigger_time = GetSecs;
+    
     %% ------------------- PRESENTACION DE LOS PERSONAJES ------------------
 
     DibujarSituacion(personajeA.historia, personajeA.textura, MENSAJE_CONTINUAR);
@@ -166,12 +174,12 @@ function Envidia()
        
     end
     
-    save(log_file, 'log_envidia', 'log_schan');
+    save(log_file, 'log_envidia', 'log_schan', 'trigger_time');
 
-    WaitSecs(10);
+    WaitSecs(5);
     Screen('Flip', hd.window);
 
-    ButtonWait(triggerKey);
+    ButtonWait(escKey);
     Salir;
     
 end

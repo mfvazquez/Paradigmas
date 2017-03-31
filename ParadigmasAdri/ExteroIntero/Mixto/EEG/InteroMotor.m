@@ -19,7 +19,7 @@ global pportobj pportaddr MARCA_DURACION
 
 MARCA_DURACION = 1e-3;
 
-EEG = false;
+EEG = true;
 
 TAMANIO_TEXTO = 0.05;
 TAMANIO_INSTRUCCIONES = 0.03;
@@ -66,7 +66,7 @@ nombre = inputdlg('Nombre:');
 nombre = nombre{1};
 
 %% CARGO LA SECUENCIA A CORRER
-secuencia_actual.intero = {'intero' 'motor'};
+secuencia_actual.intero = {'intero' 'intero' 'motor' 'motor'};
 
 %% PSYCHOTOOLBOX
 hd = init_psych;
@@ -82,21 +82,26 @@ log.intero = cell(length(secuencia_actual.intero),1);
 intero.bloques = cell(length(secuencia_actual.intero),1);
 intero.marcas = cell(length(secuencia_actual.intero),1);
 
+contador_intero = 1;
+contador_motor = 1;
 intero_dir = fullfile('data','intersujeto');
 for i = 1:length(secuencia_actual.intero)
 
     bloque = secuencia_actual.intero{i};
     data_dir = fullfile(intero_dir, bloque);
     
-    intero.bloques{i} = CargarBloqueInteroMotor(data_dir, i);    
-    
     if strcmp(bloque, 'motor')
-        marca.inicio = i;
-        marca.respuesta = 100 + marca.inicio;
+        intero.bloques{i} = CargarBloqueInteroMotor(data_dir, contador_motor);    
+        marca.inicio = contador_motor;
+        contador_motor = contador_motor + 1;
     else
-        marca.inicio = i + 2;
-        marca.respuesta = 100 + marca.inicio;
+        intero.bloques{i} = CargarBloqueInteroMotor(data_dir, contador_intero);
+        marca.inicio = contador_intero + 2;
+        contador_intero = contador_intero + 1;
     end
+    
+    marca.respuesta = 100 + marca.inicio;
+    marca.fin = 11*marca.inicio;
     
     intero.marcas{i} = marca;
     
@@ -119,7 +124,6 @@ end
     
 
 %% PRACTICAS
-exit = false;
 [~, exit] = CorrerSecuenciaIntero(intero.practica, teclas, hd, TIEMPO_MOTOR_PRACTICA, true, []);
 if exit
     Salir(hd);
@@ -129,25 +133,29 @@ end
 %% PARADIGMA
 
 for i = 1:length(secuencia_actual.intero)
-%     [log.intero{i}, exit] = CorrerSecuenciaIntero(intero.bloques{i}, teclas, hd, TIEMPO_MOTOR, false, intero.marcas{i});
-%     if exit
-%         break;
-%     end
-%     [log.preguntas{i}, exit] = BloquePreguntas(hd, teclas);
-%     if exit
-%         break;
-%     end
+    [log.intero{i}, exit] = CorrerSecuenciaIntero(intero.bloques{i}, teclas, hd, TIEMPO_MOTOR, false, intero.marcas{i});
+    if exit
+        break;
+    end
+    [log.preguntas{i}, exit] = BloquePreguntas(hd, teclas);
+    if exit
+        break;
+    end
 
-    [respuesta, exit] = BloquePreguntaTextBox(hd, [], teclas)
+    [log.intero{i}.tiempo_estimado, exit] = BloquePreguntaTextBox(hd, teclas);
+    if exit
+        break;
+    end
 
 end
 
 TextoCentrado('Usted lo hizo muy bien, gracias por participar', TAMANIO_INSTRUCCIONES, hd, hd.white);
 Screen('Flip',hd.window);
+WaitSecs(2);
 
 
 %% GUARDO LOG
-log_file = PrepararLog('log', nombre, 'Extero');
+log_file = PrepararLog('log', nombre, 'InteroMotor');
 save(log_file, 'log');
 
 %% SALIR

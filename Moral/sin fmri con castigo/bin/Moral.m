@@ -156,19 +156,6 @@ for i = 1:length(historias)
     log.conducta_fin{1,i} = log_respuesta.respuesta_fin;
     log.conducta_respuesta{1,i} = log_respuesta.respuesta;
     
-    % ------------------- PREGUNTA DANIO ---------------------------------
-
-    [exit, log_respuesta] = Respuesta(textos_danio);
-    
-    if (exit)
-        break;
-    end
-    
-    log.danio_inicio{1,i} =log_respuesta.respuesta_inicio;
-    log.danio_PrimerMovimiento{1,i} =log_respuesta.primer_movimiento;
-    log.danio_fin{1,i} = log_respuesta.respuesta_fin;
-    log.danio_respuesta{1,i} = log_respuesta.respuesta;
-    
     % -------------------- PREGUNTA CASTIGO -----------------------------
     
     [exit, log_respuesta] = Respuesta(textos_castigo);
@@ -181,6 +168,20 @@ for i = 1:length(historias)
     log.castigo_PrimerMovimiento{1,i} =log_respuesta.primer_movimiento;
     log.castigo_fin{1,i} = log_respuesta.respuesta_fin;
     log.castigo_respuesta{1,i} = log_respuesta.respuesta;
+    
+        % ------------------- PREGUNTA DANIO ---------------------------------
+
+    [exit, log_respuesta] = Respuesta(textos_danio);
+    
+    if (exit)
+        break;
+    end
+    
+    log.danio_inicio{1,i} =log_respuesta.respuesta_inicio;
+    log.danio_PrimerMovimiento{1,i} =log_respuesta.primer_movimiento;
+    log.danio_fin{1,i} = log_respuesta.respuesta_fin;
+    log.danio_respuesta{1,i} = log_respuesta.respuesta;
+    
     
 end
 
