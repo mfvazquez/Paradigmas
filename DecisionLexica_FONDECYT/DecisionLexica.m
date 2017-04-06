@@ -140,7 +140,7 @@ for x = 1:length(bloques)
     TextoCentrado(bloques{x}.bloque.instrucciones, TAMANIO_INSTRUCCIONES, hd);
     Screen('Flip', hd.window);
     if ~isempty(log)
-        marca = x 
+        marca = x;
         EnviarMarca(marca);
     end
 %     GuardarPantalla(hd);
