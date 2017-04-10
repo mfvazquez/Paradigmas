@@ -1,15 +1,23 @@
 clear all
 
-permutaciones = perms(['A' 'B']);
+permutaciones = perms(['A' 'B' 'C' 'D']);
 [fil, col] = size(permutaciones);
 
 for i = 1:fil
     bloque.emociones = permutaciones(i,:);
-    bloque.intero = {'motor' 'intero'};
+    bloque.intero = {'motor' 'intero' 'motor' 'intero'};
     bloque.contador = 0;
-    secuencias(i*2-1) = bloque;
-    bloque.intero = {'intero' 'motor'};
-    secuencias(i*2) = bloque;
+    bloque.emociones_duraciones = [0.1 1 0.1 1];    
+    secuencias(i*4-3) = bloque;
+    
+    bloque.intero = {'intero' 'motor' 'intero' 'motor'};
+    secuencias(i*4-2) = bloque;
+    
+    bloque.emociones_duraciones = [1 0.1 1 0.1];    
+    secuencias(i*4-1) = bloque;
+    
+    bloque.intero = {'motor' 'intero' 'motor' 'intero'};
+    secuencias(i*4) = bloque;
 end
 
 save('secuencias.mat', 'secuencias');

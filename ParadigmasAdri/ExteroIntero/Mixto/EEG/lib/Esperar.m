@@ -22,7 +22,9 @@ function [exit, respuesta, tiempo_respuesta, saltear_bloque] = Esperar(tiempo, b
                     return;
                 end
             end
-            
+        end
+        
+        if ~isempty(botones_salteado)
             saltear_bloque = BotonesApretados(keyCode, botones_salteado);
             if saltear_bloque
                 return;

@@ -1,4 +1,4 @@
-function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, practica)
+function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, practica, marcas)
 
     global TAMANIO_INSTRUCCIONES
     global TAMANIO_TEXTO
@@ -19,15 +19,15 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
         
     TextoCentrado('+', TAMANIO_TEXTO, hd);
     Screen('Flip', hd.window);
-    if EEG && ~practica
-        EnviarMarca(125);
-    end
-    
     
     indice = 0; % indice para contar la cantidad de 'z' apretadas
     
     status.Active = 1;
     inicio = GetSecs;
+    if EEG && ~practica
+%         marca = marcas.inicio
+        EnviarMarca(marcas.inicio);
+    end
     if ~isempty(bloque.audio)
         
         audiodevices = PsychPortAudio('GetDevices');
@@ -37,9 +37,6 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
         
         PsychPortAudio('FillBuffer', hd.pahandle, bloque.audio');    % Fill the audio playback buffer with the audio data 'wavedata':
         PsychPortAudio('Start', hd.pahandle, 1, 0, 1);
-        if EEG && ~practica
-            EnviarMarca(225);
-        end
         status = PsychPortAudio('GetStatus',hd.pahandle);  % Me fijo si esta reproduciendo
     end
     log.inicio = inicio;
@@ -50,7 +47,8 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
 
         if KeyCode(teclas.LatidosKey)  % apretó la 'z'
             if EEG && ~practica
-                EnviarMarca(205);
+%                 marca = marcas.respuesta
+                EnviarMarca(marcas.respuesta);
             end
             
             log_trial.response = secs;
@@ -85,8 +83,10 @@ function [log, exit] = CorrerSecuenciaIntero(bloque, teclas, hd, tiempo_limite, 
         PsychPortAudio('Stop',hd.pahandle);
     end
     if EEG && ~practica
-        EnviarMarca(202);
+%         marca = marcas.fin
+        EnviarMarca(marcas.fin);
     end
+    log.fin = GetSecs;
     log.indice = indice;
 
 end

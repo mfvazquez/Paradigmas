@@ -1,4 +1,4 @@
-function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones, hd, teclas, log, marcas, mensaje_practica, texto_botones)
+function [log, exit] = CorrerSecuenciaEmociones(bloque, n_bloque, hd, teclas, log)
 
     ExitKey = teclas.ExitKey;
       
@@ -9,20 +9,30 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
     
     negativas = { 'Ang' 'Dis' 'Fea' 'Sad' };
     
+    practica = true;
+    texturas = bloque.texturas{n_bloque};
+    if isfield(bloque, 'archivos')
+        archivos = bloque.archivos{n_bloque};
+        practica = false;
+    end
+    
+    duracion_estimulo = bloque.duraciones(n_bloque);
+    
+    
     global TAMANIO_TEXTO
     global TAMANIO_INSTRUCCIONES
     global EEG
 
     
     %% INSTRUCCIONES
-    EmocionesInstrucciones(instrucciones, TAMANIO_INSTRUCCIONES, texto_botones, hd);
+    EmocionesInstrucciones(bloque.instrucciones, TAMANIO_INSTRUCCIONES, bloque.textos_botones, hd);
     Screen('Flip', hd.window);
     exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
     if exit
         return;
     end
-    if ~isempty(mensaje_practica)
-        TextoCentrado(mensaje_practica, TAMANIO_INSTRUCCIONES, hd);
+    if isfield(bloque, 'mensaje_practica')
+        TextoCentrado(bloque.mensaje_practica, TAMANIO_INSTRUCCIONES, hd);
         Screen('Flip', hd.window);
         exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
         if exit
@@ -33,7 +43,7 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
     %% FIJACION
     TextoCentrado('+', TAMANIO_TEXTO, hd);
     Screen('Flip', hd.window);
-    if ~isempty(codigos) && EEG
+    if ~practica && EEG
         EnviarMarca(150);
     end
     
@@ -52,10 +62,11 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
         DibujarTextura(texturas{i}, hd.window);  
         [~, OnSetTime] = Screen('Flip', hd.window);
         log_trial.imagen = OnSetTime;
-        if ~isempty(codigos) && EEG
-            EnviarMarca(marcas(codigos{i}))
+        if ~practica && EEG
+            EnviarMarca(bloque.codigos(archivos{i}))
         end
-        [exit, respuesta, tiempo, saltear_bloque] = Esperar(0.2, ExitKey, botones, botones_salteado);
+        duracion_estimulo
+        [exit, respuesta, tiempo, saltear_bloque] = Esperar(duracion_estimulo, ExitKey, botones, botones_salteado);
         if exit || saltear_bloque
             return;
         end
@@ -65,7 +76,7 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
         
             TextoCentrado(TITULO, TAMANIO_TEXTO, hd);
             if i == 1
-                DibujarReferencias(hd, texto_botones, TAMANIO_INSTRUCCIONES);
+                DibujarReferencias(hd, bloque.textos_botones, TAMANIO_INSTRUCCIONES);
             end
             [~, OnSetTime] = Screen('Flip', hd.window);
 
@@ -76,10 +87,10 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
             end
         end
               
-        if ~isempty(codigos)
+        if ~practica
             
-            log_trial.imagen_codigo = codigos{i};
-            categoria = codigos{i}(5:7);
+            log_trial.imagen_codigo = archivos{i};
+            categoria = archivos{i}(5:7);
             respuesta_correcta = 'Positiva';
             if strcmp(categoria, 'Neu')
                 respuesta_correcta = 'Neutral';
@@ -93,7 +104,7 @@ function [log, exit] = CorrerSecuenciaEmociones(texturas, codigos, instrucciones
             
             log_trial.accuracy = 9;
             if ~isempty(respuesta)
-                log_trial.respuesta = texto_botones{1, respuesta};
+                log_trial.respuesta = bloque.textos_botones{1, respuesta};
                 if strcmp(log_trial.respuesta, respuesta_correcta)
                     log_trial.accuracy = 1;
                 else

@@ -1,14 +1,7 @@
-Bienvenido!
-Este es un experimento de EEG en el que
-necesitamos de su colaboración:
-
--Trate de mover la cabeza lo menos posible
-- Fije la mirada en la CRUZ(+) en el centro de la 
-pantalla cada vez que aparezca
--Trate de pestañar lo menos posible cuando esté la
-CRUZ(+) presente
-
-¡Gracias!
+En esta prueba le pediremos que realice 
+una tarea de SEGUIMIENTO en la cual tendrá 
+que seguir un CORAZÓN GRABADO que 
+escuchará por los auriculares. 
 
 
-Presione la barra espaciadora para comenzar.
+Presione la barra espaciadora para continuar.
