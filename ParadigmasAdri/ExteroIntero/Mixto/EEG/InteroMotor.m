@@ -109,11 +109,8 @@ end
 
 practica_dir = fullfile(intero_dir, 'practica');
 intero.practica = CargarBloqueInteroMotor(practica_dir, 1);
-
-%% BLOQUE HEP
-
-% cargo instrucciones
-instrucciones_HEP = fileread(fullfile('data','instrucciones_HEP.txt'));
+%% INSTRUCCION QUE NO ES HEP 
+instrucciones_HEP = fileread(fullfile('data','instrucciones.txt'));
 TextoCentrado(instrucciones_HEP, TAMANIO_INSTRUCCIONES, hd);
 Screen('Flip',hd.window);
 exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
@@ -121,25 +118,6 @@ if exit
     Salir(hd);
     return;
 end
-
-TextoCentrado('+', TAMANIO_TEXTO, hd);
-[~, OnSetTime] = Screen('Flip',hd.window);
-if EEG
-    EnviarMarca(200);
-end
-log.HEP.inicio = OnSetTime;
-Esperar(120, teclas.ExitKey, {}, teclas.botones_salteado);
-if EEG
-    EnviarMarca(210);
-end
-log.HEP.fin = GetSecs;
-
-[log.HEP.tiempo_estimado, exit] = BloquePreguntaTextBox(hd, teclas);
-if exit
-    Salir(hd);
-    return;
-end
-
 
 %% INSTRUCCIONES PRINCIPALES
 instrucciones = CargarTextosDeCarpeta(fullfile('data','instrucciones'));

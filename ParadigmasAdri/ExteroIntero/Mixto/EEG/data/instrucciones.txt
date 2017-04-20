@@ -1,0 +1,16 @@
+Bienvenido!
+Este es un experimento de EEG en el que
+necesitamos de su colaboración.
+
+Le pedimos que:
+
+-Trate de mover la cabeza lo menos posible
+- Fije la mirada en la CRUZ(+) en el centro de la 
+pantalla cada vez que aparezca
+-Trate de pestañar lo menos posible cuando esté la
+CRUZ(+) presente
+
+¡Gracias!
+
+
+Presione la barra espaciadora para comenzar.

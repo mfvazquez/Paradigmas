@@ -1,4 +1,4 @@
-function MotorIntero()
+function Intero()
 
 clc;
 sca;
@@ -66,7 +66,7 @@ nombre = inputdlg('Nombre:');
 nombre = nombre{1};
 
 %% CARGO LA SECUENCIA A CORRER
-secuencia_actual.intero = {'motor' 'motor' 'intero' 'intero'};
+secuencia_actual.intero = {'intero' 'intero'};
 
 %% PSYCHOTOOLBOX
 hd = init_psych;
@@ -165,7 +165,7 @@ WaitSecs(2);
 
 
 %% GUARDO LOG
-log_file = PrepararLog('log', nombre, 'MotorIntero');
+log_file = PrepararLog('log', nombre, 'Intero');
 save(log_file, 'log');
 
 %% SALIR

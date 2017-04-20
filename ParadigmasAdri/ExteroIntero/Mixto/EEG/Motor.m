@@ -1,4 +1,4 @@
-function MotorIntero()
+function Motor()
 
 clc;
 sca;
@@ -66,7 +66,7 @@ nombre = inputdlg('Nombre:');
 nombre = nombre{1};
 
 %% CARGO LA SECUENCIA A CORRER
-secuencia_actual.intero = {'motor' 'motor' 'intero' 'intero'};
+secuencia_actual.intero = {'motor' 'motor'};
 
 %% PSYCHOTOOLBOX
 hd = init_psych;
@@ -109,6 +109,7 @@ end
 
 practica_dir = fullfile(intero_dir, 'practica');
 intero.practica = CargarBloqueInteroMotor(practica_dir, 1);
+
 
 %% INSTRUCCION QUE NO ES HEP 
 instrucciones_HEP = fileread(fullfile('data','instrucciones.txt'));
@@ -165,7 +166,7 @@ WaitSecs(2);
 
 
 %% GUARDO LOG
-log_file = PrepararLog('log', nombre, 'MotorIntero');
+log_file = PrepararLog('log', nombre, 'Motor');
 save(log_file, 'log');
 
 %% SALIR

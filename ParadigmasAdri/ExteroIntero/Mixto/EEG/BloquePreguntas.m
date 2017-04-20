@@ -35,7 +35,7 @@ function [log, exit] = BloquePreguntas(hd, teclas)
         if exit || saltear_bloque
             return;
         end
-        log_bloque.respuesta{j} = log_respuesta;
+        log_bloque.respuesta = log_respuesta;
         log{j} = log_bloque;
         
     end

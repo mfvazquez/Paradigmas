@@ -1,4 +1,4 @@
-function MotorIntero()
+function Reposo()
 
 clc;
 sca;
@@ -110,8 +110,9 @@ end
 practica_dir = fullfile(intero_dir, 'practica');
 intero.practica = CargarBloqueInteroMotor(practica_dir, 1);
 
-%% INSTRUCCION QUE NO ES HEP 
-instrucciones_HEP = fileread(fullfile('data','instrucciones.txt'));
+%% BLOQUE HEP
+
+instrucciones_HEP = fileread(fullfile('data','instrucciones_HEP.txt'));
 TextoCentrado(instrucciones_HEP, TAMANIO_INSTRUCCIONES, hd);
 Screen('Flip',hd.window);
 exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
@@ -120,52 +121,27 @@ if exit
     return;
 end
 
-%% INSTRUCCIONES PRINCIPALES
-instrucciones = CargarTextosDeCarpeta(fullfile('data','instrucciones'));
-for x = 1:length(instrucciones)
-    TextoCentrado(instrucciones{x}, TAMANIO_INSTRUCCIONES, hd);
-    Screen('Flip',hd.window);
-    exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
-    if exit
-        Salir(hd);
-        return;
-    end
+TextoCentrado('+', TAMANIO_TEXTO, hd);
+[~, OnSetTime] = Screen('Flip',hd.window);
+if EEG
+    EnviarMarca(200);
 end
-    
+log.HEP.inicio = OnSetTime;
+Esperar(120, teclas.ExitKey, {}, teclas.botones_salteado);
+if EEG
+    EnviarMarca(210);
+end
+log.HEP.fin = GetSecs;
 
-%% PRACTICAS
-[~, exit] = CorrerSecuenciaIntero(intero.practica, teclas, hd, TIEMPO_MOTOR_PRACTICA, true, []);
+[log.HEP.tiempo_estimado, exit] = BloquePreguntaTextBox(hd, teclas);
 if exit
     Salir(hd);
-    return
+    return;
 end
-
-%% PARADIGMA
-
-for i = 1:length(secuencia_actual.intero)
-    [log.intero{i}, exit] = CorrerSecuenciaIntero(intero.bloques{i}, teclas, hd, TIEMPO_MOTOR, false, intero.marcas{i});
-    if exit
-        break;
-    end
-    [log.preguntas{i}, exit] = BloquePreguntas(hd, teclas);
-    if exit
-        break;
-    end
-
-    [log.intero{i}.tiempo_estimado, exit] = BloquePreguntaTextBox(hd, teclas);
-    if exit
-        break;
-    end
-
-end
-
-TextoCentrado('Usted lo hizo muy bien, gracias por participar', TAMANIO_INSTRUCCIONES, hd, hd.white);
-Screen('Flip',hd.window);
-WaitSecs(2);
 
 
 %% GUARDO LOG
-log_file = PrepararLog('log', nombre, 'MotorIntero');
+log_file = PrepararLog('log', nombre, 'Reposo');
 save(log_file, 'log');
 
 %% SALIR
