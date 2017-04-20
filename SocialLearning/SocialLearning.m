@@ -1,3 +1,5 @@
+function SocialLearning()
+
 clc;
 sca;
 close all;
@@ -34,12 +36,14 @@ nombre = nombre{1};
 opciones = {'Femenino' 'Masculino'};
 choice = menu('Genero:', opciones);
 genero = opciones{choice};
+log.genero = genero;
 
 %% BLOQUE
 [opciones directorios] = ObtenerCategorias(fullfile('data','bloques'));
 choice = menu('Bloques:', opciones);
 bloque_dir = directorios{choice};
 bloque = opciones{choice};
+log.bloque = bloque;
 
 %% INSTRUCCIONES
 instrucciones_dir = fullfile('data','instrucciones');
@@ -58,6 +62,11 @@ for i = 1:length(ciclos_archivos)
     ciclos{i} = CargarCSV(fullfile(ciclos_dir,ciclos_archivos{i}), ';');
 end
     
+%% LOG
+log.ciclos = cell(1,length(ciclos));
+for i = 1:length(ciclos)
+    log.ciclos{i} = cell(1,length(ciclos{i}));
+end
 
 %% PSYCHOTOOLBOX
 hd = init_psych;
@@ -71,7 +80,6 @@ texturas.opciones = CargarTexturasDeCarpetaNombre(fullfile('data', 'imagenes','o
 %% INICIO DEL PARADIGMA
 
 % INSTRUCCIONES
-
 TextoCentrado(instrucciones.principales, TAMANIO_INSTRUCCIONES, hd);
 Screen('Flip',hd.window);
 exit = EsperarBoton(teclas.continuar, teclas.salir);
@@ -81,7 +89,6 @@ if exit
 end
 
 % PRACTICA
-
 TextoCentrado(instrucciones.practica, TAMANIO_INSTRUCCIONES, hd);
 Screen('Flip',hd.window);
 exit = EsperarBoton(teclas.continuar, teclas.salir);
@@ -90,14 +97,13 @@ if exit
     return
 end
 
-exit = CorrerCiclo(hd, practica, texturas, teclas);
+[exit, ~] = CorrerCiclo(hd, practica, texturas, teclas, []);
 if exit
     Salir;
     return
 end
 
 % BLOQUES
-
 TextoCentrado(instrucciones.bloque, TAMANIO_INSTRUCCIONES, hd);
 Screen('Flip',hd.window);
 exit = EsperarBoton(teclas.continuar, teclas.salir);
@@ -108,12 +114,17 @@ end
 
 for i = 1:length(ciclos)
 
-    exit = CorrerCiclo(hd, ciclos{i}, texturas, teclas);
+    [exit, log.ciclos{i}] = CorrerCiclo(hd, ciclos{i}, texturas, teclas, log.ciclos{i});
     if exit
         break;
     end
 end
-    
+
+%% GUARDO LOG
+log_file = PrepararLog('log', nombre, ['SocialLearning_' bloque]);
+save(log_file, 'log');
 
 %% SALIR
 Salir;
+
+end
