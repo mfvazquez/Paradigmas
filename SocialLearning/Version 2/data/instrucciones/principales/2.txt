@@ -1,0 +1,12 @@
+En la primer pantalla se le mostrará el número. 
+Luego deberá elegir a qué categoría pertenece.
+
+Preste atención a la ubicación de las 
+categorías en las FLECHAS.
+
+Recibirá una respuesta visual sobre si 
+su elección fue correcta o no.
+
+
+
+Presione ESPACIO para continuar.

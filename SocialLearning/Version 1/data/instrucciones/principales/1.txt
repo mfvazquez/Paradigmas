@@ -1,0 +1,20 @@
+A continuación se le presentarán 
+diferentes números ( ej. 382).
+
+Deberá determinar si el número 
+pertenece a la categoría A o B.
+
+Utilice las flechas para seleccionar 
+la categoría.
+
+Después de su respuesta, se le indicará 
+si acertó o no.
+
+Su objetivo es lograr encontrar 
+a qué categoría pertenecen los números.
+
+No hay una lógica entre el número y la lógica
+
+
+
+Presione ESPACIO para continuar.

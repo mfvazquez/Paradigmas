@@ -15,7 +15,7 @@ addpath('lib');
 global TAMANIO_INSTRUCCIONES
 global TAMANIO_TEXTO
 
-TAMANIO_TEXTO = 0.05;
+TAMANIO_TEXTO = 0.1;
 TAMANIO_INSTRUCCIONES = 0.03;
 
 %% TECLAS
@@ -47,7 +47,7 @@ log.bloque = bloque;
 
 %% INSTRUCCIONES
 instrucciones_dir = fullfile('data','instrucciones');
-instrucciones.principales = fileread(fullfile(instrucciones_dir, 'principales.txt'));
+instrucciones.principales = CargarTextosDeCarpeta(fullfile(instrucciones_dir, 'principales'));
 instrucciones.practica = fileread(fullfile(instrucciones_dir, 'practica.txt'));
 instrucciones.bloque = fileread(fullfile(instrucciones_dir, 'bloque.txt'));
 
@@ -80,12 +80,14 @@ texturas.opciones = CargarTexturasDeCarpetaNombre(fullfile('data', 'imagenes','o
 %% INICIO DEL PARADIGMA
 
 % INSTRUCCIONES
-TextoCentrado(instrucciones.principales, TAMANIO_INSTRUCCIONES, hd);
-Screen('Flip',hd.window);
-exit = EsperarBoton(teclas.continuar, teclas.salir);
-if exit
-    Salir;
-    return
+for x = 1:length(instrucciones.principales)
+    TextoCentrado(instrucciones.principales{x}, TAMANIO_INSTRUCCIONES, hd);
+    Screen('Flip',hd.window);
+    exit = EsperarBoton(teclas.continuar, teclas.salir);
+    if exit
+        Salir;
+        return
+    end
 end
 
 % PRACTICA

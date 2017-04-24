@@ -22,9 +22,9 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         end
 
         %% ESTIMULO
-        DibujarEstimulo(hd, imagenes.neutral, textos);
+        DibujarEstimulo(hd, imagenes.neutral, textos, []);
         [~, OnSetTime] = Screen('Flip', hd.window);
-        [exit, ~] = Esperar(1, teclas.salir,[], []);
+        [exit, ~] = Esperar(1.5, teclas.salir,[], []);
         if exit 
             return
         end
@@ -35,7 +35,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
 
         %% BLANK
         [~, OnSetTime] = Screen('Flip', hd.window);
-        [exit, ~] = Esperar(2, teclas.salir,[], []);
+        [exit, ~] = Esperar(1.5, teclas.salir,[], []);
         if exit 
             return
         end
@@ -52,7 +52,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
             log_actual.opciones_onset = OnSetTime;
         end
         
-        [exit, respuesta, tiempo_respuesta, ~] = Esperar(1, teclas.salir, {teclas.izquierda teclas.derecha}, []);
+        [exit, respuesta, tiempo_respuesta] = EsperarBotones(teclas.salir, {teclas.izquierda teclas.derecha});
         if exit 
             return
         end
@@ -69,8 +69,10 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         end
                 
         imagen_respuesta = imagenes.ira;
+        log_actual.accuracy = 0;
         if strcmp(respuesta_correcta, respuesta_elegida)
             imagen_respuesta = imagenes.alegria;
+            log_actual.accuracy = 1;
         end
         
         if ~isempty(log)
@@ -92,7 +94,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         end
         
         %% RESULTADO 
-        DibujarEstimulo(hd, imagen_respuesta, textos);
+        DibujarEstimulo(hd, imagen_respuesta, textos, respuesta_correcta);
         [~, OnSetTime] = Screen('Flip', hd.window);
         [exit, ~] = Esperar(1, teclas.salir,[], []);
         if exit 

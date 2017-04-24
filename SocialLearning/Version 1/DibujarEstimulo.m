@@ -1,4 +1,4 @@
-function DibujarEstimulo(hd, textura, textos)
+function DibujarEstimulo(hd, textura, textos, elegido)
 
     [screenXpixels, screenYpixels] = Screen('WindowSize', hd.window);
 
@@ -20,14 +20,32 @@ function DibujarEstimulo(hd, textura, textos)
     Xpos = rect_imagen(1) - distancias(1) - textos_dimensiones(1);
     Ypos = round((rect_imagen(4) + rect_imagen(2) - textos_dimensiones(2)) / 2);
     rect_texto = [Xpos  Ypos Xpos+textos_dimensiones(1) Ypos+textos_dimensiones(2)];
-    Texto(textos.izquierda, rect_texto, hd);
-
+    
+    if strcmp(elegido, textos.izquierda)
+        oldStyle=Screen('TextStyle', hd.window, 1);
+        rect_texto(2) = round(rect_texto(2)*0.95);
+        rect_texto(4) = round(rect_texto(4)*1.02);
+        Texto(textos.izquierda, rect_texto, hd);
+        Screen('TextStyle', hd.window, oldStyle); 
+    else
+        Texto(textos.izquierda, rect_texto, hd);    
+    end
+    
     % CARACTER DERECHO
     Xpos = rect_imagen(3) + distancias(1);
     Ypos = round((rect_imagen(4) + rect_imagen(2) - textos_dimensiones(2)) / 2);
     rect_texto = [Xpos  Ypos Xpos+textos_dimensiones(1) Ypos+textos_dimensiones(2)];
-    Texto(textos.derecha, rect_texto, hd);
 
+    if strcmp(elegido, textos.derecha)
+        oldStyle=Screen('TextStyle', hd.window, 1);
+        rect_texto(2) = round(rect_texto(2)*0.95);
+        rect_texto(4) = round(rect_texto(4)*1.02);
+        Texto(textos.derecha, rect_texto, hd);
+        Screen('TextStyle', hd.window, oldStyle); 
+    else
+        Texto(textos.derecha, rect_texto, hd);    
+    end
+    
     % NUMERO INFERIOR
     Xpos = rect_imagen(1);
     Ypos = rect_imagen(4) + distancias(2);
