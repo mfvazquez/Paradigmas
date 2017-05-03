@@ -1,15 +1,15 @@
 % Espera hasta que transcurra un tiempo o hasta que se apriete uno de los
 % botones.
-function [exit, respuesta, tiempo_respuesta, saltear_bloque] = Esperar(tiempo, botonSalida, botones, botones_salteado)
+function [exit, respuesta, tiempo_respuesta, saltear_bloque] = Esperar(tiempo, boton_salida, botones, botones_salteado, boton_pausa)    
     exit = false;
     tStart = GetSecs;
     respuesta = [];
     tiempo_respuesta = [];
-    saltear_bloque = false;
+    saltear_bloque = false;    
     while GetSecs - tStart < tiempo
         [~, ~, keyCode, ~] = KbCheck;
         
-        if keyCode(botonSalida)
+        if keyCode(boton_salida)
             exit = true;
             return
         end
@@ -31,5 +31,10 @@ function [exit, respuesta, tiempo_respuesta, saltear_bloque] = Esperar(tiempo, b
             end
             
         end
+        
+        if ~isempty(boton_pausa) && keyCode(boton_pausa)                  
+            exit = EsperarPausa(boton_pausa, boton_salida);              
+        end
+        
     end
 end

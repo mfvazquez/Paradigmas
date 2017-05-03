@@ -5,6 +5,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
 
         textos.inferior = trials{x,1};
         respuesta_correcta = trials{x,2};
+        log_actual.numero = textos.inferior;
 
         aux = trials{x,3};
         log_actual.orden_opciones = trials{x,3};
@@ -25,7 +26,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         %% ESTIMULO
         TextoCentrado(textos.inferior, TAMANIO_TEXTO ,hd);
         [~, OnSetTime] = Screen('Flip', hd.window);
-        [exit, ~] = Esperar(1.5, teclas.salir,[], []);
+        [exit, ~] = Esperar(1.5, teclas.salir,[], [], teclas.pausa);
         if exit 
             return
         end
@@ -36,7 +37,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
 
         %% BLANK
         [~, OnSetTime] = Screen('Flip', hd.window);
-        [exit, ~] = Esperar(1.5, teclas.salir,[], []);
+        [exit, ~] = Esperar(1.5, teclas.salir,[], [], teclas.pausa);
         if exit 
             return
         end
@@ -46,7 +47,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         end
         
         %% RESPUESTA
-        
+        Screen('Flip', hd.window);
         DibujarRespuesta(hd, texturas.opciones, textos);
         [~, OnSetTime] = Screen('Flip', hd.window);
         if ~isempty(log)
@@ -85,7 +86,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         
         %% BLANK
         [~, OnSetTime] = Screen('Flip', hd.window);
-        [exit, ~] = Esperar(0.5, teclas.salir,[], []);
+        [exit, ~] = Esperar(0.5, teclas.salir,[], [], teclas.pausa);
         if exit 
             return
         end
@@ -95,9 +96,10 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         end
         
         %% RESULTADO 
+        Screen('Flip', hd.window);
         DibujarTexturaCentrada(imagen_respuesta, hd.window);
         [~, OnSetTime] = Screen('Flip', hd.window);
-        [exit, ~] = Esperar(1, teclas.salir,[], []);
+        [exit, ~] = Esperar(1, teclas.salir,[], [], teclas.pausa);
         if exit 
             return
         end
@@ -108,7 +110,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         
         %% BLANK
         [~, OnSetTime] = Screen('Flip', hd.window);
-        [exit, ~] = Esperar(1+rand, teclas.salir,[], []);
+        [exit, ~] = Esperar(1+rand, teclas.salir,[], [], teclas.pausa);
         if exit 
             return
         end

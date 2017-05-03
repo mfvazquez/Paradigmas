@@ -1,4 +1,4 @@
-function MensajeContinuar(mensaje, hd)
+function MensajeContinuar(mensaje, color, hd)
 
     global TAMANIO_TEXTO
     
@@ -10,6 +10,6 @@ function MensajeContinuar(mensaje, hd)
     rect = [0  Ypos+YLength screenXpixels screenYpixels];
     textSize = round(screenYpixels*TAMANIO_TEXTO*0.5);
     Screen('TextSize', hd.window, textSize);
-    DrawFormattedText(hd.window, mensaje, 'center','center', hd.white, [],[],[],2,[],rect);      
+    DrawFormattedText(hd.window, mensaje, 'center','center', color, [],[],[],2,[],rect);      
     
 end
