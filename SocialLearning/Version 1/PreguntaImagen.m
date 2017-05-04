@@ -1,5 +1,6 @@
 function [log, exit] = PreguntaImagen(hd, textura, opciones, textos, teclas)
 
+    log = [];
     DibujarPreguntaImagen(hd, textura, opciones, textos);
     [~, OnSetTime] = Screen('Flip',hd.window);
     [exit, respuesta, tiempo_respuesta] = EsperarBotonesApretar(teclas.salir, {teclas.izquierda teclas.derecha});

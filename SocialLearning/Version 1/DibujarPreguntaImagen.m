@@ -17,7 +17,7 @@ function DibujarPreguntaImagen(hd, imagen, texturas, textos)
     % TEXTO IZQUIERDA
     Ypos = margenes(2);
     rect_texto = [rect_imagen(1) Ypos rect_imagen(3) Ypos+textos_dimensiones(2)];
-    Texto(textos.izquierda, rect_texto, hd);
+    Texto(textos.izquierda, rect_texto, hd,  hd.white, round((rect_texto(4)-rect_texto(2))/2.5));
 
     % IMAGEN DERECHA
     Xpos = screenXpixels - margenes(1) - texturas.derecha.ancho;
@@ -28,11 +28,11 @@ function DibujarPreguntaImagen(hd, imagen, texturas, textos)
     %TEXTO DERECHA
     Ypos = margenes(2);
     rect_texto = [rect_imagen(1) Ypos rect_imagen(3) Ypos+textos_dimensiones(2)];
-    Texto(textos.derecha, rect_texto, hd);
+    Texto(textos.derecha, rect_texto, hd,  hd.white, round((rect_texto(4)-rect_texto(2))/2.5));
 
     % TEXTO SUPERIOR
     rect_texto = [0 round(screenYpixels/20) screenXpixels round(screenYpixels/6)];
-    Texto(textos.superior, rect_texto, hd, hd.white, round((rect_texto(4)-rect_texto(2))/2));
+    Texto(textos.superior, rect_texto, hd, hd.white, round((rect_texto(4)-rect_texto(2))/2.5));
     
     % IMAGEN CENTRAL
     DibujarTexturaCentrada(imagen, hd.window);

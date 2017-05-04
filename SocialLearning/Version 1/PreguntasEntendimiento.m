@@ -1,8 +1,10 @@
-function [log, exit] = PreguntasEntendimiento(hd, texturas, teclas, log)
+function [log, exit] = PreguntasEntendimiento(hd, texturas, teclas)
 
     textos.izquierda = 'positiva';
     textos.derecha = 'negativa';
     textos.superior = '¿Qué tipo de respuesta\n representa la siguiente imagen?';
+    
+    log = [];
     
     [log.sujeto_ira, exit] = PreguntaImagen(hd, texturas.sujetos.ira, texturas.opciones, textos, teclas);
     if exit

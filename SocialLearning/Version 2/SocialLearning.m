@@ -160,7 +160,7 @@ for x = 1:length(bloques)
 
 end
 
-log = PreguntasEntendimiento(hd, texturas, teclas, log);
+log.preguntas = PreguntasEntendimiento(hd, texturas, teclas);
 
 log.duracion = GetSecs - log.inicio;
 
