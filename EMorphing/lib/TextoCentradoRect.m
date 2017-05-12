@@ -1,4 +1,4 @@
-function Texto(texto, rect, hd, color, textSize)
+function TextoCentradoRect(texto, rect, hd, color, textSize)
 
     if nargin < 5
         textSize = rect(4) - rect(2);   

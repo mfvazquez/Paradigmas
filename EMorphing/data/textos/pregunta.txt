@@ -1,6 +1,11 @@
 1- Alegria
+
 2- Asco
+
 3- Ira
+
 4- Miedo
+
 5- Sorpresa
+
 6- Tristeza

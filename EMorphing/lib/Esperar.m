@@ -7,7 +7,7 @@ function [exit, respuesta, tiempo_respuesta, saltear_bloque] = Esperar(tiempo, b
     tiempo_respuesta = [];
     saltear_bloque = false;    
     while GetSecs - tStart < tiempo
-        [~, ~, keyCode, ~] = KbCheck;
+        [~, secs, keyCode, ~] = KbCheck;
         
         if keyCode(boton_salida)
             exit = true;
@@ -16,9 +16,9 @@ function [exit, respuesta, tiempo_respuesta, saltear_bloque] = Esperar(tiempo, b
         
         if ~isempty(botones)
             for i = 1:length(botones)
-                if keyCode(botones{i})
+                if keyCode(botones(i))
                     respuesta = i;
-                    tiempo_respuesta = GetSecs;
+                    tiempo_respuesta = secs;
                     return;
                 end
             end

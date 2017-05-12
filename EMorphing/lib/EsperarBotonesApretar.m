@@ -6,7 +6,7 @@ function [exit, respuesta, tiempo_respuesta] = EsperarBotonesApretar(botonSalida
     respuesta = [];
     tiempo_respuesta = [];
     while true
-        [~, keyCode, ~] =  KbPressWait;
+        [secs, keyCode, ~] =  KbPressWait;
         
         if keyCode(botonSalida)
             exit = true;
@@ -14,9 +14,9 @@ function [exit, respuesta, tiempo_respuesta] = EsperarBotonesApretar(botonSalida
         end
         
         for i = 1:length(botones)
-            if keyCode(botones{i})
+            if keyCode(botones(i))
                 respuesta = i;
-                tiempo_respuesta = GetSecs;
+                tiempo_respuesta = secs;
                 return;
             end
         end
