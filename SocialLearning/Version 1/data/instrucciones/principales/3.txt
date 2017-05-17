@@ -1,0 +1,6 @@
+Utilice las flechas para seleccionar la categoría. 
+Intente responder lo más rápido posible. 
+
+[respuestas]
+
+[mensaje_continuar]

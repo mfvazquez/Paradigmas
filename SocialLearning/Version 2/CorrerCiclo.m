@@ -75,6 +75,8 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         if strcmp(respuesta_correcta, respuesta_elegida)
             imagen_respuesta = imagenes.alegria;
             log_actual.accuracy = 1;
+        elseif strcmp(respuesta_correcta, 'C')
+            imagen_respuesta = imagenes.alegria;
         end
         
         if ~isempty(log)

@@ -43,11 +43,12 @@ log.secuencia = secuencia;
 
 %% INSTRUCCIONES
 instrucciones_dir = fullfile('data','instrucciones');
-instrucciones.principales = CargarTextosDeCarpeta(fullfile(instrucciones_dir, 'principales'));
-instrucciones.practica = fileread(fullfile(instrucciones_dir, 'practica.txt'));
-instrucciones.bloque = fileread(fullfile(instrucciones_dir, 'bloque.txt'));
-instrucciones.tarea = fileread(fullfile(instrucciones_dir, 'tarea.txt'));
-instrucciones.fin = fileread(fullfile(instrucciones_dir, 'fin.txt'));
+
+instrucciones.principales = CargarInstruccionesDir(fullfile(instrucciones_dir, 'principales'));
+instrucciones.practica = CargarInstruccion(fullfile(instrucciones_dir, 'practica.txt'));
+instrucciones.bloque = CargarInstruccion(fullfile(instrucciones_dir, 'bloque.txt'));
+instrucciones.tarea = CargarInstruccion(fullfile(instrucciones_dir, 'tarea.txt'));
+instrucciones.fin = CargarInstruccion(fullfile(instrucciones_dir, 'fin.txt'));
 
 
 %% BLOQUES
@@ -105,21 +106,25 @@ texturas.opciones = CargarTexturasDeCarpetaNombre(fullfile('data', 'imagenes','o
 log.inicio = GetSecs;
 
 % INSTRUCCIONES PRINCIPALES
+
 for x = 1:length(instrucciones.principales)
-    TextoCentrado(instrucciones.principales{x}, TAMANIO_INSTRUCCIONES, hd);
+    
+	PresentarInstruccion(hd, instrucciones.principales{x}, texturas);
+        
     Screen('Flip',hd.window);
     exit = EsperarBoton(teclas.continuar, teclas.salir);
     if exit
         Salir;
         return
     end
+    
 end
 
 for x = 1:length(bloques)
 
     % INSTRUCCIONES INICIO DE BLOQUE
     if x ~= 1
-        TextoCentrado(instrucciones.bloque, TAMANIO_INSTRUCCIONES, hd);
+        PresentarInstruccion(hd, instrucciones.bloque, texturas);
         Screen('Flip',hd.window);
         exit = EsperarBoton(teclas.continuar, teclas.salir);
         if exit
@@ -128,7 +133,7 @@ for x = 1:length(bloques)
     end
     
     % PRACTICA
-    TextoCentrado(instrucciones.practica, TAMANIO_INSTRUCCIONES, hd);
+    PresentarInstruccion(hd, instrucciones.practica, texturas);
     Screen('Flip',hd.window);
     exit = EsperarBoton(teclas.continuar, teclas.salir);
     if exit
@@ -141,7 +146,7 @@ for x = 1:length(bloques)
     end
 
     % TAREA
-    TextoCentrado(instrucciones.tarea, TAMANIO_INSTRUCCIONES, hd);
+    PresentarInstruccion(hd, instrucciones.tarea, texturas);
     Screen('Flip',hd.window);
     exit = EsperarBoton(teclas.continuar, teclas.salir);
     if exit
@@ -165,7 +170,7 @@ log.preguntas = PreguntasEntendimiento(hd, texturas, teclas);
 log.duracion = GetSecs - log.inicio;
 
 %% FIN
-TextoCentrado(instrucciones.fin, TAMANIO_INSTRUCCIONES, hd);
+PresentarInstruccion(hd, instrucciones.fin, texturas);
 Screen('Flip',hd.window);
 WaitSecs(1);
 

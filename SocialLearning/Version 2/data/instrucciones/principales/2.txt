@@ -1,11 +1,5 @@
-En la primer pantalla se le mostrará el número. 
-Luego deberá elegir a qué categoría pertenece.
-Preste atención a la ubicación de las categorías en las FLECHAS.
-Recibirá una respuesta visual sobre si su elección fue correcta o no.
-Intenta responder lo más rápido posible. 
-Si queres pausar el experimento apreta "P".
-¡Buena suerte!
+Primero se le presentará un número
 
+[numero]
 
-
-Presione ESPACIO para continuar.
+[mensaje_continuar]

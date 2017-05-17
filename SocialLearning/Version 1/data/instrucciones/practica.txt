@@ -1,6 +1,5 @@
-A continuación realizarás 2 ejercicios de prueba, 
-prestá atención y respondé lo más rápido posible. 
-Prestá atención a la posición de las TECLAS que ha cambiado.
+A continuación realizará 2 ejercicios de prueba, 
+preste atención y responda lo más rápido posible.
 
 
-Presione ESPACIO para continuar.
+[mensaje_continuar]
