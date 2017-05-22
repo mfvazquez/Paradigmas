@@ -1,4 +1,4 @@
-Utilice las flechas para seleccionar la categoría. 
+Deberá utilizar las flechas para seleccionar la categoría. 
 Intente responder lo más rápido posible. 
 
 [respuestas]

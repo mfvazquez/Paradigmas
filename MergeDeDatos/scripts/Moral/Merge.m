@@ -24,14 +24,14 @@ LG2	= [ 0	1	1	0	1	0	1	1	0	0	0	0	1	1	0	1	0	0	0	1	1	0	1	1 ];
 % end
 
 
-pacientes_dir = fullfile('logs','Pacientes');
+pacientes_dir = fullfile('logs');
 pacientes_arch = ArchivosDeCarpeta(pacientes_dir);
 pacientes = OrganizarDatos(pacientes_arch);
 moral.pacientes = ObtenerDatosTotales(pacientes, pacientes_dir);
 
 
 for x = 1:length(moral.pacientes)
-    GuardarExcel(moral.pacientes(x), fullfile('excel','pacientes'));
+    GuardarExcel(moral.pacientes(x), fullfile('excel'));
 end
 
 save('moral.mat', 'moral');
