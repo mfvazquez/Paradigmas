@@ -1,8 +1,0 @@
-Cuando la palabra desaparezca, aparecerá el signo “&”. 
-Al ver este signo “&”, tendrá que leer la palabra que 
-apareció pero en sentido INVERSO, o sea, de atrás para adelante 
-
-
-
-
-Presiona la BARRA ESPACIADORA para continuar 

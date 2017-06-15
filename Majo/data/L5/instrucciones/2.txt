@@ -1,7 +1,0 @@
-Cuando la palabra desaparezca, aparecerá el signo “&”. 
-Al ver este signo “&”, tendrá que leer la palabra TAL COMO APARECIÓ
-
-
-
-
-Presiona la BARRA ESPACIADORA para continuar

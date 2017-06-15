@@ -86,16 +86,16 @@ if ismac
     outdevice = strcmp('Built-in Output',{audiodevices.DeviceName});
     hd.outdevice = 1;
 elseif ispc
-%     audiodevices = PsychPortAudio('GetDevices',3);
-%     if ~isempty(audiodevices)
-%         %DMX audio
-%         hd.outdevice = audiodevices(1).DeviceIndex;
-%     else
+    audiodevices = PsychPortAudio('GetDevices',3);
+    if ~isempty(audiodevices)
+        %DMX audio
+        hd.outdevice = audiodevices(1).DeviceIndex;
+    else
         %Windows default audio
         audiodevices = PsychPortAudio('GetDevices',2);
         hd.outdevice = BuscarDeviceOutput(audiodevices);
 
-%     end
+    end
 else
     error('Unsupported OS platform!');
 end
@@ -104,17 +104,48 @@ InitializePsychSound(1);
 
 audio = bloques{1}.estimulos{1};
 
-hd.pahandle = PsychPortAudio('Open', hd.outdevice, 1, 1, 22050, 1);
-PsychPortAudio('Volume', hd.pahandle , 10);
+hd.master = PsychPortAudio('Open', hd.outdevice, 3+8, 1, 44100, 2);
+PsychPortAudio('Start', hd.master, 0, 0, 1);
+hd.play = PsychPortAudio('OpenSlave', hd.master, 1, 2, []);
+hd.rec = PsychPortAudio('OpenSlave', hd.master, 2, 2, []);
 
-PsychPortAudio('FillBuffer', hd.pahandle, audio.canal');    % Fill the audio playback buffer with the audio data 'wavedata':
 
-PsychPortAudio('Start', hd.pahandle);
-status = PsychPortAudio('GetStatus',hd.pahandle);  % Me fijo si esta reproduciendo
 
+PsychPortAudio('Volume', hd.play , 2);
+
+PsychPortAudio('FillBuffer', hd.play, [audio.canal'; audio.canal']);    % Fill the audio playback buffer with the audio data 'wavedata':
+
+inicio = PsychPortAudio('Start', hd.play, [], [], 1, [], []);
+status = PsychPortAudio('GetStatus',hd.play);  % Me fijo si esta reproduciendo
 while status.Active
     display asd
-    status = PsychPortAudio('GetStatus',hd.pahandle);
+    status = PsychPortAudio('GetStatus',hd.play);
 end
+fin_audio = GetSecs;
+PsychPortAudio('DeleteBsuffer');
+PsychPortAudio('Stop', hd.play);
 
-PsychPortAudio('DeleteBuffer');
+
+triggerlevel = 0.1;
+freq = 44100;
+
+
+PsychPortAudio('GetAudioData', hd.rec, 10);
+
+
+PsychPortAudio('Start', hd.rec);
+inicio_rec = GetSecs;
+display habla
+tstart = GetSecs;
+WaitSecs(3);
+[audiodata offset overflow tCaptureStart]= PsychPortAudio('GetAudioData', hd.rec);
+
+PsychPortAudio('Stop', hd.rec);
+PsychPortAudio('Stop', hd.master);
+PsychPortAudio('Close', hd.rec);
+PsychPortAudio('Close', hd.play);
+PsychPortAudio('Close', hd.master);
+
+sound(audiodata, freq)
+length(audiodata)/freq
+

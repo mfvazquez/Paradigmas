@@ -75,19 +75,18 @@ function hd = init_psych()
     %Mac
     if ismac
         audiodevices = PsychPortAudio('GetDevices');
-        outdevice = strcmp('Built-in Output',{audiodevices.DeviceName});
-        hd.outdevice = 1;
+        hd.audiodevice = 1;
     elseif ispc
-%         audiodevices = PsychPortAudio('GetDevices',3);
-%         if ~isempty(audiodevices)
-%             %DMX audio
-%             hd.outdevice = audiodevices(1).DeviceIndex;
-%         else
-            %Windows default audio
+        audiodevices = PsychPortAudio('GetDevices',3);
+        if ~isempty(audiodevices)
+            %DMX audio
+            hd.audiodevice = audiodevices(1).DeviceIndex;
+        else
+            Windows default audio
             audiodevices = PsychPortAudio('GetDevices',2);
-            hd.outdevice = BuscarDeviceOutput(audiodevices);
+            hd.audiodevice = BuscarDeviceOutput(audiodevices);
             
-%         end
+        end
     else
         error('Unsupported OS platform!');
     end

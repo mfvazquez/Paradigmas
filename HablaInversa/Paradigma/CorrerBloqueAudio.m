@@ -1,12 +1,12 @@
 function [exit, log] = CorrerBloqueAudio(hd, estimulos, datos, teclas, log)
 
-    hd.pahandle = PsychPortAudio('Open', hd.outdevice, 1, 1, 22050, 1);
+    hd.pahandle = PsychPortAudio('Open', hd.audiodevice, 1, 1, 44100, 2);
     PsychPortAudio('Volume', hd.pahandle , 10);
 
     for x = 1:length(estimulos)
         
-        recObj = audiorecorder(22050, 16, 1);
-        recObj.record;
+%         recObj = audiorecorder(22050, 16, 1);
+%         recObj.record;
         
         %% FIJACION
         [exit, log_actual.fijacion] = PresentarTexto(hd, teclas, '+', 0.3);
@@ -19,12 +19,12 @@ function [exit, log] = CorrerBloqueAudio(hd, estimulos, datos, teclas, log)
         log_actual.audio = PresentarAudio(hd, estimulos{x});
         
         
-        %% GRABACION        
-        [exit, log_actual.grabacion] = PresentarGrabacion(hd, '', datos, recObj);
-        
+%         %% GRABACION        
+%         [exit, log_actual.grabacion] = PresentarGrabacion(hd, '', datos, recObj);
+%         
         
         %% FIN DEL TRIAL
-        recObj.delete;        
+%         recObj.delete;        
         log{x} = log_actual;
         
         if exit
