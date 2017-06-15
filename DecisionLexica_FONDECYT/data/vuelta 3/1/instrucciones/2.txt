@@ -1,6 +1,6 @@
-Cuando sea una PALABRA REAL pulsa Ñ
+Cuando sea una PALABRA REAL pulsa -> (Flecha derecha)
 
-Cuando sea una PALABRA INVENTADA pulsa L
+Cuando sea una PALABRA INVENTADA pulsa <- (Flecha izquierda)
 
 
 

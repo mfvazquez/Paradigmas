@@ -24,8 +24,8 @@ function [log, exit] = CorrerSecuencia(bloque, hd, teclas, log, n_bloque)
             EnviarMarca(marca);
             log_actual.estimulo_onset.marca = marca;
         end
-%         GuardarPantalla(hd);
-        [exit, respuesta, tiempo_respuesta] = Esperar(TIEMPO_ESTIMULO, teclas.ExitKey, botones);
+
+        [exit, respuesta, tiempo_respuesta] = Esperar(TIEMPO_ESTIMULO, teclas.ExitKey, botones, teclas.Pausa);
         if exit
             return
         end
@@ -40,7 +40,7 @@ function [log, exit] = CorrerSecuencia(bloque, hd, teclas, log, n_bloque)
         %% VACIO
         if isempty(respuesta)
             [~, log_actual.vacio] = Screen('Flip', hd.window);
-            [exit, respuesta, tiempo_respuesta] = Esperar(TIEMPO_VACIO, teclas.ExitKey, botones);
+            [exit, respuesta, tiempo_respuesta] = Esperar(TIEMPO_VACIO, teclas.ExitKey, botones, teclas.Pausa);
             if exit
                 return
             end
@@ -73,7 +73,7 @@ function [log, exit] = CorrerSecuencia(bloque, hd, teclas, log, n_bloque)
         
         %% ESPERA
         Screen('Flip', hd.window);
-        [exit, ~] = Esperar(TiempoDeEspera(TIEMPO_ESPERA), teclas.ExitKey, []);
+        [exit, ~] = Esperar(TiempoDeEspera(TIEMPO_ESPERA), teclas.ExitKey, [], teclas.Pausa);
          
         if ~isempty(log)
            log{x} = log_actual;

@@ -1,6 +1,12 @@
-function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
+function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log, marca_prefijo)
+    
     global TAMANIO_TEXTO
-
+    
+    if ~isempty(marca_prefijo)
+        marca = marca_prefijo + 8;
+        EnviarMarca(marca);
+    end
+    
     for x = 1:size(trials,1)
 
         textos.inferior = trials{x,1};
@@ -26,7 +32,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         %% BLANK
         TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);
         Screen('Flip', hd.window);
-        [exit, ~] = Esperar(1+rand, teclas.salir,[], [], teclas.pausa);
+        [exit, ~] = Esperar(1+rand, teclas.salir,[], teclas.pausa);
         
         if exit 
             return
@@ -35,9 +41,13 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         %% ESTIMULO
         TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);       
         TextoCentrado(textos.inferior, TAMANIO_TEXTO ,hd);                
-        [~, OnSetTime] = Screen('Flip', hd.window);                
+        [~, OnSetTime] = Screen('Flip', hd.window);
+        if ~isempty(marca_prefijo)
+            marca = marca_prefijo + 1;
+            EnviarMarca(marca);
+        end
         
-        [exit, ~] = Esperar(1.5, teclas.salir,[], [], teclas.pausa);
+        [exit, ~] = Esperar(1.5, teclas.salir,[], teclas.pausa);
         if exit 
             return
         end
@@ -49,8 +59,12 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         %% BLANK
         TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);    
         [~, OnSetTime] = Screen('Flip', hd.window);
+        if ~isempty(marca_prefijo)
+            marca = marca_prefijo + 2;
+            EnviarMarca(marca);
+        end
 
-        [exit, ~] = Esperar(1.5, teclas.salir,[], [], teclas.pausa);
+        [exit, ~] = Esperar(1, teclas.salir,[], teclas.pausa);
         if exit 
             return
         end
@@ -63,6 +77,10 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);
         DibujarRespuesta(hd, texturas.opciones, textos);
         [~, OnSetTime] = Screen('Flip', hd.window);
+        if ~isempty(marca_prefijo)
+            marca = marca_prefijo + 3;
+            EnviarMarca(marca);
+        end
         
         if ~isempty(log)
             log_actual.opciones_onset = OnSetTime;
@@ -73,12 +91,16 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
             return
         end
         
-        if isempty(respuesta)            
-            if ~isempty(log)
-                log{x} = log_actual;
-            end
-            continue
-        elseif respuesta == 1
+        if ~isempty(marca_prefijo)           
+            marca = marca_prefijo + 3 + respuesta;            
+            EnviarMarca(marca);
+        end
+         
+        if ~isempty(log)
+            log{x} = log_actual;
+        end
+
+        if respuesta == 1
             respuesta_elegida = textos.izquierda;
         elseif respuesta == 2
             respuesta_elegida = textos.derecha;
@@ -103,7 +125,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         %% BLANK
         TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);
         [~, OnSetTime] = Screen('Flip', hd.window);
-        [exit, ~] = Esperar(0.5, teclas.salir,[], [], teclas.pausa);
+        [exit, ~] = Esperar(1, teclas.salir,[], teclas.pausa);
         if exit 
             return
         end
@@ -115,10 +137,20 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
         %% RESULTADO 
         DibujarTexturaCentrada(imagen_respuesta, hd.window);
         [~, OnSetTime] = Screen('Flip', hd.window);
+        if ~isempty(marca_prefijo)           
+            marca = marca_prefijo + 6;            
+            EnviarMarca(marca);
+        end
         
-        [exit, ~] = Esperar(1, teclas.salir,[], [], teclas.pausa);
+        [exit, ~] = Esperar(1, teclas.salir,[], teclas.pausa);
         if exit 
             return
+        end
+        
+        Screen('Flip', hd.window);
+        if ~isempty(marca_prefijo)           
+            marca = marca_prefijo + 7;            
+            EnviarMarca(marca);
         end
         
         if ~isempty(log)
@@ -130,6 +162,11 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log)
             log{x} = log_actual;
         end
         
+    end
+    
+    if ~isempty(marca_prefijo)           
+        marca = marca_prefijo + 9;            
+        EnviarMarca(marca);
     end
 
 end

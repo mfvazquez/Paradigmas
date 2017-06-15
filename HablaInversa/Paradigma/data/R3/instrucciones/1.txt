@@ -1,0 +1,9 @@
+A continuación escuchará FRASES de diferente longitud. 
+
+Inmediatamente después de que termine la frase, 
+tiene que REPETIRLA en el MISMO ORDEN que la escuchó.  
+
+
+
+
+Presiona la BARRA ESPACIADORA para continuar

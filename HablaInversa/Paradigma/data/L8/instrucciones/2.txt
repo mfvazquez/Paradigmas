@@ -1,0 +1,8 @@
+Cuando la  frases  desaparezca, aparecerá el signo “&”. 
+Al ver este signo “&”, tendrá que leer la  frase 
+que apareció al revés, es decir de atrás para adelante. 
+
+
+
+
+Presiona la BARRA ESPACIADORA para continuar

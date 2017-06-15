@@ -17,7 +17,8 @@ teclas.salir = KbName('ESCAPE');
 teclas.derecha = KbName('RightArrow');
 teclas.izquierda = KbName('LeftArrow');
 teclas.continuar = KbName('SPACE');
-teclas.pausa = KbName('P');
+teclas.pausa.inicio = KbName('P');
+teclas.pausa.fin = KbName('Q');
 
 %% NOMBRE
 
@@ -33,13 +34,16 @@ genero = opciones{choice};
 log.genero = genero;
 
 %% BLOQUE
-
+codificador = containers.Map({'S1' 'S2' 'N1' 'N2'}, [0 1 2 3]);
 secuencias = {'S1-N1-S2-N2' 'N1-S1-N2-S2' 'S2-N2-S1-N1' 'N2-S2-N1-S1'};
 choice = menu('Secuencia:', secuencias);
 secuencia = secuencias{choice};
 secuencia = strsplit(secuencia, '-');
+marcas_bloque = zeros(1,4);
+for x = 1:length(marcas_bloque)
+    marcas_bloque(x) = codificador(secuencia{x});
+end
 log.secuencia = secuencia;
-
 
 %% INSTRUCCIONES
 instrucciones_dir = fullfile('data','instrucciones');
@@ -97,11 +101,37 @@ global TAMANIO_TEXTO
 TAMANIO_TEXTO = 0.1;
 TAMANIO_INSTRUCCIONES = 0.03;
 
+global MARCA_PAUSA_INICIO
+global MARCA_PAUSA_FIN
+
+MARCA_PAUSA_INICIO = 254;
+MARCA_PAUSA_FIN = 255;
+
 %% IMAGENES
 
 texturas.figuras = CargarTexturasDeCarpetaNombre(fullfile('data', 'imagenes', 'figuras'), hd.window);
 texturas.sujetos = CargarTexturasDeCarpetaNombre(fullfile('data', 'imagenes', genero), hd.window);
 texturas.opciones = CargarTexturasDeCarpetaNombre(fullfile('data', 'imagenes','opciones'), hd.window);
+
+%% PUERTO PARALELO
+
+global pportobj pportaddr MARCA_DURACION
+
+MARCA_DURACION = 1e-3;
+pportaddr = 'C020';
+
+if exist('pportaddr','var') && ~isempty(pportaddr)
+    fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+    pportaddr = hex2dec(pportaddr);
+
+    pportobj = io32;
+    io32status = io32(pportobj);
+    EnviarMarca(0);
+    if io32status ~= 0
+        error('io32 failure: could not initialise parallel port.\n');
+    end
+end
+
 
 %% INICIO DEL PARADIGMA
 
@@ -142,7 +172,7 @@ for x = 1:length(bloques)
         break
     end
 
-    [exit, ~] = CorrerCiclo(hd, bloques{x}.practica, texturas, teclas, []);
+    [exit, ~] = CorrerCiclo(hd, bloques{x}.practica, texturas, teclas, [], []);
     if exit
         break
     end
@@ -156,7 +186,8 @@ for x = 1:length(bloques)
     end
 
     for i = 1:length(ciclos)
-        [exit, log.bloques{x}{i}] = CorrerCiclo(hd, bloques{x}.ciclos{i}, texturas, teclas, log.bloques{x}{i});
+        marca = ((i-1) + marcas_bloque(x)*length(ciclos))*10;
+        [exit, log.bloques{x}{i}] = CorrerCiclo(hd, bloques{x}.ciclos{i}, texturas, teclas, log.bloques{x}{i}, marca);
         if exit
             break;
         end

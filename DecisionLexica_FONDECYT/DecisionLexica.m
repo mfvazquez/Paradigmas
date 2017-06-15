@@ -25,6 +25,12 @@ global TIEMPO_ESTIMULO
 global TIEMPO_VACIO
 global TIEMPO_ESPERA
 
+global MARCA_PAUSA_INICIO
+global MARCA_PAUSA_FIN
+
+MARCA_PAUSA_INICIO = 254;
+MARCA_PAUSA_FIN = 255;
+
 MARCA_DURACION = 1e-3;
 
 keySet =   {'Wman', 'Wnman', 'Wabs', 'nWman', 'nWnman', 'nWabs'};
@@ -34,7 +40,7 @@ MARCAS = containers.Map(keySet,valueSet);
 TAMANIO_INSTRUCCIONES = 0.03;
 TAMANIO_ESTIMULOS = 0.05;
 
-TIEMPO_ESTIMULO = 0.15;
+TIEMPO_ESTIMULO = 0.3;
 TIEMPO_VACIO = 2.5;
 TIEMPO_ESPERA = [1.5 2.5];
 
@@ -56,17 +62,16 @@ if exist('pportaddr','var') && ~isempty(pportaddr)
     end
 end
 
-%% IMAGENES
-% global numero_imagen
-% numero_imagen = 1;
 
 %% BOTONES
 
 KbName('UnifyKeyNames');
 teclas.ExitKey = KbName('ESCAPE');
-teclas.Afirmativo = 192; %Numero de boton de la tecla Ñ
-teclas.Negativo = KbName('L');
+teclas.Negativo = KbName('LeftArrow');
+teclas.Afirmativo = KbName('RightArrow');
 teclas.Continuar = KbName('SPACE');
+teclas.Pausa.inicio = KbName('P');
+teclas.Pausa.fin = KbName('Q');
 
 %% DATOS
 
@@ -112,7 +117,6 @@ for x = 1:length(bloques)
     for y = 1:length(bloques{x}.instrucciones)
         TextoCentrado(bloques{x}.instrucciones{y}, TAMANIO_INSTRUCCIONES, hd);        
         Screen('Flip', hd.window);
-%         GuardarPantalla(hd);
         exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
         if exit
             break
@@ -125,7 +129,6 @@ for x = 1:length(bloques)
     % Practica
     TextoCentrado(bloques{x}.practica.instrucciones, TAMANIO_INSTRUCCIONES, hd);
     Screen('Flip', hd.window);
-%     GuardarPantalla(hd);
     exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
     if exit
         break
@@ -143,7 +146,6 @@ for x = 1:length(bloques)
         marca = x;
         EnviarMarca(marca);
     end
-%     GuardarPantalla(hd);
     exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
     if exit
         break
@@ -156,7 +158,6 @@ for x = 1:length(bloques)
     if x ~= length(bloques)
         TextoCentrado(TEXTO_PAUSA, TAMANIO_INSTRUCCIONES, hd);
         Screen('Flip', hd.window);
-%         GuardarPantalla(hd);
         exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
         if exit
             break
