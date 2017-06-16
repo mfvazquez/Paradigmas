@@ -1,0 +1,16 @@
+¿Listo para la prueba completa?
+
+RECUERDA 
+
+Las palabras pueden aparecer escritas al derecho o de forma inversa. 
+Si es una palabra que existe, por ejemplo “BOTELLA” tienes que 
+presionar la letra “m” ya sea que esté escrita al derecho, 
+es decir “BOTELLA” o de forma inversa, es decir “ALLETOB”. 
+
+Presiona “n” si la palabra que aparece en pantalla es 
+una palabra inventada, por ejemplo “LLOBATE”
+
+
+
+
+Presione ESPACIO para comenzar

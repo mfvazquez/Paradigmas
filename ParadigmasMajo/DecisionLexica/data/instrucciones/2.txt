@@ -1,0 +1,16 @@
+Cuando aparezca una palabra en pantalla tendrás que presionar 
+la tecla “m” si crees que es una palabra que existe, 
+o sea una palabra con significado, y tendrás que presionar 
+la tecla “z” si es una palabras inventando. 
+
+
+RECUERDA
+
+“m” si es una palabra que existe, con significado
+
+“n” si es una palabra inventada
+
+
+
+
+Presione ESPACIO para comenzar
