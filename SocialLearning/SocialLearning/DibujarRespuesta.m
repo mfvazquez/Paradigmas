@@ -1,13 +1,12 @@
 function DibujarRespuesta(hd, texturas, textos)
 
+global PROPORCION_MARGEN
+
 [screenXpixels, screenYpixels] = Screen('WindowSize', hd.window);
 
 TEXTOS_PROPORCION = [10 10]; % tamaño de los textos e imagenes respecto a las dimensiones de la ventana
-DISTANCIA_PROPORCION = [20 15]; % tamaño de las distancias entre textos e imagenes respecto a la ventana
-PROPORCION_MARGEN = [5 3]; % tamaño de los margenes de la ventana respecto a su tamaño
 
 textos_dimensiones = [round(screenXpixels/TEXTOS_PROPORCION(1)) round(screenYpixels/TEXTOS_PROPORCION(2))];
-distancias = [round(screenXpixels/DISTANCIA_PROPORCION(1)) round(screenYpixels/DISTANCIA_PROPORCION(2))];
 margenes = [round(screenXpixels/PROPORCION_MARGEN(1)) round(screenYpixels/PROPORCION_MARGEN(2))];
 
 % IMAGEN IZQUIERDA

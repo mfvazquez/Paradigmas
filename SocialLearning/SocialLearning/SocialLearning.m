@@ -97,15 +97,27 @@ hd = init_psych;
 
 global TAMANIO_INSTRUCCIONES
 global TAMANIO_TEXTO
+global TAMANIO_CRUZ
 
+TAMANIO_CRUZ = 0.1;
 TAMANIO_TEXTO = 0.1;
 TAMANIO_INSTRUCCIONES = 0.03;
+
 
 global MARCA_PAUSA_INICIO
 global MARCA_PAUSA_FIN
 
 MARCA_PAUSA_INICIO = 254;
 MARCA_PAUSA_FIN = 255;
+
+global PROPORCION_MARGEN
+% PRIMER ELEMENTO ES ANCHO Y SEGUNDO ELEMENTO ES LA ALTURA
+
+% define el tamaño del margen relativo al tamaño del monitor. 
+% Ej si es [5 3] habra 1/5 del ancho del monitor que estara en 
+% blanco del lado izquierdo y derecho. Lo mismo para la altura pero con 1/3
+PROPORCION_MARGEN = [3.5 3]; 
+
 
 %% IMAGENES
 
@@ -115,22 +127,22 @@ texturas.opciones = CargarTexturasDeCarpetaNombre(fullfile('data', 'imagenes','o
 
 %% PUERTO PARALELO
 
-global pportobj pportaddr MARCA_DURACION
-
-MARCA_DURACION = 1e-3;
-pportaddr = 'C020';
-
-if exist('pportaddr','var') && ~isempty(pportaddr)
-    fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-    pportaddr = hex2dec(pportaddr);
-
-    pportobj = io32;
-    io32status = io32(pportobj);
-    EnviarMarca(0);
-    if io32status ~= 0
-        error('io32 failure: could not initialise parallel port.\n');
-    end
-end
+% global pportobj pportaddr MARCA_DURACION
+% 
+% MARCA_DURACION = 1e-3;
+% pportaddr = 'C020';
+% 
+% if exist('pportaddr','var') && ~isempty(pportaddr)
+%     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+%     pportaddr = hex2dec(pportaddr);
+% 
+%     pportobj = io32;
+%     io32status = io32(pportobj);
+%     EnviarMarca(0);
+%     if io32status ~= 0
+%         error('io32 failure: could not initialise parallel port.\n');
+%     end
+% end
 
 
 %% INICIO DEL PARADIGMA

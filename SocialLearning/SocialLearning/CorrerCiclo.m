@@ -1,6 +1,6 @@
 function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log, marca_prefijo)
     
-    global TAMANIO_TEXTO
+    global TAMANIO_TEXTO TAMANIO_CRUZ
     
     if ~isempty(marca_prefijo)
         marca = marca_prefijo + 8;
@@ -30,7 +30,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log, marca_pref
         end
 
         %% BLANK
-        TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);
+        TextoCentrado('+', TAMANIO_CRUZ ,hd, [25 25 25]);
         Screen('Flip', hd.window);
         [exit, ~] = Esperar(1+rand, teclas.salir,[], teclas.pausa);
         
@@ -39,7 +39,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log, marca_pref
         end
         
         %% ESTIMULO
-        TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);       
+        TextoCentrado('+', TAMANIO_CRUZ ,hd, [25 25 25]);
         TextoCentrado(textos.inferior, TAMANIO_TEXTO ,hd);                
         [~, OnSetTime] = Screen('Flip', hd.window);
         if ~isempty(marca_prefijo)
@@ -57,7 +57,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log, marca_pref
         end
 
         %% BLANK
-        TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);    
+        TextoCentrado('+', TAMANIO_CRUZ ,hd, [25 25 25]);  
         [~, OnSetTime] = Screen('Flip', hd.window);
         if ~isempty(marca_prefijo)
             marca = marca_prefijo + 2;
@@ -74,7 +74,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log, marca_pref
         end
         
         %% RESPUESTA
-        TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);
+        TextoCentrado('+', TAMANIO_CRUZ ,hd, [25 25 25]);
         DibujarRespuesta(hd, texturas.opciones, textos);
         [~, OnSetTime] = Screen('Flip', hd.window);
         if ~isempty(marca_prefijo)
@@ -123,7 +123,7 @@ function [exit, log] = CorrerCiclo(hd, trials, texturas, teclas, log, marca_pref
         end
         
         %% BLANK
-        TextoCentrado('+', TAMANIO_TEXTO ,hd, [25 25 25]);
+        TextoCentrado('+', TAMANIO_CRUZ ,hd, [25 25 25]);
         [~, OnSetTime] = Screen('Flip', hd.window);
         [exit, ~] = Esperar(1, teclas.salir,[], teclas.pausa);
         if exit 

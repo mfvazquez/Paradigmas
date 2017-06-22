@@ -12,7 +12,7 @@ addpath('lib');
 %% ELEGIR BLOQUE
 bloques = ArchivosDeCarpeta(fullfile('data','bloques'));
 choice = menu('Bloque:',bloques);
-bloque_archivo = bloques{choice};
+bloque_carpeta = bloques{choice};
 
 %% NOMBRE
 
@@ -59,14 +59,14 @@ end
 %% CARGO TEXTOS
 
 % INSTRUCCIONES
-instrucciones = fileread(fullfile('data','textos','instrucciones.txt'));
+instrucciones = fileread(fullfile('data','bloques',bloque_carpeta,'instrucciones.txt'));
 
 % OPCIONES
-texto_opciones = fileread(fullfile('data','textos','pregunta.txt'));
-
+texto_opciones = fileread(fullfile('data','bloques',bloque_carpeta,'pregunta.txt'));
+log.opciones = texto_opciones;
 %% CARGO BLOQUE
 
-bloque = CargarCSV(fullfile('data','bloques',bloque_archivo), ';');
+bloque = CargarCSV(fullfile('data','bloques',bloque_carpeta,'estimulos.csv'), ';');
 for x = 1:length(bloque)
     bloque{x,1} = str2double(bloque{x,1});
 end
@@ -102,10 +102,10 @@ if exit
     return
 end
 % BLOQUE
-[~, log.bloque] = CorrerBloque(hd, texturas, botones, bloque, texto_opciones, log.bloque, emociones);
+[~, log.bloque] = CorrerBloque(hd, texturas, botones, bloque, texto_opciones, log.bloque);
 
 %% GUARDO LOG
-log_file = PrepararLog('log', nombre, ['EMorphing_Bloque' bloque_archivo]);
+log_file = PrepararLog('log', nombre, ['EMorphing_Bloque' bloque_carpeta]);
 save(log_file, 'log');
 
 Salir;

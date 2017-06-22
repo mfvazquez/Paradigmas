@@ -1,4 +1,4 @@
-function [exit, log] = CorrerBloque(hd, texturas, botones, bloque, texto_opciones, log, emociones)
+function [exit, log] = CorrerBloque(hd, texturas, botones, bloque, texto_opciones, log)
 
     global TAMANIO_TEXTO
 
@@ -24,7 +24,7 @@ function [exit, log] = CorrerBloque(hd, texturas, botones, bloque, texto_opcione
         log{x}.opciones_respuesta_tiempo = tiempo_respuesta;
         log{x}.opciones_respuesta_reaction_time = tiempo_respuesta - OnSetTime;
         log{x}.opciones_emocion_elegida_numero = respuesta;
-        log{x}.opciones_emocion_elegida = emociones{respuesta};
+        log{x}.opciones_emocion_elegida = respuesta;
         
         log{x}.accuracy = 0;
         if strcmp(log{x}.opciones_emocion_elegida, log{x}.emocion)
