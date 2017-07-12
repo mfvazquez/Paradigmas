@@ -1,11 +1,9 @@
-1- Levantó la comisura de los labios
+1 - Levantó la comisura de los labios
 
-2- Frunció la nariz
+2 - Frunció la nariz
 
-3- Contrajo el ceño
+3 - Levantó las cejas
 
-4- Tensó el labio inferior
+4 - Entrecerró los ojos
 
-5- Arqueó las cejas
-
-6- Contrajo los párpados
+5 - Frunció el ceño

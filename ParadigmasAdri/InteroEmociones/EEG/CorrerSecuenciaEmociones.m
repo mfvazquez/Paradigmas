@@ -47,14 +47,17 @@ function [log, exit] = CorrerSecuenciaEmociones(bloque, n_bloque, hd, teclas, lo
         EnviarMarca(150);
     end
     
-    [exit, ~, ~, saltear_bloque] = Esperar(0.2, ExitKey, {}, botones_salteado);
+    [exit, ~, ~, saltear_bloque] = Esperar(0.5, ExitKey, {}, botones_salteado);
     if exit || saltear_bloque
         return;
     end
 
     %% VACIO
     Screen('Flip', hd.window);
-    WaitSecs(0.5);
+    [exit, ~, ~, saltear_bloque] = Esperar(0.5, ExitKey, {}, botones_salteado);
+    if exit || saltear_bloque
+        return;
+    end
           
     for i = 1:length(texturas)
         
@@ -65,23 +68,33 @@ function [log, exit] = CorrerSecuenciaEmociones(bloque, n_bloque, hd, teclas, lo
         if ~practica && EEG
             EnviarMarca(bloque.codigos(archivos{i}))
         end
-        duracion_estimulo
-        [exit, respuesta, tiempo, saltear_bloque] = Esperar(duracion_estimulo, ExitKey, botones, botones_salteado);
+        [exit, respuesta, tiempo, saltear_bloque] = Esperar(0.2, ExitKey, botones, botones_salteado);
         if exit || saltear_bloque
             return;
         end
         
+        
+        %% VACIO
+        if isempty(respuesta)
+            [~, OnSetTime] = Screen('Flip', hd.window);
+            log_trial.vacio = OnSetTime;
+            [exit, respuesta, tiempo, saltear_bloque] = Esperar(0.8, ExitKey, botones, botones_salteado);
+            if exit || saltear_bloque
+                return;
+            end
+        end
+        
         %% PREGUNTA
         if isempty(respuesta)
-        
-            TextoCentrado(TITULO, TAMANIO_TEXTO, hd);
+            DibujarReferencias(hd, bloque.textos_botones, TAMANIO_INSTRUCCIONES);
             if i == 1
-                DibujarReferencias(hd, bloque.textos_botones, TAMANIO_INSTRUCCIONES);
+                TextoCentrado(TITULO, TAMANIO_TEXTO, hd);
             end
             [~, OnSetTime] = Screen('Flip', hd.window);
 
             log_trial.pregunta = OnSetTime;
-            [exit, respuesta, tiempo, saltear_bloque] = Esperar(1.5, ExitKey, botones, botones_salteado);
+            [exit, respuesta, tiempo, saltear_bloque] = EsperarBotones(ExitKey, botones, botones_salteado);
+%             [exit, respuesta, tiempo, saltear_bloque] = Esperar(1.5, ExitKey, botones, botones_salteado);
             if exit || saltear_bloque
                 return;
             end
@@ -123,13 +136,19 @@ function [log, exit] = CorrerSecuenciaEmociones(bloque, n_bloque, hd, teclas, lo
         
  
         
-        %% OFFSET
+        %% CRUZ DE FIJACION
+        TextoCentrado('+', TAMANIO_TEXTO, hd);
         [~, OnSetTime] = Screen('Flip', hd.window);
-        duracion = rand*0.5+0.7;
+        log_trial.fijacion = OnSetTime;
+        [exit, ~, ~, saltear_bloque] = Esperar((rand*0.1)+0.4, ExitKey, {}, botones_salteado);
+        if exit || saltear_bloque
+            return;
+        end
         
+        %% OFFSET
+        [~, OnSetTime] = Screen('Flip', hd.window);        
         log_trial.offset_time = OnSetTime;
-        log_trial.offset_duracion = duracion;
-        [exit, ~, ~, saltear_bloque] = Esperar(duracion, ExitKey, {}, botones_salteado);
+        [exit, ~, ~, saltear_bloque] = Esperar(0.5, ExitKey, {}, botones_salteado);
         if exit || saltear_bloque
             return;
         end

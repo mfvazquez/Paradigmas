@@ -16,7 +16,7 @@ function bloque = CargarBloqueInteroMotor(carpeta, num_bloque)
     end
     
     if exist(archivo_audio, 'file') == 2
-        [bloque.audio, bloque.freq] = wavread(archivo_audio);
+        [bloque.audio, bloque.freq] = audioread(archivo_audio);
     end
 
 end

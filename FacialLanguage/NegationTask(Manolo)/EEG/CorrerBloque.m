@@ -21,15 +21,12 @@ function [exit, log] = CorrerBloque(bloque, entrenamiento, log)
                 return;
             end
         end
-        [exit, accuracy, stat, log{n}] = CorrerSecuencia(bloque{i}, entrenamiento, stat, log{n});
-        log{n}.secuencia = bloque{i};
+        [exit, stat, log{n}] = CorrerSecuencia(bloque{i}, entrenamiento, stat);
         
         if exit
             return;
         end
-        
-        log{n}.amarillo.relativo = log{n}.amarillo.absoluto - log{n}.estimulo{DOT.STIM(1)}{DOT.STIM(2)};
-        
+                
         n = n + 1;
     end
 

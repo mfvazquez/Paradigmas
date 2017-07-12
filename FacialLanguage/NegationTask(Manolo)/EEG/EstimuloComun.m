@@ -4,15 +4,12 @@ function [exit, respuesta, log] = EstimuloComun(texto, TIEMPO, botones, marca, e
     global TEXT_SIZE_STIM
     global ExitKey
     global MARCAS
-    global pportobj pportaddr
     
     TextoCentrado(texto, TEXT_SIZE_STIM);
     [~, OnSetTime] = Screen('Flip', hd.window);
     log = OnSetTime;
     if ~entrenamiento
-        io32(pportobj,pportaddr, marca);
-        WaitSecs(MARCAS.DURACION);
-        io32(pportobj,pportaddr,0);
+        EnviarMarca(marca);
     end 
     
     respuesta.valor = '';

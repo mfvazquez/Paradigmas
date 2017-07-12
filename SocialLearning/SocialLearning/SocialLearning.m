@@ -1,4 +1,4 @@
-function SocialLearning()
+% function SocialLearning()
 
 clc;
 sca;
@@ -34,14 +34,14 @@ genero = opciones{choice};
 log.genero = genero;
 
 %% BLOQUE
-codificador = containers.Map({'S1' 'S2' 'N1' 'N2'}, [0 1 2 3]);
-secuencias = {'S1-N1-S2-N2' 'N1-S1-N2-S2' 'S2-N2-S1-N1' 'N2-S2-N1-S1'};
+codificador = containers.Map({'S1' 'S2' 'S3' 'NS1' 'NS2' 'NS3'}, [1 2 3 4 5 6]);
+secuencias = {'S1-NS1-S2-NS2-S3-NS3' 'NS1-S1-NS2-S2-NS3-S3' 'S1-NS1-S3-NS3-S2-NS2' 'NS1-S1-NS3-S3-NS2-S2' 'S2-NS2-S1-NS1-S3-NS3' 'NS2-S2-NS1-S1-NS3-S3' 'S2-NS2-S3-NS3-S1-NS1' 'NS2-S2-NS3-S3-NS1-S1' 'S3-NS3-S1-NS1-S2-NS2' 'NS3-S3-NS1-S1-NS2-S2' 'S3-NS3-S2-NS2-S1-NS1' 'NS3-S3-NS2-S2-NS1-S1'};
 choice = menu('Secuencia:', secuencias);
 secuencia = secuencias{choice};
 secuencia = strsplit(secuencia, '-');
-marcas_bloque = zeros(1,4);
+marcas_bloque = zeros(1,6);
 for x = 1:length(marcas_bloque)
-    marcas_bloque(x) = codificador(secuencia{x});
+    marcas_bloque(x) = codificador(secuencia{x}); 
 end
 log.secuencia = secuencia;
 
@@ -53,9 +53,6 @@ instrucciones.practica = CargarInstruccion(fullfile(instrucciones_dir, 'practica
 instrucciones.bloque = CargarInstruccion(fullfile(instrucciones_dir, 'bloque.txt'));
 instrucciones.tarea = CargarInstruccion(fullfile(instrucciones_dir, 'tarea.txt'));
 instrucciones.fin = CargarInstruccion(fullfile(instrucciones_dir, 'fin.txt'));
-
-
-
 
 %% BLOQUES
 
@@ -127,23 +124,27 @@ texturas.opciones = CargarTexturasDeCarpetaNombre(fullfile('data', 'imagenes','o
 
 %% PUERTO PARALELO
 
-% global pportobj pportaddr MARCA_DURACION
-% 
-% MARCA_DURACION = 1e-3;
-% pportaddr = 'C020';
-% 
-% if exist('pportaddr','var') && ~isempty(pportaddr)
-%     fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-%     pportaddr = hex2dec(pportaddr);
-% 
-%     pportobj = io32;
-%     io32status = io32(pportobj);
-%     EnviarMarca(0);
-%     if io32status ~= 0
-%         error('io32 failure: could not initialise parallel port.\n');
-%     end
-% end
+global pportobj pportaddr MARCA_DURACION EEG
 
+EEG = false;
+
+MARCA_DURACION = 1e-3;
+pportaddr = 'C020';
+
+if EEG
+
+if exist('pportaddr','var') && ~isempty(pportaddr)
+    fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
+    pportaddr = hex2dec(pportaddr);
+
+    pportobj = io64;
+    io64status = io64(pportobj);
+    EnviarMarca(0);
+    if io64status ~= 0
+        error('io64 failure: could not initialise parallel port.\n');
+    end
+end
+end
 
 %% INICIO DEL PARADIGMA
 
@@ -198,14 +199,14 @@ for x = 1:length(bloques)
     end
 
     for i = 1:length(ciclos)
-        marca = ((i-1) + marcas_bloque(x)*length(ciclos))*10;
+        marca = ((i-1) + marcas_bloque(x)*length(ciclos));
         [exit, log.bloques{x}{i}] = CorrerCiclo(hd, bloques{x}.ciclos{i}, texturas, teclas, log.bloques{x}{i}, marca);
         if exit
             break;
         end
     end
     if exit
-        break
+        break 
     end
 
 end
@@ -226,4 +227,4 @@ save(log_file, 'log');
 %% SALIR
 Salir;
 
-end
+% end

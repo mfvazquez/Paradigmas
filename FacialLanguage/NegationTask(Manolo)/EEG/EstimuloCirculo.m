@@ -1,11 +1,10 @@
-function [exit, respuesta, log] = EstimuloCirculo(texto, TIEMPOS, amarillo, log, marcas, entrenamiento)
+function [exit, respuesta, log] = EstimuloCirculo(texto, TIEMPOS, amarillo, marcas, entrenamiento)
     
     global hd
     global DOT
     global TEXT_SIZE_STIM
     global ExitKey
     global MARCAS
-    global pportobj pportaddr
     
     dot_pos = zeros(1,4);
     [screenXpixels, screenYpixels] = Screen('WindowSize', hd.window);
@@ -17,7 +16,7 @@ function [exit, respuesta, log] = EstimuloCirculo(texto, TIEMPOS, amarillo, log,
     
     respuesta.valor = '';
     respuesta.tiempo = NaN;
-    
+    log = cell(1,3);
     for i = 1:length(TIEMPOS)
         
         TextoCentrado(texto, TEXT_SIZE_STIM);
@@ -32,9 +31,11 @@ function [exit, respuesta, log] = EstimuloCirculo(texto, TIEMPOS, amarillo, log,
         [~, OnSetTime] = Screen('Flip', hd.window);
         log{i} = OnSetTime;
         if ~entrenamiento
-            io32(pportobj,pportaddr, marcas{i});
-            WaitSecs(MARCAS.DURACION);
-            io32(pportobj,pportaddr,0);
+            if i == DOT.STIM(2) && amarillo
+                EnviarMarca(marcas{i} + 1);
+            else
+                EnviarMarca(marcas{i});
+            end
         end 
         if i >= DOT.STIM(2) && amarillo && isempty(respuesta.valor)
             if ~entrenamiento

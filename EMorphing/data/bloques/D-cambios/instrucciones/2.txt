@@ -1,0 +1,15 @@
+Las opciones de respuesta para señalar el cambio son:
+
+1 - Levantó la comisura de los labios
+
+2 - Frunció la nariz
+
+3 - Levantó las cejas
+
+4 - Entrecerró los ojos
+
+5 - Frunció el ceño
+
+
+
+Ahora, presione ENTER para continuar.

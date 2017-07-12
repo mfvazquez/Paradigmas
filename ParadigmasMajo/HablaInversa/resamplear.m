@@ -7,7 +7,7 @@ freq_deseada = 44100;
 for x = 1:length(secuencia)
         
     
-    data_dir = fullfile('data',secuencia{x}, 'estimulos');
+    data_dir = fullfile('data',secuencia{x}, 'practica');
     archivos = ArchivosDeCarpeta(data_dir);
         
     for y = 1:length(archivos)

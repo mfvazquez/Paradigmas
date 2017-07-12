@@ -10,7 +10,7 @@ function [exit, log] = CorrerBloqueAudio(hd, estimulos, datos, teclas, log)
     PsychPortAudio('GetAudioData', rec, 10); % reservo 10 segundos de grabacion 
     PsychPortAudio('Volume', reproductor , 1);
 
-    for x = 1:length(estimulos)        
+    for x = 1:length(estimulos)  
         %% FIJACION
         [exit, log_actual.fijacion] = PresentarTexto(hd, teclas, '+', 0.3);
         if exit
@@ -24,7 +24,7 @@ function [exit, log] = CorrerBloqueAudio(hd, estimulos, datos, teclas, log)
         
         
         %% GRABACION   5ms
-        log_actual.grabacion = PresentarGrabacion(rec, datos);        
+        log_actual.grabacion = PresentarGrabacion(rec, datos, teclas);        
         log_actual.reaction_time = log_actual.grabacion.hablo_t+log_actual.grabacion.inicio_t-log_actual.audio.end;
         
         

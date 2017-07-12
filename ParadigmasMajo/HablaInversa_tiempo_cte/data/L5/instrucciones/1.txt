@@ -1,7 +1,0 @@
-A continuación se le presentarán una serie de palabras en la pantalla.  
-Cada palabra permanecerá por un breve periodo de tiempo y luego desaparecerá. 
-
-
-
-
-Presiona la BARRA ESPACIADORA para continuar

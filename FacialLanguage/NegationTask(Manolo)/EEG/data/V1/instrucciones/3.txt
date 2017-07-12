@@ -1,20 +1,23 @@
-Al final de algunas frases, aparecerá un signo de interrogación (?) y, a continuación, una frase.
+Al final de algunas frases, aparecerá un signo de interrogación (?) 
+y, a continuación, una pregunta que refiere a la consigna anterior.
 
-Si la frase coincide LITERALMENTE con la que acabas de leer, presiona con tu mano izquierda 
-la tecla V (CORRECTO) y, si la frase no se corresponde de manera literal, pulsa la tecla B (INCORRECTO).
 
-Por ejemplo, si acabas de leer la frase "Ahora sí encenderás el televisor" y luego aparece (?), 
-hay varias opciones:
+Su tarea es contestar si, según la oración, la acción SÍ se realizará 
+o NO se realizará. Presione la FLECHA IZQUIERDA para decir SÍ 
+y la FLECHA DERECHA para decir NO.
 
-a) Que aparezca exactamente la misma frase: "Ahora sí encenderás el televisor" (sería CORRECTO)
 
-b) Que aparezcan versiones incorrectas de la frase, como por ejemplo:
+Por ejemplo, al leer la frase "Ahora sí encenderás el televisor", 
+si luego aparece (?), con la pregunta "¿Encenderás el televisor?",
+deberás presionar SÍ (FLECHA IZQUIERDA).
+  
 
-- "Ahora NO encenderás el televisor" (INCORRECTO).
+Y al leer la frase "Ahora no firmarás el papel", si luego aparece (?), 
+con la pregunta "¿Firmarás el papel?",
+deberás presionar NO (FLECHA DERECHA).
 
-- "Ahora sí APAGARÁS el televisor" (INCORRECTO).
 
-- "Ahora sí encenderás el COMPUTADOR" (INCORRECTO)
+
 
 Si tienes alguna duda, pregunta al experimentador/a.
 

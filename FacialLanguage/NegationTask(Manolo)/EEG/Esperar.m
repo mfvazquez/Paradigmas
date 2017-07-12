@@ -2,13 +2,11 @@
 % botones.
 function [exit, respuesta] = Esperar(tiempo, botonSalida, botones, marca)
 
-    global MARCAS
-    global pportobj pportaddr
-
     exit = false;
     tStart = GetSecs;
     respuesta.valor = '';
     respuesta.tiempo = NaN;
+    respuesta.botones = botones;
     while GetSecs - tStart < tiempo
         [~, ~, keyCode, ~] = KbCheck;
         
@@ -23,9 +21,7 @@ function [exit, respuesta] = Esperar(tiempo, botonSalida, botones, marca)
                     respuesta.valor = botones{i}.KEY_VALUE;
                     respuesta.tiempo = GetSecs;
                         if ~isempty(marca)
-                            io32(pportobj,pportaddr, marca);
-                            WaitSecs(MARCAS.DURACION);
-                            io32(pportobj,pportaddr,0);
+                            EnviarMarca(marca);
                         end 
                     
                     return;

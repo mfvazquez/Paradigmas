@@ -1,4 +1,4 @@
-function [exit, respuesta, log] = EstimuloPregunta(texto, TIEMPOS, log, marcas, entrenamiento)
+function [exit, respuesta, log] = EstimuloPregunta(texto, TIEMPOS, marcas, entrenamiento)
    
     global hd
     global ExitKey
@@ -7,8 +7,6 @@ function [exit, respuesta, log] = EstimuloPregunta(texto, TIEMPOS, log, marcas, 
     global OPCION_IZQ
     global OPCION_DER
     global OPCION_DIST
-    global MARCAS
-    global pportobj pportaddr
 
     
     respuesta.valor = '';
@@ -18,9 +16,7 @@ function [exit, respuesta, log] = EstimuloPregunta(texto, TIEMPOS, log, marcas, 
     [~, OnSetTime] = Screen('Flip', hd.window);
     log{1} = OnSetTime;
     if ~entrenamiento
-        io32(pportobj,pportaddr, marcas{1});
-        WaitSecs(MARCAS.DURACION);
-        io32(pportobj,pportaddr,0);
+        EnviarMarca(marcas{1});
     end     
     [exit, ~] = Esperar(TIEMPOS{1}, ExitKey, [], []);
     if exit
@@ -50,10 +46,8 @@ function [exit, respuesta, log] = EstimuloPregunta(texto, TIEMPOS, log, marcas, 
     [~, OnSetTime] = Screen('Flip', hd.window);
     log{2} = OnSetTime;
     if ~entrenamiento
-        io32(pportobj,pportaddr, marcas{2});
-        WaitSecs(MARCAS.DURACION);
-        io32(pportobj,pportaddr,0);
+        EnviarMarca(marcas{2});
     end 
     [exit, respuesta] = Esperar(TIEMPOS{2}, ExitKey, {OPCION_IZQ OPCION_DER}, []);
-
+    
 end

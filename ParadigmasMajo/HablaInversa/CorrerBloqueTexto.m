@@ -30,7 +30,7 @@ function [exit, log] = CorrerBloqueTexto(hd, estimulos, datos, teclas, log)
         %% GRABACION
         TextoCentrado('&', TAMANIO_TEXTO ,hd);    
         Screen('Flip', hd.window);    
-        log_actual.grabacion = PresentarGrabacion(rec, datos);
+        log_actual.grabacion = PresentarGrabacion(rec, datos, teclas);
         
         %% FIN DEL TRIAL
         log{x} = log_actual;

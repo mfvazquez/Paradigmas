@@ -1,4 +1,4 @@
-function [exit, accuracy, stat, log] = CorrerSecuencia(secuencia, entrenamiento, stat, log)
+function [exit, stat, log] = CorrerSecuencia(secuencia, entrenamiento, stat)
 
     global hd
     global ExitKey
@@ -6,9 +6,7 @@ function [exit, accuracy, stat, log] = CorrerSecuencia(secuencia, entrenamiento,
     global PREGUNTA
     global TIEMPOS
     global MARCAS
-    global pportobj pportaddr
     
-    accuracy = 0;
     exit = false;
 
     % SIN PREGUNTA
@@ -28,20 +26,21 @@ function [exit, accuracy, stat, log] = CorrerSecuencia(secuencia, entrenamiento,
     for i = 1:largo
         
         if i == DOT.STIM(1)
-            [exit, respuesta_dot, log.estimulo{i}] = EstimuloCirculo(secuencia{i}, TIEMPOS.ESTIMULOS{i}, amarillo, log.estimulo{i}, MARCAS.ESTIMULOS{i}, entrenamiento);
+            [exit, respuesta_dot, log.estimulo{i}] = EstimuloCirculo(secuencia{i}, TIEMPOS.ESTIMULOS{i}, amarillo, MARCAS.ESTIMULOS{i}, entrenamiento);
             if exit
                 return
             end
-            log.amarillo.absoluto = respuesta_dot.tiempo;
+            log.respuesta_amarillo = respuesta_dot.tiempo;
         elseif i == PREGUNTA.STIM;
-            [exit, respuesta, log.estimulo{i}] = EstimuloPregunta(secuencia{i}, TIEMPOS.ESTIMULOS{i}, log.estimulo{i}, MARCAS.ESTIMULOS{i}, entrenamiento);
+            pregunta = ['¿' secuencia{4} ' ' secuencia{5} ' ' secuencia{6}(1:end-1) '?'];
+            [exit, respuesta, log.estimulo{i}] = EstimuloPregunta(pregunta, TIEMPOS.ESTIMULOS{i}, MARCAS.ESTIMULOS{i}, entrenamiento);
             if exit
                 return
             end
                 if isempty(respuesta.valor) % Sin respuesta
                     accuracy = 0;
                     marca_enviar = 0;
-                elseif respuesta.valor == secuencia{end-1} % Respuesta Correcta
+                elseif strcmp(respuesta.valor,secuencia{3}) % Respuesta Correcta
                     accuracy = 1;
                     marca_enviar = MARCAS.ACIERTO;
                 else % Respuesta incorrecta
@@ -49,15 +48,15 @@ function [exit, accuracy, stat, log] = CorrerSecuencia(secuencia, entrenamiento,
                     marca_enviar = MARCAS.ERROR;
                 end
                 if ~entrenamiento
-                    io32(pportobj,pportaddr, marca_enviar);
-                    WaitSecs(MARCAS.DURACION);
-                    io32(pportobj,pportaddr,0);
+                    EnviarMarca(marca_enviar)
                 end
-
-                log.respuesta.accuracy = accuracy;
-                log.respuesta.tiempo = respuesta.tiempo;
+                log.respuesta_correcta = secuencia{3};
+                log.respuesta_accuracy = accuracy;
+                log.respuesta_tiempo = respuesta.tiempo;
+                log.respuesta_elegida = respuesta.valor;
+                log.secuencia = secuencia(2:6);
             if entrenamiento
-                reaction_time = respuesta.tiempo - log.estimulo{PREGUNTA.STIM}{2};
+                reaction_time = respuesta.tiempo - log.estimulo{PREGUNTA.STIM}{end};
                 stat = FeedbackDisplay(accuracy, reaction_time, stat);
             end
         else
@@ -66,9 +65,9 @@ function [exit, accuracy, stat, log] = CorrerSecuencia(secuencia, entrenamiento,
                 if exit
                     return
                 end
-                log.amarillo.absoluto = respuesta_dot.tiempo;
+                log.respuesta_amarillo = respuesta_dot.tiempo;
             else
-                [exit, ~, log.estimulo{i}{1}] = EstimuloComun(secuencia{i}, TIEMPOS.ESTIMULOS{i}, [], MARCAS.ESTIMULOS{i}, entrenamiento);
+                [exit, ~, log.estimulo{i}] = EstimuloComun(secuencia{i}, TIEMPOS.ESTIMULOS{i}, [], MARCAS.ESTIMULOS{i}, entrenamiento);
                 if exit
                     return
                 end
@@ -85,13 +84,21 @@ function [exit, accuracy, stat, log] = CorrerSecuencia(secuencia, entrenamiento,
             if exit
                 return
             end
-            log.amarillo.absoluto = respuesta_dot.tiempo;
+            log.respuesta_amarillo = respuesta_dot.tiempo;
         else
             [exit, ~] = Esperar(TIEMPOS.BLANCOS{i}, ExitKey, [], []);
             if exit 
                 return
             end
         end
+    end
+    
+    if isfield(log,'respuesta_tiempo')
+        log.pregunta_reaction_time =  log.respuesta_tiempo - log.estimulo{PREGUNTA.STIM}{end};
+    end
+    
+    if amarillo && isfield(log,'respuesta_amarillo')
+        log.amarillo_reaction_time = log.respuesta_amarillo - log.estimulo{DOT.STIM(1)}{DOT.STIM(2)};
     end
 
 end

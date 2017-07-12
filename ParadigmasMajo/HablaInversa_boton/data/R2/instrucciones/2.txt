@@ -1,8 +1,0 @@
-Inmediatamente después de escuchar la palabra,  
-tiene que REPETIR lo que escuchó pero de forma INVERSA, 
-es decir de atrás para adelante. 
-
-
-
-
-Presiona la BARRA ESPACIADORA para continuar 

@@ -19,7 +19,7 @@ global pportobj pportaddr MARCA_DURACION
 
 MARCA_DURACION = 1e-3;
 
-EEG = false;
+EEG = true;
 
 TAMANIO_TEXTO = 0.05;
 TAMANIO_INSTRUCCIONES = 0.03;
@@ -36,13 +36,13 @@ if EEG
         fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
         pportaddr = hex2dec(pportaddr);
 
-        pportobj = io32;
-        io32status = io32(pportobj);
+        pportobj = io64;
+        io64status = io64(pportobj);
 
         EnviarMarca(0);
         
-        if io32status ~= 0
-            error('io32 failure: could not initialise parallel port.\n');
+        if io64status ~= 0
+            error('io64 failure: could not initialise parallel port.\n');
         end
     end
 end

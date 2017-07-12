@@ -1,0 +1,12 @@
+A continuación verá escrita en la pantalla una serie de palabras . 
+Algunas de ellas son palabras con significado 
+y otras son palabras que no existen. 
+
+Las palabras pueden estar escritas al derecho o de formas inversa. 
+Es decir que puede aparecer "BOTELLA" o puede aparecer  "ALLETOB". 
+Además, aparecerán palabras que no existen como "LLOBATE"
+
+
+
+
+Presione ESPACIO para comenzar

@@ -4,7 +4,7 @@ El objetivo es que aprendas la tarea, así que es normal que cometas algunos erro
 Recuerda las instrucciones: lee las frases comprendiendo y presta atención a la señal que 
 aparecerá:
 
-* Si es un punto amarillo, PRESIONA LA TECLA L.
+* Si es un punto amarillo, PRESIONA LA TECLA FLECHA ABAJO.
 * Si el punto es azul, NO DEBES PRESIONAR NINGUNA TECLA.
 
 Debes responder lo más rápido que puedas, pero sin anticiparte.
