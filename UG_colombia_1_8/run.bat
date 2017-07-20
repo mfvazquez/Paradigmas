@@ -1,0 +1,2 @@
+python inicio.py
+pause
