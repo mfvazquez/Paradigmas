@@ -17,7 +17,14 @@ from scipy.stats import norm
 from random import shuffle, randint, random
 
 
-
+def DiccionarioDeJugadores(avatares):
+    jugadores = {}
+    contador_jugadores = 2;
+    for x in avatares:	
+        if x not in jugadores:
+            jugadores[x] = str(contador_jugadores)
+            contador_jugadores += 1
+    return jugadores
 
 def PreguntarSiEntendio(win):
     win.mouseVisible = False
@@ -47,7 +54,6 @@ def GameUG_R(expInfo, win, ntrial=30, ngame=1, proposers_ID=[1,1,1,1], tipos=[1,
     fileRname = 'dataUG/UG_Respuestas_cics_%s_%s_%s_%s' % (expInfo['Participante'], expInfo['Tipo'],expInfo['TipoUG'], expInfo['date'])
     text_file = open(fileRname, "w")
 
-    jugadores = {'A_130_130_0.png':'2', 'A_0_255_0.png':'3', 'A_0_255_255.png':'4'}
     avatares = ['A_130_130_0.png', 'A_0_255_0.png', 'A_0_255_255.png', 'A_0_255_0.png', 'A_130_130_0.png',
                 'A_0_255_0.png',
                 'A_130_130_0.png', 'A_0_255_0.png', 'A_0_255_255.png', 'A_0_255_0.png', 'A_130_130_0.png',
@@ -55,6 +61,7 @@ def GameUG_R(expInfo, win, ntrial=30, ngame=1, proposers_ID=[1,1,1,1], tipos=[1,
                 'A_130_130_0.png', 'A_0_255_0.png', 'A_0_255_255.png', 'A_0_255_0.png', 'A_130_130_0.png',
                 'A_0_255_0.png',
                 'A_0_255_0.png', 'A_0_255_0.png', 'A_0_255_0.png']
+    jugadores = DiccionarioDeJugadores(avatares)
     shuffle(avatares)
     MARCA= visual.Rect(win, fillColor=(1, 1, 1), pos=[-0.9, 0.9], width=0.2, height=0.2, )
     MARCA2= visual.Rect(win, fillColor=(1, 1, 1), pos=[0.9, 0.9], width=0.2, height=0.2, )
@@ -479,7 +486,6 @@ def GameDic(expInfo, win, ntrial=30, ngame=1, receptors_ID=[1], tipos=[1], FS=Tr
     # --------------------------------------------------------
     #avataers de los receptore
     win.mouseVisible = False
-    jugadores = {'A_130_130_0.png':'2', 'A_0_255_0.png':'3', 'A_0_255_255.png':'4'}
     avatares = ['A_130_130_0.png', 'A_0_255_0.png', 'A_0_255_0.png', 'A_0_255_0.png', 'A_130_130_0.png',
                 'A_0_255_0.png',
                 'A_130_130_0.png', 'A_0_255_0.png', 'A_0_255_0.png', 'A_0_255_0.png', 'A_130_130_0.png',
@@ -487,6 +493,7 @@ def GameDic(expInfo, win, ntrial=30, ngame=1, receptors_ID=[1], tipos=[1], FS=Tr
                 'A_0_130_130.png', 'A_0_255_0.png', 'A_0_255_0.png', 'A_0_255_0.png', 'A_130_130_0.png',
                 'A_0_255_0.png',
                 'A_0_255_0.png', 'A_0_255_0.png', 'A_0_255_0.png']
+    jugadores = DiccionarioDeJugadores(avatares)
     shuffle(avatares)
 
     if not os.path.isdir('dataDG'):
@@ -534,7 +541,7 @@ def GameDic(expInfo, win, ntrial=30, ngame=1, receptors_ID=[1], tipos=[1], FS=Tr
         if (expInfo['Tipo'] == 'Prueba'):
 
             message1 = visual.TextStim(win, color='white', height=(0.3 * ht), pos=[0, 0.65],
-                                       text=('Juego de entrenamiento: JUEGO 2')
+                                       text=('Juego de entrenamiento: JUEGO 2'))
             message2 = visual.TextStim(win, color='white', height=(0.2 * ht), pos=[0, 0],wrapWidth=1.5,
                                        text=(u'﻿Usted es el jugador ROJO (izquierda). El otro jugador es el VERDE (derecha).\n\n'+
                                         u'En esta ocasión usted es quien realiza la oferta de las FICHAS. En la pantalla aparecerán dos cuadros de colores, uno ROJO que corresponde a la cantidad inicial de fichas que deberá repartir con el otro jugador (Cuadro VERDE). El otro jugador no podrá rechazar la oferta y recibirá lo que le des.\n\n'+
@@ -558,7 +565,7 @@ def GameDic(expInfo, win, ntrial=30, ngame=1, receptors_ID=[1], tipos=[1], FS=Tr
         elif (expInfo['Tipo'] == 'Real'):
             #if tipo == 1:
 
-            message1 = visual.TextStim(win, color='white', height=(0.3 * ht), pos=[0, 0.65], text=('Juego con otra Persona: JUEGO 2')
+            message1 = visual.TextStim(win, color='white', height=(0.3 * ht), pos=[0, 0.65], text=('Juego con otra Persona: JUEGO 2'))
             message2 = visual.TextStim(win, color='white', height=(0.2 * ht), pos=[0, 0], wrapWidth=1.5,
                                            text=(u'Juego con otra Persona\n En seguida empezará el juego real.'))
             message3 = visual.TextStim(win, pos=[0, -0.65], height=(0.3 * ht), wrapWidth=2,
