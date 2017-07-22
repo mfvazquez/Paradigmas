@@ -14,38 +14,18 @@ addpath('lib');
 
 global TAMANIO_INSTRUCCIONES
 global TAMANIO_TEXTO
-global EEG
-global pportobj pportaddr MARCA_DURACION
 
-MARCA_DURACION = 1e-3;
+global hd BLINK_DURATION IEEG
 
-EEG = true;
+IEEG = true;
+
+BLINK_DURATION = 20e-3;
 
 TAMANIO_TEXTO = 0.05;
 TAMANIO_INSTRUCCIONES = 0.03; 
 
 TIEMPO_MOTOR_PRACTICA = 30;
 TIEMPO_MOTOR = 120;
-
-%% PUERTO PARALELO
-
-if EEG
-    pportaddr = 'C020';
-
-    if exist('pportaddr','var') && ~isempty(pportaddr)
-        fprintf('Connecting to parallel port 0x%s.\n', pportaddr);
-        pportaddr = hex2dec(pportaddr);
-
-        pportobj = io64;
-        io64status = io64(pportobj);
-
-        EnviarMarca(0);
-        
-        if io64status ~= 0
-            error('io64 failure: could not initialise parallel port.\n');
-        end
-    end
-end
 
 %% TECLAS
 
@@ -94,8 +74,6 @@ secuencia_actual.emociones = secuencias(numero_secuencia,:);
 
 
 %% PSYCHOTOOLBOX
-exit = false;
-
 hd = init_psych;
 
 %% LOG
@@ -174,7 +152,8 @@ emociones_practica.textos_botones = emociones.textos_botones;
 %% INSTRUCCIONES PRINCIPALES
 instrucciones = CargarTextosDeCarpeta(fullfile('data','instrucciones'));
 for x = 1:length(instrucciones)
-    TextoCentrado(instrucciones{x}, TAMANIO_INSTRUCCIONES, hd);
+    TextoCentrado(instrucciones{x}, TAMANIO_INSTRUCCIONES, hd);   
+    DibujarCuadradoNegro();
     Screen('Flip',hd.window);
     exit = EsperarBoton(teclas.Continuar, teclas.ExitKey);
     if exit
@@ -217,6 +196,7 @@ for i = 1:length(secuencia_actual.intero)
 end
 
 TextoCentrado('Usted lo hizo muy bien, gracias por participar', TAMANIO_INSTRUCCIONES, hd, hd.white);
+DibujarCuadradoNegro();
 Screen('Flip',hd.window);
 
 
