@@ -19,7 +19,7 @@ global pportobj pportaddr MARCA_DURACION
 
 MARCA_DURACION = 1e-3;
 
-EEG = true;
+EEG = true ;
 
 TAMANIO_TEXTO = 0.05;
 TAMANIO_INSTRUCCIONES = 0.03; 

@@ -1,0 +1,300 @@
+1. ¿Qué hizo Luis cuando abrió los ojos?
+1. Tiró  el reloj
+MI
+
+2. Ignoró el reloj
+R
+
+3. Miró el reloj
+C
+
+4. Apagó el reloj
+SI
+
+5.   No recuerdo
+NR
+2. ¿Dónde estaba el reloj?
+1. En la cómoda
+SI
+
+2. En la mesita de luz 
+C
+
+3. En el mueble
+MI
+
+4. En el piso
+R
+
+5. No recuerdo
+NR
+3. ¿Qué había hecho Luis durante nueve horas?
+1. Había descansado
+R
+
+2. Había soñado
+SI
+
+3. Había dormido
+C
+
+4. Había meditado
+MI
+
+5. No recuerdo
+NR
+4. ¿Cómo fue Luis a la cocina?
+1. En bata
+SI
+
+2. En camisón
+MI
+
+3. En pantuflas
+R
+
+4. En pijama
+C 
+
+5. No recuerdo
+NR
+5. ¿Qué hizo Luis en la cocina?
+1. Calentó agua
+C
+
+2. Tomó agua
+SI
+
+3. Enfrió agua
+MI
+
+4. Se sirvió agua
+R
+
+5. No recuerdo
+NR
+6. ¿Dónde servía cereales Luis?
+1. En una taza
+SI
+
+2. En un plato
+C
+
+3. En bol
+R
+
+4. En una olla
+MI
+
+5. No recuerdo
+NR
+7. ¿Qué le producía a Luis el olor del café recién hecho?
+1. Lo despertaba
+MI
+
+2. Le encantaba
+C
+
+3. Lo relajaba
+SI
+
+4. Lo tranquilizaba
+R
+
+5. No recuerdo
+NR
+8. ¿En qué momento Luis planificaba qué hacer a lo largo de su día?  
+1. Durante el desayuno
+C
+
+2. Al mediodía
+SI
+
+3. A la tarde
+MI
+
+4. A la mañana
+R
+
+5. No recuerdo
+NR
+9. ¿Qué haría primero Luis? 
+1. Iría al cine
+MI
+
+2. Leería un libro
+R
+
+3. Miraría su serie preferida
+SI
+
+4. Vería su película favorita
+C
+
+5. No recuerdo
+NR
+10. ¿Dónde escucharía música clásica?
+1. En la terraza
+SI
+
+2. En la habitación
+R
+
+3. En el living
+MI
+
+4. En el balcón
+C
+
+5. No recuerdo
+NR
+11. ¿Qué hizo Luis con el televisor? 
+1. Lo apagó
+R
+
+2. Lo prendió
+C
+
+3. Lo conectó
+MI
+
+4. Lo enchufó
+SI
+
+5. No recuerdo
+NR
+12. ¿Cómo puso Luis la película?
+1. Con mucha emoción
+MI
+
+2. Con mucho entusiasmo 
+R
+
+3. Con muchas ganas
+C
+
+4. Con curiosidad
+SI
+
+5. No recuerdo
+NR
+13. ¿Qué hizo Luis finalizada la película? 
+1. Escribió
+SI
+
+2. Comió
+MI
+
+3. Leyó
+C
+
+4. Descansó
+R
+
+5. No recuerdo
+NR
+14. ¿Dónde escuchó música Luis?
+1. En la radio
+SI
+
+2. En el auto
+MI
+
+3. En el tocadiscos
+C
+
+4. En la computadora
+R
+
+5. No recuerdo
+NR
+15. ¿Qué hizo Luis en el balcón además de observar el paisaje?
+1. Disfrutó el aire fresco 
+MI
+
+2. Recordó el aire fresco
+SI
+
+3. Admiró el aire fresco
+R
+
+4. Tomó aire fresco
+C
+
+5. No recuerdo 
+NR
+16. ¿Cómo se sentía Luis?
+1. Lleno de amor
+MI
+
+2. Lleno de felicidad
+SI
+
+3. Lleno de energía
+C
+
+4. Lleno de emociones
+R
+
+5. No recuerdo
+NR
+17. ¿Qué hizo Luis al salir de su casa?
+1. Caminó a la plaza
+R
+
+2. Corrió a la plaza
+MI
+
+3. Contempló la plaza
+SI
+
+4. Fue a la plaza
+C
+
+5. No recuerdo 
+NR
+18. ¿Durante cuánto tiempo hizo deporte?
+1. Durante unos minutos
+SI
+
+2. Durante una hora
+C
+
+3. Durante toda la tarde
+MI
+
+4. Durante dos horas
+R
+
+5. No recuerdo
+NR
+19. ¿Qué hizo luego de ejercitarse?
+1. Se sentó
+SI
+
+2. Se recostó
+C
+
+3. Se arrodilló 
+MI
+
+4. Se fue 
+R
+
+5. No recuerdo 
+NR
+20. ¿Dónde se relajó?
+1. En las hamacas
+MI
+
+2. En el césped
+C
+
+3. Bajo un árbol
+SI
+
+4. En el piso 
+R
+
+5. No recuerdo
+NR

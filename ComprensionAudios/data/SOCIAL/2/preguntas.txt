@@ -1,0 +1,301 @@
+1. ¿A dónde llegó Pablo primero?
+1. A la cita
+C
+
+2. A la reunión
+SI
+
+3. A la fiesta
+MI
+
+4. Al encuentro
+R
+
+5. No recuerdo 
+NR
+2. ¿Qué hizo Pablo mientras esperaba?
+1. Pidió una limonada fría y un tostado
+C
+
+2. Consultó el precio del café
+MI
+
+3. Consultó el precio de una limonada fría y un tostado
+SI
+
+4. Abrazó al mozo y se comió una torta
+R
+
+5. No recuerdo
+NR
+
+3. ¿De qué era el día?
+1. De festejo
+SI
+
+2. De estudio
+MI
+
+3. De reencuentro
+C
+
+4. Del encuentro
+R
+
+5. No recuerdo
+NR
+4. ¿Qué hicieron Pablo y Laura cuando ella entró al bar?
+1. Se consolaron
+MI
+
+2. Se saludaron
+C
+
+3. Se hablaron
+R
+
+4. Se emocionaron
+SI
+
+5. No recuerdo
+NR
+5. ¿Cómo entraron en contacto físico en el bar?
+1. Con una palmada 
+R
+
+2. Con un amoroso abrazo
+C
+
+3. Con un cálido beso
+SI
+
+4. Con un apretón de manos
+MI
+
+5. No recuerdo
+NR
+6.  ¿Por qué estaban muy ansiosos Pablo y Laura?
+1. Por merendar
+MI
+
+2. Por encontrarse
+C
+
+3. Por contarse historias
+SI
+
+4. Por abrazarse
+R
+
+5. No recuerdo
+NR
+7. ¿Dónde se sentó Laura?
+1. Frente a Pablo
+C
+
+2. Al lado de Pablo
+SI
+
+3. Junto a Pablo
+MI
+
+4. Detrás de Pablo
+R
+
+5. No recuerdo
+NR
+8. ¿Qué hicieron Pablo y Laura cuando ella se sentó?
+1. Compartieron una rica merienda
+C
+
+2. Comieron una torta 
+SI
+
+3. Tomaron una bebida
+MI
+
+4. Compraron una comida 
+R
+
+5. No recuerdo
+NR
+9. ¿Cómo intercambiaron recuerdos?
+1. Con emoción
+R
+
+2. Con alegría
+MI
+
+3. Con timidez
+SI
+
+4. Con nostalgia
+C
+
+5. No recuerdo
+NR
+10. ¿Qué hicieron por varias horas?
+1. Cantaron
+MI
+
+2. Conversaron
+C
+
+3. Bromearon
+SI
+
+4. Bailaron
+R
+
+5. No recuerdo
+NR
+11. ¿A dónde acompañó Pablo a Laura? 
+1. A su hogar
+C
+
+2. A su departamento 
+SI
+
+3. Al trabajo
+MI
+
+4. Al parque
+R
+
+5. No recuerdo
+NR
+12. ¿Qué hizo Pablo durante el camino? 
+1. Le propuso otra cita a Laura
+C
+
+2. Invitó a Laura al teatro
+SI
+
+3. Convenció a Laura de cenar
+MI
+
+4. Invitó a Laura al cine
+R
+
+5. No recuerdo 
+NR
+13. ¿Cómo aceptó Laura? 
+1. Con ganas
+R
+
+2. Con emoción
+MI
+
+3. Con gusto
+C
+
+4. Con timidez
+SI
+
+5. No recuerdo
+NR
+14. ¿Qué hacían Pablo y Laura en la puerta de la casa de ella? 
+1. Se acariciaban
+SI
+
+2. Se hablaban
+MI
+
+3. Se despedían
+C
+
+4. Se besaban 
+R
+
+5. No recuerdo
+NR
+15. ¿Cómo le estrechó la mano Pablo a Laura? 
+1. Con fuerza
+C
+
+2. Con ganas
+SI
+
+3. Con amor
+MI
+
+4. Con emoción
+R
+
+5. No recuerdo
+NR
+16. ¿Qué le confesó Pablo a Laura?
+1. Que se había enamorado de ella
+C
+
+2. Que se había encariñado con ella
+SI
+
+3. Que se había emocionado con ella
+R
+
+4. Que se había divertido con ella
+MI
+
+5. No recuerdo 
+NR
+17.  ¿Cómo abrazó Pablo a Laura? 
+1. Con amor
+MI
+
+2. Con pasión 
+SI
+
+3. Con fuerza
+R
+
+4. Con cariño
+C
+
+5. No recuerdo
+NR
+18.  ¿Qué hizo Laura al escucharlo?  
+1. Enmudeció
+SI
+
+2. Respondió 
+C
+
+3. Rió
+R
+
+4. Habló
+MI
+
+5. No recuerdo
+NR
+19.  ¿Cómo se besaron? 
+1. Con emoción
+R
+
+2. Con pasión
+C
+
+3. Con nervios
+SI
+
+4. Con disgusto
+MI
+
+5. No recuerdo
+NR
+20.  ¿Qué hicieron después de besarse? 
+1. Se quedaron charlando
+SI
+
+2. Se despidieron
+MI
+
+3. Se desearon buenas noches
+C
+
+4. Se tomaron de la mano 
+R
+
+5. No recuerdo
+NR

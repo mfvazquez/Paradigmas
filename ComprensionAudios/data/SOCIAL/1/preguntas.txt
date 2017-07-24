@@ -1,0 +1,300 @@
+1. ¿Cómo reaccionó el jefe de Alberto ante el pedido de dos semanas de descanso?
+1. Se las agendó
+SI
+
+2. Se las concedió
+C
+
+3. Se las otorgó
+R
+
+4. Se las pospuso
+MI
+
+5. No recuerdo 
+NR
+2. ¿Cómo saludó Juan a Alberto?
+1. Con ganas 
+MI
+
+2. Con una sonrisa
+C
+
+3. Con la mano
+SI
+
+4. Con emoción
+R
+
+5. No recuerdo
+NR
+3. ¿En qué momento Alberto recordó su jardín?
+1. Al discutir con Juan
+MI
+
+2. Al salir  a Juan
+R
+
+3. Al conversar con  Juan
+SI
+
+4. Al hablar con Juan
+C
+
+5. No recuerdo
+NR
+4. ¿Con quién se reunió inmediatamente Alberto?
+1. Con un amigo
+R
+
+2. Con Juan
+C
+
+3. Con la vecina
+SI
+
+4. Con el jefe
+MI
+
+5. No recuerdo
+NR
+5. ¿Qué hizo Alberto?
+1. Pidió un favor
+C
+
+2. Pidió información
+R
+
+3. Solicitó colaboración
+SI
+
+4. Contrató un servicio
+MI
+
+5. No recuerdo
+NR
+6. ¿Cómo se dirigió Alberto a Juan?
+1. Confianzudamente
+SI
+
+2. Emocionadamente
+R
+
+3. Encarecidamente
+C
+
+4. Rapidamente
+MI
+
+5. No recuerdo
+NR
+7. ¿Cómo interactuó Alberto con Juan?
+1. Le explicó su situación
+C
+
+2. Le mostró sus flores
+MI
+
+6. Le dio las instrucciones 
+SI
+
+3. Le comentó sobre sus flores 
+R
+
+4. No recuerdo
+NR
+8. ¿Para qué le ofreció dinero Alberto a Juan?
+1. Para que cumpliera con su pedido
+C
+
+2. Para que cumpliera con sus obligaciones
+MI
+
+3. Para que cumpliera con sus deseos
+SI
+
+4. Para que cumpliera con sus ambiciones
+R
+
+5. No recuerdo
+NR
+9.  ¿Para qué era Juan la persona ideal?
+1. Para ordenarlo
+MI
+
+6. Para informarlo
+R
+
+2. Para salvarlo
+SI
+
+3. Para ayudarlo
+C
+
+4. No recuerdo
+NR
+10. ¿De quién esperaba respuesta Alberto una vez en el taxi?
+1. De su mejor amigo
+SI
+
+2. Del chofer
+MI
+
+3. Del jefe
+R
+
+4. De su vecino
+C
+
+5. No recuerdo
+NR
+11. ¿Qué hacía Alberto en el taxi?
+1. Le indicaba el recorrido al conductor
+C
+
+2. Le pedía ayuda al conductor
+MI
+
+3. Le daba órdenes al conductor
+SI
+
+4. Le hablaba al conductor
+R
+
+5. No recuerdo
+NR
+12. ¿Cómo aceptó Juan la tarea que Alberto le encargó? 
+1. Con gusto
+C
+
+2. Con ganas
+R
+
+3. Con alegría
+MI
+
+4. Con pasión
+SI
+
+5. No recuerdo
+NR
+13. ¿Cómo reaccionó Juan ante el ofrecimiento del pago? 
+1. Lo rechazó
+C
+
+2. Lo  guardó
+R
+
+3. Lo cuestionó
+SI
+
+4. Lo aceptó
+MI
+
+5. No recuerdo 
+NR
+14. ¿Cómo insistió Alberto? 
+1. Con ganas
+R
+
+2. Con  amor
+MI
+
+3. Con amabilidad
+C
+
+4. Con desesperación
+SI
+
+5. No recuerdo
+NR
+15. ¿Qué hizo Alberto con cien pesos? 
+1. Se los guardó a Juan 
+MI
+
+2. Se los mostró a Juan
+SI
+
+3. Se los dio a Juan
+C
+
+4. Se los ofreció a Juan
+R
+
+5. No recuerdo
+NR
+16. ¿Cómo devolvió el dinero Juan? 
+1. Amablemente
+R
+
+2. Tímidamente 
+SI
+
+3. Emocionadamente
+MI
+
+4. Gentilmente
+C
+
+5. No recuerdo
+NR
+17. ¿Qué haría Alberto ante el gesto de Juan?
+1. Se lo retribuiría
+C
+
+2. Se lo imitaría
+R
+
+3. Se lo reconocería
+SI
+
+4. Se lo  aceptaría
+MI
+
+5. No recuerdo 
+NR
+18.  ¿A quién le entregó Alberto las llaves? 
+1. A su esposa 
+MI
+
+2. Al portero
+SI
+
+3. Al jefe
+R
+
+4. A Juan
+C
+
+5. No recuerdo
+NR
+19.  ¿Qué hizo Alberto durante todo el viaje?  
+1. Conversó
+SI
+
+2. Agradeció 
+C
+
+3. Pensó 
+MI
+
+4. Durmió
+R
+
+5. No recuerdo
+NR
+20.  ¿Qué haría Alberto al reencontrarse con Juan? 
+1. Le daría un regalo 
+R
+
+2. Le regalaría una de sus flores
+C
+
+3. Le daría una sorpresa
+SI
+
+4. Le pagaría 
+MI
+
+5. No recuerdo
+NR

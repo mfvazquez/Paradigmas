@@ -89,7 +89,7 @@ function [log, exit] = CorrerSecuenciaEmociones(bloque, n_bloque, hd, teclas, lo
             end
             [~, OnSetTime] = Screen('Flip', hd.window);
 
-            log_trial.pregunta = OnSetTime;
+            log_trial.pregunta_tiempo = OnSetTime;
 %             [exit, respuesta, tiempo, saltear_bloque] = Esperar(ExitKey, botones, botones_salteado);
             [exit, respuesta, tiempo, saltear_bloque] = Esperar(1.5, ExitKey, botones, botones_salteado);
             if exit || saltear_bloque
@@ -129,7 +129,7 @@ function [log, exit] = CorrerSecuenciaEmociones(bloque, n_bloque, hd, teclas, lo
         end
         
         log_trial.respuesta_tiempo = tiempo;
-        log_trial.reaction_time = log_trial.respuesta_tiempo - log_trial.imagen;
+        log_trial.reaction_time = log_trial.respuesta_tiempo - log_trial.pregunta_tiempo;
         
  
         

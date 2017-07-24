@@ -1,0 +1,300 @@
+1. ¿A dónde llegó Nora?
+1. A su hogar
+C
+
+2. Al trabajo
+MI
+
+3. Al hotel
+SI
+
+4. Al parque
+R
+
+5. No recuerdo
+NR
+2. ¿Qué hizo al llegar?
+1. Se puso las pantuflas
+R
+
+2. Se puso el pijama  
+SI
+
+3. Se quitó la ropa
+C
+
+4. Se quitó los zapatos
+MI
+
+5. No recuerdo
+NR
+3. ¿Cómo tomó un baño Nora?
+1. Lentamente
+SI
+
+2. Tranquilamente
+R
+
+3. Relajadamente
+C
+
+4. Velozmente
+MI
+
+5. No recuerdo
+NR
+4. ¿Qué hizo Nora a la hora de cenar?
+1. Se compró una sopa
+MI
+
+2. Se fue a dormir
+R
+
+3. Se dirigió a la cocina
+C
+
+4. Descongeló comida
+SI
+
+5. No recuerdo
+NR
+5. ¿De qué era la sopa?
+1. De carne
+R
+
+2. De queso
+SI
+
+3. De verdura
+C
+
+4. De pollo
+R
+
+5. No recuerdo
+NR
+6. ¿Qué hizo con la cebolla?
+1. La compró
+R
+
+2. La picó
+C
+
+3. La lavó
+SI
+
+4. La comió
+MI
+
+5. No recuerdo
+NR
+7. ¿Dónde hirvió la cebolla?
+1. En la hornalla
+R
+
+2. En la cacerola
+SI
+
+3. En la cocina
+MI
+
+4. En el agua
+C
+
+5. No recuerdo 
+NR
+8. ¿Qué hizo con la espinaca?
+1. La quitó
+MI
+
+2. La agregó
+C
+
+3. La cortó
+SI
+
+4. La lavó
+R
+
+5. No recuerdo
+NR
+9. ¿Con qué estaba condimentada la espinaca?
+1. Con sal y especias extrañas
+MI
+
+2. Con sal y queso 
+R
+
+3. Con sal, orégano y ajo
+SI
+
+4. Con sal, pimienta y aceite
+C
+
+5. No recuerdo
+NR
+10. ¿Qué hizo Nora en su cómodo sofá?
+1. Se sentó
+SI
+
+2. Se recostó
+C
+
+3. Se durmió  
+MI
+
+4. Se acomodó
+R
+
+5. No recuerdo
+NR
+11. ¿Por cuánto tiempo Nora cerró los ojos?
+1. Por un rato
+R
+
+2. Por unos pocos segundos
+SI
+
+3. Por una hora
+MI
+
+4. Por unos minutos
+C
+
+5. No recuerdo
+NR
+12. ¿Cuándo degustó un flan Nora?
+1. Al despertar 
+R
+
+2. Al terminar la sopa
+C
+
+3. Al lavar los platos
+MI
+
+4. Al levantarse
+SI
+
+5. No recuerdo
+NR
+13. ¿Cómo le encantaba el flan a Nora?
+1. Con chocolate
+R
+
+2. Con crema
+SI
+
+3. Con caramelo
+C
+
+4. Con dulce
+MI
+
+5. No recuerdo
+NR
+14. ¿Qué hizo después de comer el flan?
+1. Escribió un cuento
+SI
+
+2. Miro la televisión 
+R
+
+3. Leyó un capítulo
+C
+
+4. Miró una película
+MI
+
+5. No recuerdo
+NR
+15. ¿Sobre qué le fascinaban las historias a Nora?
+1. Sobre viajes
+SI
+ 
+2. Sobre aventuras
+C
+ 
+3. Sobre amor
+MI
+ 
+4. Sobre paisajes 
+R
+ 
+5. No recuerdo
+NR
+16. ¿Qué hacía Nora con las escenas paradisíacas?
+1. Las recordaba
+SI
+
+2. Las disfrutaba
+MI
+
+3. Las imaginaba 
+C
+
+4. Las miraba
+R
+
+5. No recuerdo
+NR
+17. ¿Dónde se describían e ilustraban las escenas?
+1. En la revista
+R
+
+2. A lo largo del texto
+C
+
+3. En la televisión 
+SI
+
+4. A lo largo de la película
+MI
+
+5. No recuerdo
+NR
+18. ¿Qué decidió Nora?
+1. Que iría a la estación
+MI
+
+2. Que saldría al balcón
+SI
+
+3. Que pasearía por la plaza 
+C
+
+4. Que iría al parque 
+R
+
+5. No recuerdo
+NR
+19. ¿En qué pensaba Nora mientras se acostaba?
+1. En su trabajo
+MI
+
+2. En el viaje a la montaña
+R
+
+3. En las vacaciones pasadas
+SI
+
+4. En sus próximas vacaciones
+C
+
+5. No recuerdo
+NR
+20. ¿Qué hizo Nora al otro día?
+1. Se subió al subte
+MI
+
+2. Se fue al trabajo
+R
+
+3. Se tomó un avión
+SI
+
+4. Se compró un pasaje de avión
+C
+
+5. No recuerdo
+NR
