@@ -1,0 +1,2 @@
+python prueba_botones.py
+pause

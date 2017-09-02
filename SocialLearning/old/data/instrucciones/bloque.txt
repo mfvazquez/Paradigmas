@@ -1,9 +1,0 @@
-Ahora van a aparecer un nuevo grupo de números. 
-Recuerde que debe elegir si pertenecen a 
-la categoría A o B, y que va a tener 
-varios intentos para decidirlo.
-
-Recuerde prestar atención a la respuesta visual.
-
-
-[mensaje_continuar]

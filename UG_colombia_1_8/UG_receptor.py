@@ -380,14 +380,14 @@ def GameUG_R(expInfo, win, ntrial=30, ngame=1, proposers_ID=[1,1,1,1], tipos=[1,
                 #event.waitKeys()
                 if resp.clock == None:  #if we don't have one we've just started
                         resp.clock = core.Clock()  #create one (now t=0)
-                theseKeys = event.getKeys(keyList=['up','down','escape'])
+                theseKeys = event.getKeys(keyList=['up','down','escape','num_8','num_2'])
                 
-                while len(theseKeys) == 0: theseKeys = event.getKeys(keyList=['up','down','escape'])
+                while len(theseKeys) == 0: theseKeys = event.getKeys(keyList=['up','down','escape','num_8','num_2'])
                 t_d = trialClock.getTime()
                 if len(theseKeys) > 0:  #at least one key was pressed
                             resp.keys = theseKeys[0]  #just the first key pressed
                             event.clearEvents()
-                if resp.keys == "up":
+                if resp.keys == "up" or resp.keys == "8":
                             RR_=0
                             SUP.setText('R')
                             #MARCA2.draw()
@@ -415,7 +415,7 @@ def GameUG_R(expInfo, win, ntrial=30, ngame=1, proposers_ID=[1,1,1,1], tipos=[1,
                             if proposer_ID==2:
                                 if tipo==2: BL.draw()
                             win.flip()
-                elif resp.keys == "down":
+                elif resp.keys == "down" or resp.keys == "2":
                             RR_=1
                             SUP.setText('A')
                             #MARCA2.draw()
@@ -784,11 +784,11 @@ def GameDic(expInfo, win, ntrial=30, ngame=1, receptors_ID=[1], tipos=[1], FS=Tr
                     if R == 0:
                         if resp.clock == None:  #if we don't have one we've just started
                             resp.clock = core.Clock()  #create one (now t=0)
-                        theseKeys = event.getKeys(keyList=['left', 'down', 'right'])
+                        theseKeys = event.getKeys(keyList=['left', 'down', 'right','num_6','num_4','num_2'])
                         if len(theseKeys) > 0:  #at least one key was pressed
                             resp.keys = theseKeys[0]  #just the first key pressed
                             event.clearEvents()
-                            if resp.keys == "right":
+                            if resp.keys == "right" or resp.keys == "num_6":
                                 if NS_a: ns.send_event('o_i_', timestamp=egi.ms_localtime(), label="Of_+")
                                 if Tu_D < 100:
                                     Tu_D = Tu_D + 10
@@ -803,7 +803,7 @@ def GameDic(expInfo, win, ntrial=30, ngame=1, receptors_ID=[1], tipos=[1], FS=Tr
                                     YOr2.draw()
                                     YO.draw()
                                     win.flip()
-                            if resp.keys == "left":
+                            if resp.keys == "left" or resp.keys =="num_4":
                                 if NS_a: ns.send_event('o_d_', timestamp=egi.ms_localtime(), label="Of_-")
                                 #print Tu_D
                                 if Tu_D > 0:
@@ -819,7 +819,7 @@ def GameDic(expInfo, win, ntrial=30, ngame=1, receptors_ID=[1], tipos=[1], FS=Tr
                                     YOr2.draw()
                                     YO.draw()
                                     win.flip()
-                            if (resp.keys == "down") :#or (resp.keys == '3'):
+                            if resp.keys == "down" or resp.keys == "num_2":
                                 if NS_a: ns.send_event('d_m_', timestamp=egi.ms_localtime(), label="Decision")
                                 t_d = trialClock.getTime()
                                 R = 1

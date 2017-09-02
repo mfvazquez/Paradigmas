@@ -1,5 +1,0 @@
-Primero se le presentará un número
-
-[numero]
-
-[mensaje_continuar]

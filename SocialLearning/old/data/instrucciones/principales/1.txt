@@ -1,6 +1,0 @@
-A continuación se le presentarán diferentes números.
-Deberá determinar si los números pertenecen a la categoría A o B.
-Después de su respuesta, se le indicará si acertó o no.
-Su objetivo es encontrar a qué categoría pertenecen los números.
-
-[mensaje_continuar]

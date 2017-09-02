@@ -1,0 +1,17 @@
+Las opciones de respuesta para señalar el cambio son:
+
+1- Alegria
+
+2- Asco
+
+3- Ira
+
+4- Miedo
+
+5- Sorpresa
+
+6- Tristeza
+
+
+
+Ahora, presione ENTER para continuar.

@@ -11,7 +11,6 @@ from random import shuffle, randint, random
 from UG_receptor import *
 from win32api import GetSystemMetrics
 
-
 #-----  Settings ---  see also ALL_games.py (button settings)
 # For repeteated games 
 t_e_p = 2  # for the test trials 

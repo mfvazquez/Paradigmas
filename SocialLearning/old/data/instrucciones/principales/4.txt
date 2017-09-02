@@ -1,7 +1,0 @@
-Se le indicará si su respuesta fue correcta o incorrecta. 
-Deberá basarse en esta indicación para descubrir la categoría; 
-no hay una regla entre el número y la categoría.
-Los números se volverán a presentar en varias oportunidades.
-¡Buena suerte!
-
-[mensaje_continuar]
